@@ -1,1 +1,1 @@
-# solar-database
+# Solar Database
