@@ -6,3 +6,8 @@
     color: white;
     text-decoration: none;
 }
+
+.navbar-text:hover {
+    color: #DADADA;
+    text-decoration: none;
+}
