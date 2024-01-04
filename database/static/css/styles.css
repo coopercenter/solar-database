@@ -11,3 +11,13 @@
     color: #DADADA;
     text-decoration: none;
 }
+
+.form-select-format {
+    width: 240px; 
+    height: 28px;
+    font-size: 14px;
+}
+
+.button-spacing {
+    line-height: 70%;
+}

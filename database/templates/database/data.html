@@ -1,4 +1,91 @@
 {% extends "database/base.html" %}
 {% block content %}
-    <h1>Data</h1>
+    <br><br>
+    <h4>Browse and Export Data</h4>
+    <br>
+
+    <div>
+        <button class="btn btn-outline-dark" style="margin-right: 20px">Export All to CSV</button>
+        <button class="btn btn-outline-dark">Export Filtered to CSV</button>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h5 class="card-header">
+          Filters
+        </h5>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control form-select-format" placeholder="Project Name">
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Nameplate Capacity (MW)</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; PJM Queue Status</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Locality</option>
+                        <option value="1">&#160; Fairfax County</option>
+                        <option value="2">&#160; Albemarle County</option>
+                        <option value="3">&#160; Amherst County</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Project Status</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Local Action Date</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; State Permit Status</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Local Permit Status</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <input class="form-control form-select-format" placeholder="Local Zoning Submittal Date">
+                </div>
+                <div class="col">
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; State Permit Path</option>
+                    </select>
+                    <div class="button-spacing"><br></div>
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; Project Acreage</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <h6>Location</h6>
+            <div style="line-height: 40%"><br></div>
+            <div class="row">
+                <div class="col">
+                    <select class="form-select form-select-format">
+                        <option selected>&#160; County/City</option>
+                    </select>
+                </div>
+                <div class="col">
+                    2
+                </div>
+                <div class="col">
+                    3
+                </div>
+                <div class="col">
+                    4
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {% endblock content %}
