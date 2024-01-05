@@ -5,16 +5,16 @@
     <br>
 
     <div>
-        <button class="btn btn-outline-dark" style="margin-right: 20px">Export All to CSV</button>
-        <button class="btn btn-outline-dark">Export Filtered to CSV</button>
+        <button class="btn btn-outline-dark btn-sm" style="margin-right: 20px">Export All to CSV</button>
+        <button class="btn btn-outline-dark btn-sm">Export Filtered to CSV</button>
     </div>
 
     <br>
 
     <div class="card">
-        <h5 class="card-header">
+        <h6 class="card-header">
           Filters
-        </h5>
+        </h6>
         
         <div class="card-body">
             <div class="row">
@@ -68,7 +68,7 @@
             </div>
             <br>
             <p>
-                <button class="btn btn-outline-dark" type="button" data-toggle="collapse" data-target="#additional-filters">
+                <button class="btn btn-outline-dark btn-sm" type="button" data-toggle="collapse" data-target="#additional-filters">
                   Additional Filters
                 </button>
             </p>
@@ -223,11 +223,139 @@
                     </div>
                 </div>
                 <br>
+                <h6>Generation Details</h6>
+                <div style="line-height: 40%"><br></div>
+                <div class="row">
+                    <div class="col">
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Offtaker</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <input class="form-control form-select-format" placeholder="Generator ID (EIA)">
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Operating Year (EIA)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Net-Metering</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Operator (EIA)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Interconnection (PJM)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Operation Commence (EIA)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Facility Type</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-select-format" placeholder="Plant ID (EIA)">
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Type of Interconnection (SCC)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Construction Commenced (DEQ)</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Sector (EIA)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Operating Month (EIA)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Project Classification (EIA)</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <h6>State Permit Process</h6>
+                <div style="line-height: 40%"><br></div>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control form-select-format" placeholder="NOI Recieved Date">
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Interconnection Report</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; Qualifying Facility</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <input class="form-control form-select-format" placeholder="DEQ Permit #">
+                        <div class="button-spacing"><br></div>
+                        <input class="form-control form-select-format" placeholder="SCC CPCN #">
+                        <div class="button-spacing"><br></div>
+                        <input class="form-control form-select-format" placeholder="QF FERC Docket #">
+                    </div>
+                    <div class="col">
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; DEQ SWM Status</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; RPC Program Compliance (SCC)</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <input class="form-control form-select-format" placeholder="PJM Queue #">
+                    </div>
+                    <div class="col">
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; State Permit Source</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected>&#160; RPC Development Plan (SCC)</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
             </div>
             <br>
-            <button class="btn btn-outline-dark" style="margin-right: 20px">Apply Filter(s)</button>
-            <button class="btn btn-outline-dark">Reset</button>
+            <button class="btn btn-outline-dark btn-sm" style="margin-right: 20px">Apply Filter(s)</button>
+            <button class="btn btn-outline-dark btn-sm">Reset</button>
         </div>
     </div>
+
+    <br>
+
+    <div class="card">
+        <h6 class="card-header">
+          Columns Displayed
+        </h6>
+        
+        <div class="card-body">
+            <select class="form-select form-select-format" style="margin-right: 30px">
+                <option selected>&#160; Data Source</option>
+            </select>
+
+            <select class="form-select form-select-format">
+                <option selected>&#160; Data Category</option>
+            </select>
+            <br><br>
+            <button class="btn btn-outline-dark btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
+        </div>
+    </div>
+
+    <br>
+
+    <h6>Project(s) Found:</h6>
     
 {% endblock content %}
