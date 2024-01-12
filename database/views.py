@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import SolarProjectData
 
 
 def home(request):
@@ -12,4 +13,7 @@ def dashboard(request):
     return render(request, 'database/dashboard.html')
 
 def data(request):
-    return render(request, 'database/data.html')
+    context = {
+        'data': SolarProjectData.objects.all(),
+    }
+    return render(request, 'database/data.html', context)

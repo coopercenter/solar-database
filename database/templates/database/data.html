@@ -356,6 +356,35 @@
 
     <br>
 
-    <h6>Project(s) Found:</h6>
-    
+    <h5>Search Result(s)</h5>
+    <div style="line-height: 85%"><br></div>
+
+    <table id="projectData" class="table table-hover">
+        <thead>
+            <tr>
+                <th style="font-weight: 600">Project Name</th>
+                <th style="font-weight: 600">Locality</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in data %}
+            <tr>
+                <td>{{ project.project_name }}</td>
+                <td>{{ project.locality }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="line-height: 200%"><br></div>
+
+    <script>
+        $(document).ready(function () {
+          $('#projectData').DataTable({
+            searching: false,
+            lengthChange: false
+          });
+        });
+    </script>
+      
 {% endblock content %}
