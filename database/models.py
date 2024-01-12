@@ -66,7 +66,7 @@ class SolarProjectData(models.Model):
     local_permit_status = models.TextField(db_column='Local Permit Status', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     state_permit_path = models.TextField(db_column='State Permit\xa0Path (DEQ or SCC)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     state_permit_source = models.TextField(db_column='State Permit Source', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    vdeq_reps_commercial_operation_commenced = models.DateTimeField(db_column='VDEQ-REPS_Commercial Operation Commenced', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    vdeq_reps_commercial_operation_commenced = models.TextField(db_column='VDEQ-REPS_Commercial Operation Commenced', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     concurrent_2232 = models.TextField(db_column='Concurrent 2232?', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     status_of_2232_comp_plan_review = models.TextField(db_column='Status of 2232/comp plan review', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     offtaker = models.TextField(db_column='Offtaker', blank=True, null=True)  # Field name made lowercase.
@@ -84,7 +84,7 @@ class SolarProjectData(models.Model):
     sector = models.TextField(db_column='Sector (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     generator_id = models.TextField(db_column='Generator ID (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     deq_permit_number = models.TextField(db_column='DEQ Permit Number', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    noi_received_date = models.TextField(db_column='NOI Received Date (DEQ, "RENOIREC")', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    # noi_received_date = models.TextField(db_column='NOI Received Date (DEQ, "RENOIREC")', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     interconnection = models.TextField(db_column='Interconnection', blank=True, null=True)  # Field name made lowercase.
     type_of_interconnection = models.TextField(db_column='Type of interconnection', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     operating_month = models.FloatField(db_column='Operating Month', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
@@ -107,7 +107,7 @@ class SolarProjectData(models.Model):
     entity_id_eia = models.FloatField(db_column='Entity ID (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     scc_facility_type = models.TextField(db_column='SCC Facility Type', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     scc_cpcn_number = models.TextField(db_column='SCC CPCN Number', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    vdeq_reps_final_interconnection_agreement_report = models.DateTimeField(db_column='VDEQ-REPS_Final Interconnection Agreement Report', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    vdeq_reps_final_interconnection_agreement_report = models.TextField(db_column='VDEQ-REPS_Final Interconnection Agreement Report', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     pjm_queue = models.TextField(db_column='PJM Queue #', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
     deq_swm_status = models.FloatField(db_column='DEQ SWM Status', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     total_acreage = models.TextField(db_column='Total Acreage (DEQ)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
@@ -115,3 +115,6 @@ class SolarProjectData(models.Model):
     class Meta:
         managed = False
         db_table = 'solar_project_data'
+    
+    def __str__(self):
+        return f"{self.project_name}"
