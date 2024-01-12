@@ -364,6 +364,11 @@
             <tr>
                 <th style="font-weight: 600">Project Name</th>
                 <th style="font-weight: 600">Locality</th>
+                <th style="font-weight: 600">County/City</th>
+                <th style="font-weight: 600">Address</th>
+                <th style="font-weight: 600">Tax Map Parcel #</th>
+                <th style="font-weight: 600">Current Land Use</th>
+                <th style="font-weight: 600">Base Zoning</th>
             </tr>
         </thead>
         <tbody>
@@ -371,6 +376,11 @@
             <tr>
                 <td>{{ project.project_name }}</td>
                 <td>{{ project.locality }}</td>
+                <td>{{ project.city_county }}</td>
+                <td>{{ project.address }}</td>
+                <td>{{ project.tax_map_parcel }}</td>
+                <td>{{ project.land_use_at_time_of_local_application }}</td>
+                <td>{{ project.base_zoning }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -382,7 +392,17 @@
         $(document).ready(function () {
           $('#projectData').DataTable({
             searching: false,
-            lengthChange: false
+            lengthChange: false,
+            scrollX: true,
+            columnDefs: [
+                { width: '250px', targets: 0 }, 
+                { width: '100px', targets: 1 },
+                { width: '100px', targets: 2 },
+                { width: '500px', targets: 3 },
+                { width: '200px', targets: 4 },
+                { width: '200px', targets: 5 },
+                { width: '200px', targets: 6 },
+            ]
           });
         });
     </script>
