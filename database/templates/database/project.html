@@ -4,36 +4,42 @@
     <h4>{{ object.project_name }}</h4>
     <br>
 
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <h6 class="card-header">
-                  Location
-                </h6>
-                <div class="card-body">
-                    <table id="projectData" class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td style="width: 100px; font-weight: 600; padding-top: 1px; padding-bottom: 1px; padding-left: 2px">Locality: </td>
-                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.locality }} </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px"> Address: </td>
-                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.address }} </td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px"> County/City: </td>
-                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.city_county }} </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-        <div class="col">
-
+    <div class="card">
+        <h6 class="card-header">
+            Location
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 140.5px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px">Locality: </td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.locality }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> County/City: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.city_county }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Address: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.address }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Tax Map Parcel #: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.tax_map_parcel }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Current Land Use: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.land_use_at_time_of_local_application }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Base Zoning: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.base_zoning }} </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <br>
 
 {% endblock content %}
