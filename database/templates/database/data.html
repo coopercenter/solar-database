@@ -32,9 +32,9 @@
                 <div class="col">
                     <select class="form-select form-select-format">
                         <option selected>&#160; Locality</option>
-                        <option value="1">&#160; Fairfax County</option>
-                        <option value="2">&#160; Albemarle County</option>
-                        <option value="3">&#160; Amherst County</option>
+                        <option value="1">&#160; Fairfax</option>
+                        <option value="2">&#160; Albemarle</option>
+                        <option value="3">&#160; Amherst</option>
                     </select>
                     <div class="button-spacing"><br></div>
                     <select class="form-select form-select-format">
@@ -369,6 +369,7 @@
                 <th style="font-weight: 600">Tax Map Parcel #</th>
                 <th style="font-weight: 600">Current Land Use</th>
                 <th style="font-weight: 600">Base Zoning</th>
+                <th>data_id</th>
             </tr>
         </thead>
         <tbody>
@@ -381,6 +382,7 @@
                 <td>{{ project.tax_map_parcel }}</td>
                 <td>{{ project.land_use_at_time_of_local_application }}</td>
                 <td>{{ project.base_zoning }}</td>
+                <td>{{ project.data_id }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -390,7 +392,7 @@
 
     <script>
         $(document).ready(function () {
-          $('#projectData').DataTable({
+          var table = $('#projectData').DataTable({
             searching: false,
             lengthChange: false,
             scrollX: true,
@@ -403,6 +405,14 @@
                 { width: '200px', targets: 5 },
                 { width: '200px', targets: 6 },
             ]
+          });
+
+          table.column(7).visible(false)
+          
+          $('#projectData tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            var data_id = data[7]
+            window.location.href = '/project/' + data_id + '/';
           });
         });
     </script>

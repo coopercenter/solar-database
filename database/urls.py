@@ -7,5 +7,5 @@ urlpatterns = [
     path('about/', views.about, name='database-about'),
     path('dashboard/', views.dashboard, name='database-dashboard'),
     path('data/', views.data, name='database-data'),
-    path('project/<int:pk>/', ProjectView.as_view(), name='database-project')
+    path('project/<pk>/', ProjectView.as_view(), name='database-project')
 ]
