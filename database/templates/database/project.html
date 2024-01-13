@@ -1,4 +1,39 @@
 {% extends "database/base.html" %}
 {% block content %}
-    {{ object.project_name }}
+    <br><br>
+    <h4>{{ object.project_name }}</h4>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <h6 class="card-header">
+                  Location
+                </h6>
+                <div class="card-body">
+                    <table id="projectData" class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td style="width: 100px; font-weight: 600; padding-top: 1px; padding-bottom: 1px; padding-left: 2px">Locality: </td>
+                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.locality }} </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px"> Address: </td>
+                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.address }} </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px"> County/City: </td>
+                                <td style="padding-top: 1px; padding-bottom: 1px;"> {{ object.city_county }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
 {% endblock content %}
