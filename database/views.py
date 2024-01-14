@@ -14,8 +14,14 @@ def dashboard(request):
     return render(request, 'database/dashboard.html')
 
 def data(request):
+    data = SolarProjectData.objects.all()
+    project_name = request.GET.get('project_name')
+
+    if project_name:
+        data = data.filter(project_name__icontains=project_name)
+
     context = {
-        'data': SolarProjectData.objects.all(),
+        'data': data,
     }
     return render(request, 'database/data.html', context)
 
