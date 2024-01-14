@@ -42,4 +42,50 @@
 
     <br>
 
+    <div class="card">
+        <h6 class="card-header">
+            Naming and Ownership
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 265px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px">Alternative Name(s): </td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.alternate_names }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Name (DEQ): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.state_permit_source }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Parent Project Name: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.parent_project }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Previous Project ID: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.data_id_for_previous_project }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Current Project Owner: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.current_project_owner }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Previous Project Applicant: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.previous_project_owner_applicant }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Entity ID (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.entity_id_eia }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Project Owner (At last application): </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.project_owner }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
 {% endblock content %}
