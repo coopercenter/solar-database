@@ -374,11 +374,17 @@
                 <option selected>&#160; Data Source</option>
             </select>
 
-            <select class="form-select form-select-format">
+            <select id="dateCategoryFilter" class="form-select form-select-format">
                 <option selected>&#160; Data Category</option>
+                <option value="location">&#160; Location</option>
+                <option value="namingAndOwnership">&#160; Naming and Ownership</option>
+                <option value="features">&#160; Features</option>
+                <option value="localPermitProcess">&#160; Local Permit Process</option>
+                <option value="generationDetails">&#160; Generation Details</option>
+                <option value="statePermitProcess">&#160; State Permit Process</option>
             </select>
             <br><br>
-            <button class="btn btn-outline-dark btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
+            <button id="columnFilterButton" class="btn btn-outline-dark btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
         </div>
     </div>
 
@@ -391,6 +397,7 @@
         <thead>
             <tr>
                 <th style="font-weight: 600">Project Name</th>
+
                 <th style="font-weight: 600">Locality</th>
                 <th style="font-weight: 600">County/City</th>
                 <th style="font-weight: 600">Address</th>
@@ -398,12 +405,22 @@
                 <th style="font-weight: 600">Current Land Use</th>
                 <th style="font-weight: 600">Base Zoning</th>
                 <th>data_id</th>
+
+                <th style="font-weight: 600">Alternative Name(s)</th>
+                <th style="font-weight: 600">State Permit Name</th>
+                <th style="font-weight: 600">Parent Project Name</th>
+                <th style="font-weight: 600">Previous Project Data ID</th>
+                <th style="font-weight: 600">Current Project Owner</th>
+                <th style="font-weight: 600">Project Owner</th>
+                <th style="font-weight: 600">Previous Project Applicant</th>
+                <th style="font-weight: 600">Entity ID</th>
             </tr>
         </thead>
         <tbody>
             {% for project in data %}
             <tr>
                 <td>{{ project.project_name }}</td>
+
                 <td>{{ project.locality }}</td>
                 <td>{{ project.city_county }}</td>
                 <td>{{ project.address }}</td>
@@ -411,6 +428,15 @@
                 <td>{{ project.land_use_at_time_of_local_application }}</td>
                 <td>{{ project.base_zoning }}</td>
                 <td>{{ project.data_id }}</td>
+                
+                <td>{{ project.alternate_names }}</td>
+                <td>{{ project.state_permit_source }}</td>
+                <td>{{ project.parent_project }}</td>
+                <td>{{ project.data_id_for_previous_project }}</td>
+                <td>{{ project.current_project_owner }}</td>
+                <td>{{ project.project_owner }}</td>
+                <td>{{ project.previous_project_owner_applicant }}</td>
+                <td>{{ project.entity_id_eia }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -432,16 +458,76 @@
                 { width: '200px', targets: 4 },
                 { width: '200px', targets: 5 },
                 { width: '200px', targets: 6 },
+
+                { width: '350px', targets: 8 },
+                { width: '100px', targets: 9 },
+                { width: '200px', targets: 10 },
+                { width: '200px', targets: 11 },
+                { width: '200px', targets: 12 },
+                { width: '200px', targets: 13 },
+                { width: '200px', targets: 14 },
+                { width: '100px', targets: 15 },
             ]
           });
 
           table.column(7).visible(false)
+
+          table.column(8).visible(false)
+          table.column(9).visible(false)
+          table.column(10).visible(false)
+          table.column(11).visible(false)
+          table.column(12).visible(false)
+          table.column(13).visible(false)
+          table.column(14).visible(false)
+          table.column(15).visible(false)
           
           $('#projectData tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
             var data_id = data[7]
             window.location.href = '/project/' + data_id + '/';
           });
+        
+          var columnFilterButton = document.getElementById("columnFilterButton");
+          
+          columnFilterButton.addEventListener("click", function() {
+            var dataCategory = document.getElementById('dateCategoryFilter').value;
+
+            if (dataCategory == 'location') {
+                table.column(1).visible(true);
+                table.column(2).visible(true);
+                table.column(3).visible(true);
+                table.column(4).visible(true);
+                table.column(5).visible(true);
+                table.column(6).visible(true);
+
+                table.column(8).visible(false);
+                table.column(9).visible(false);
+                table.column(10).visible(false);
+                table.column(11).visible(false);
+                table.column(12).visible(false);
+                table.column(13).visible(false);
+                table.column(14).visible(false);
+                table.column(15).visible(false);
+            }
+            if (dataCategory == 'namingAndOwnership') {
+                table.column(1).visible(false);
+                table.column(2).visible(false);
+                table.column(3).visible(false);
+                table.column(4).visible(false);
+                table.column(5).visible(false);
+                table.column(6).visible(false);
+
+                table.column(8).visible(true);
+                table.column(9).visible(true);
+                table.column(10).visible(true);
+                table.column(11).visible(true);
+                table.column(12).visible(true);
+                table.column(13).visible(true);
+                table.column(14).visible(true);
+                table.column(15).visible(true);
+            }
+          });
+          
         });
     </script>
       
