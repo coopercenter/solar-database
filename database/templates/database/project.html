@@ -14,17 +14,17 @@
         {{ object.latitude|json_script:"latitude_json" }}
 
         <script>
-            let longitude = Number(JSON.parse(document.getElementById('longitude_json').textContent));
-            let latitude = Number(JSON.parse(document.getElementById('latitude_json').textContent));
+            let longitude = Number(JSON.parse(document.getElementById('longitude_json').textContent))
+            let latitude = Number(JSON.parse(document.getElementById('latitude_json').textContent))
             
-            var map = L.map('map').setView([37.6, -78.6569], 7);
+            var map = L.map('map').setView([37.6, -78.6569], 7)
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
+            }).addTo(map)
 
-            L.marker([latitude, longitude]).addTo(map);
+            L.marker([latitude, longitude]).addTo(map)
 
         </script>
     {% endif %}

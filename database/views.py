@@ -11,7 +11,13 @@ def about(request):
     return render(request, 'database/about.html')
 
 def dashboard(request):
-    return render(request, 'database/dashboard.html')
+    data = list(SolarProjectData.objects.values('latitude', 'longitude','project_name'))
+
+    context = {
+        'data': data,
+    }
+
+    return render(request, 'database/dashboard.html', context)
 
 def data(request):
     data = SolarProjectData.objects.all()
@@ -23,6 +29,7 @@ def data(request):
     context = {
         'data': data,
     }
+
     return render(request, 'database/data.html', context)
 
 class ProjectView(DetailView):
