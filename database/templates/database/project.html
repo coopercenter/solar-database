@@ -115,4 +115,82 @@
 
     <br>
 
+    <div class="card">
+        <h6 class="card-header">
+            Features
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 300px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Nameplate Capacity (MW):</td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.nameplate_capacity_at_local_action }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Nameplate Capacity (MW): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.nameplate_capacity_at_local_action }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Parcel(s) Acreage: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.field_parcel_acreage }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Acreage: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.project_acreage }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Total Acreage: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.total_acreage }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Lease Acreage: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.lease_acreage }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> In Fence Area: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.in_fence_area }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Under Panel Area: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.under_panel_area }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Battery Size: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.battery_size}} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Axis Design: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.axis_design }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Panel Design (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.panel_type }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Panel Type Specified by Locality: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.panel_type_specified_by_locality }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Pollinator-Smart Features: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.contains_pollinator_smart_features }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Sheep Grazing: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.sheep_grazing }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Agrivoltaic Crop Cover: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.agrivoltaic_crop_cover }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Apriaries: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.apiaries }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
 {% endblock content %}
