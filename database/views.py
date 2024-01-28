@@ -5,19 +5,16 @@ from django.views.generic import DetailView
 
 
 def home(request):
-    return render(request, 'database/home.html')
-
-def about(request):
-    return render(request, 'database/about.html')
-
-def dashboard(request):
     data = list(SolarProjectData.objects.values('latitude', 'longitude','project_name'))
 
     context = {
         'data': data,
     }
 
-    return render(request, 'database/dashboard.html', context)
+    return render(request, 'database/home.html', context)
+
+def about(request):
+    return render(request, 'database/about.html')
 
 def data(request):
     data = SolarProjectData.objects.all()
