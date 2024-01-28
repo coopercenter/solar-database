@@ -1,7 +1,7 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
-    <button onclick="window.location.href='/data/'" class="btn btn-outline-dark btn-sm">Back</button>
+    <button onclick="window.location.href='/data/'" class="btn btn-light btn-sm">Back</button>
     <br><br>
     <h4>{{ object.project_name }}</h4>
 
@@ -82,7 +82,7 @@
                     </tr>
                     <tr>
                         <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Name (DEQ): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.state_permit_source }} </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.vdeq_emd_permit_name }} </td>
                     </tr>
                     <tr>
                         <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Parent Project Name: </td>

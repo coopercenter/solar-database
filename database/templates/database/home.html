@@ -4,15 +4,16 @@
 
     {{ data|json_script:"data_json" }}
 
-    <div class="container"  style="background-color:#F1F1EF">
-        <div class="row">
+    <div class="container">
+        <div class="row" style="background-color:#F1F1EF">
           <div class="col">
-            <br>
-            <h6>&#160; Explore Solar Projects in Virginia</h6>
-            <br>
+            <div style="line-height: 135%"><br></div>
+            <h5>Explore Solar Projects</h5>in Virginia
+            <br><br>
+            <button class="btn btn-light btn-sm">Search</button>
           </div>
           <div class="col-9">
-            <style> #map { height: 400px; width: 820px } </style>
+            <style> #map { height: 400px; width: 818px } </style>
             <p class="card-text" id="map"></p>
           </div>
         </div>
