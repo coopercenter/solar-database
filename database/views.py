@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 
 
 def home(request):
-    data = list(SolarProjectData.objects.values('latitude', 'longitude','project_name'))
+    data = list(SolarProjectData.objects.values('latitude', 'longitude','project_name', 'data_id'))
 
     context = {
         'data': data,

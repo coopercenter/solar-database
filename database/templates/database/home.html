@@ -57,7 +57,7 @@
             if (data.longtiude !== null && data.latitude !== null) {
                 var marker = L.marker([data.latitude, data.longitude]).addTo(map)
                     .on('click', function() {
-                        window.location.href ="/data/?project_name=" + data.project_name
+                        window.location.href ="/project/" + data.data_id
                     })
                     
                 marker.on('mouseover', function() {

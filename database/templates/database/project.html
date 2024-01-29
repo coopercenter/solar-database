@@ -1,7 +1,7 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
-    <button onclick="window.location.href='/data/'" class="btn btn-light btn-sm">Back</button>
+    <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     <h4>{{ object.project_name }}</h4>
 
