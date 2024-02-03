@@ -193,4 +193,120 @@
 
     <br>
 
+    <div class="card">
+        <h6 class="card-header">
+            Generational Details
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 370px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Offtaker: </td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.offtaker }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Operator (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.operator }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Plant ID (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.plant_id }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Sector (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.sector }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Generator ID (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.generator_id }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Interconnection (PJM): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.interconnection }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Type of Interconnection (SCC): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.type_of_interconnection }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Operating Month (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.operating_month }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Operating Year (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.operating_year}} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Planned Commercial Operation Commence (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.us_eia_planned_commercial_operation_commence }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Construction Commenced (DEQ): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.vdeq_reps_construction_commenced }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Classification (EIA): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.us_eia_classification }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Net-Metering: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.net_metering }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Facility Type: </td>
+                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.scc_facility_type }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h6 class="card-header">
+            Local Permit Process
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 265px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Application Submission Date: </td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_zoning_application_submittal_date }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Planning Commission Action Date: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.planning_commission_action_date }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Local Action Date: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_bos_and_cc_action_date }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Local Permitting Status: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_permit_status }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> 2232/Comp Plan Status: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.status_of_2232_comp_plan_review }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Zoning Permit Type: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.zoning_permit_type }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Executed Siting Agreement: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.executed_siting_agreement }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+    <div style="font-weight: 550">Date of Last Verification:</div>
+
+    <br>
+
 {% endblock content %}
