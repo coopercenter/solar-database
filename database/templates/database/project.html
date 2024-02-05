@@ -128,7 +128,7 @@
                     </tr>
                     <tr>
                         <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Nameplate Capacity (MW): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.nameplate_capacity_at_local_action }} </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
                     </tr>
                     <tr>
                         <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Parcel(s) Acreage: </td>
@@ -297,6 +297,80 @@
                     <tr>
                         <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Executed Siting Agreement: </td>
                         <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.executed_siting_agreement }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card">
+        <h6 class="card-header">
+            State Permit Process
+        </h6>
+        <div class="card-body">
+            <table id="projectData" class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td style="width: 280px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Status (EIA): </td>
+                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.project_status}} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Path: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.state_permit_path }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> NOI Recieved Date: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> DEQ Permit Number: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.deq_permit_number }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Status </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Source: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ state_permit_source }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Interconnection Agreeement Report: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.vdeq_reps_final_interconnection_agreement_report }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> SCC CPCN Number: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.scc_cpcn_number }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> DEQ SWM Status: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.deq_swm_status }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> RPS Program Compliance (SCC): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.rps_program_compliance }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> RPS Development Plan (SCC): </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.rps_development_plan }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Qualifying Facility: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.qualifying_facility }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> QF FERC Docket Number: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.qf_ferc_docket_number }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> PJM Queue Status: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.pjm_queue }} </td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> PJM Queue Number: </td>
+                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
                     </tr>
                 </tbody>
             </table>
