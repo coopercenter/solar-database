@@ -9,8 +9,23 @@
           <div class="col">
             <div style="line-height: 135%"><br></div>
             <h5>Explore Solar Projects</h5>in Virginia
-            <br><br>
-            <button class="btn btn-light btn-sm">Search</button>
+            
+            <div style="line-height: 200%"><br></div>
+            
+            <div style="font-size: 14px" ><i>Choose Map Layer</i></div>
+            
+            <div style="line-height: 80%"><br></div>
+
+            <select id="layerSelection" class="form-select form-select-format">
+                <option value="status">&#160; Local Permit Status</option>
+                <option value="project">&#160; Project Type</option>
+                <option value="megawatts">&#160; Approved Megawatts</option>
+                <option value="acreage">&#160; Acreage Approved</option>
+            </select>
+
+            <div style="line-height: 200%"><br></div>
+
+            <button id="layerButton" class="btn btn-light btn-sm">Search</button>
           </div>
           <div class="col-9">
             <style> #map { height: 400px; width: 818px } </style>
@@ -51,27 +66,53 @@
     <script>
         var map = L.map('map').setView([38.2, -79.2569], 7)
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map)
-
         let data = JSON.parse(document.getElementById('data_json').textContent)
 
+        var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        })
+
+        var permitStatusMarker = L.layerGroup();
+
         data.forEach(data => {
-            if (data.longtiude !== null && data.latitude !== null) {
-                var marker = L.marker([data.latitude, data.longitude]).addTo(map)
+            if (data.longitude !== null && data.latitude !== null
+                && data.longitude.indexOf(';') == -1 && data.latitude.indexOf(';') == -1) {
+                var marker = L.marker([data.latitude, data.longitude])
                     .on('click', function() {
                         window.location.href ="/project/" + data.data_id
                     })
-                    
-                marker.on('mouseover', function() {
+                    .on('mouseover', function() {
                             marker.bindPopup(data.project_name).openPopup()
                         })
                     .on('mouseout', function() {
                         marker.closePopup()
                     })
+                
+                permitStatusMarker.addLayer(marker)
             }
         })
+
+        var localPermitStatus = L.layerGroup().addLayer(mapBase).addLayer(permitStatusMarker).addTo(map);
+        var projectType = L.layerGroup().addLayer(mapBase)
+
+        var mapLayers = {
+            'status': localPermitStatus,
+            'project': projectType,
+        }
+
+        var layerButton = document.getElementById("layerButton");
+          
+        layerButton.addEventListener("click", function() {
+            var mapLayer = document.getElementById('layerSelection').value;
+
+            console.log(mapLayer)
+
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer);
+            });
+
+            mapLayers[mapLayer].addTo(map);
+        });
     </script>
 {% endblock content %}
