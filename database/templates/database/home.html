@@ -73,46 +73,63 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         })
 
-        var permitStatusMarker = L.layerGroup();
+        var permitStatusMarkers = L.layerGroup()
+        var projectTypeMarkers = L.layerGroup()
+        var sheepIcon = L.icon({
+            iconUrl: '../../static/images/sheepIcon.png',
+            iconSize: [30, 21],
+        })
 
         data.forEach(data => {
             if (data.longitude !== null && data.latitude !== null
                 && data.longitude.indexOf(';') == -1 && data.latitude.indexOf(';') == -1) {
-                var marker = L.marker([data.latitude, data.longitude])
-                    .on('click', function() {
-                        window.location.href ="/project/" + data.data_id
-                    })
-                    .on('mouseover', function() {
-                            marker.bindPopup(data.project_name).openPopup()
-                        })
-                    .on('mouseout', function() {
-                        marker.closePopup()
-                    })
+                var permitStatusMarker = L.marker([data.latitude, data.longitude])
+                                            .on('click', function() {
+                                                window.location.href ="/project/" + data.data_id
+                                            })
+                                            .on('mouseover', function() {
+                                                    permitStatusMarker.bindPopup(data.project_name).openPopup()
+                                                })
+                                            .on('mouseout', function() {
+                                                permitStatusMarker.closePopup()
+                                            })
                 
-                permitStatusMarker.addLayer(marker)
+                    if (data.sheep_grazing != null) {
+                        var sheepMarker = L.marker([data.latitude, data.longitude], {icon: sheepIcon})
+                                            .on('click', function() {
+                                            window.location.href ="/project/" + data.data_id
+                                            })
+                                            .on('mouseover', function() {
+                                                sheepMarker.bindPopup(data.project_name).openPopup()
+                                            })
+                                            .on('mouseout', function() {
+                                                sheepMarker.closePopup()
+                                            })
+                        projectTypeMarkers.addLayer(sheepMarker)
+                    }
+                
+                permitStatusMarkers.addLayer(permitStatusMarker)
             }
         })
 
-        var localPermitStatus = L.layerGroup().addLayer(mapBase).addLayer(permitStatusMarker).addTo(map);
-        var projectType = L.layerGroup().addLayer(mapBase)
+        var localPermitStatus = L.layerGroup().addLayer(mapBase).addLayer(permitStatusMarkers).addTo(map)
+        var projectType = L.layerGroup().addLayer(mapBase).addLayer(projectTypeMarkers)
 
         var mapLayers = {
             'status': localPermitStatus,
             'project': projectType,
         }
 
-        var layerButton = document.getElementById("layerButton");
+        var layerButton = document.getElementById("layerButton")
           
         layerButton.addEventListener("click", function() {
-            var mapLayer = document.getElementById('layerSelection').value;
-
-            console.log(mapLayer)
+            var mapLayer = document.getElementById('layerSelection').value
 
             map.eachLayer(function (layer) {
-                map.removeLayer(layer);
+                map.removeLayer(layer)
             });
 
-            mapLayers[mapLayer].addTo(map);
+            mapLayers[mapLayer].addTo(map)
         });
     </script>
 {% endblock content %}
