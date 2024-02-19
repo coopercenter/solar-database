@@ -22,53 +22,49 @@
                     <div class="col form-group">
                         <input type="text" name="project_name" class="form-control form-select-format" placeholder="Project Name">
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; Nameplate Capacity (MW)</option>
-                        </select>
+                        <input type="number" min="0" class="form-control form-select-format" placeholder="Nameplate Capacity (MW)">
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; PJM Queue Status</option>
-                        </select>
+                        <input type="number" min="0" class="form-control form-select-format" placeholder="PJM Queue Status">
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; Locality</option>
-                            <option value="1">&#160; Fairfax</option>
-                            <option value="2">&#160; Albemarle</option>
-                            <option value="3">&#160; Amherst</option>
-                        </select>
+                        <input type="text" class="form-control form-select-format" placeholder="Locality">
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; Project Status</option>
-                        </select>
+                        <input type="text" class="form-control form-select-format" placeholder="Project Status">
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; Local Action Date</option>
-                        </select>
+                        <input type="text" class="form-control form-select-format" placeholder="Local Action Date">
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
                         <select class="form-select form-select-format">
                             <option selected>&#160; State Permit Status</option>
+                            <option value="approved">&#160; Approved</option>
+                            <option value="denied">&#160; Denied</option>
+                            <option value="withdrawn">&#160; Withdrawn</option>
+                            <option value="pending">&#160; Pending</option>
+                            <option value="byright">&#160; By-Right</option>
                         </select>
                         <div class="button-spacing"><br></div>
                         <select class="form-select form-select-format">
                             <option selected>&#160; Local Permit Status</option>
+                            <option value="approved">&#160; Approved</option>
+                            <option value="denied">&#160; Denied</option>
+                            <option value="withdrawn">&#160; Withdrawn</option>
+                            <option value="pending">&#160; Pending</option>
+                            <option value="byright">&#160; By-Right</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <input class="form-control form-select-format" placeholder="Local Zoning Submittal Date">
+                        <input type="text" class="form-control form-select-format" placeholder="Local Zoning Submittal Date">
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
                         <select class="form-select form-select-format">
                             <option selected>&#160; State Permit Path</option>
+                            <option value="vdeq">&#160; Virginia Department of Environmental Quality &#160;</option>
+                            <option value="scc">&#160; State Corporation Commission</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected>&#160; Project Acreage</option>
-                        </select>
-                        <div class="button-spacing"><br></div>
+                        <input type="number" min="0" class="form-control form-select-format" placeholder="Project Acreage">
                     </div>
                 </div>
                 <p>
@@ -82,30 +78,29 @@
                     <div class="row">
                         <div class="col">
                             <select class="form-select form-select-format">
-                                <option selected>&#160; County/City</option>
+                                <option selected>&#160; Government Unit</option>
+                                <option value="city">&#160; City</option>
+                                <option value="county">&#160; County</option>
+                                <option value="town">&#160; Town</option>
                             </select>
                             <div class="button-spacing"><br></div>
                             <input class="form-control form-select-format" placeholder="Tax Map Parcel #">
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Longitude">
+                            <input type="number" step="0.01" min="0" class="form-control form-select-format" placeholder="Longitude">
                             <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Current Land Use</option>
-                            </select>
+                            <input type="text" class="form-control form-select-format" placeholder="Current Land Use">
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Latitude">
+                            <input type="number" step="0.01" min="0" class="form-control form-select-format" placeholder="Latitude">
                             <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Base Zoning</option>
-                            </select>
+                            <input type="text" class="form-control form-select-format" placeholder="Base Zoning">
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Address">
+                            <input type="text" class="form-control form-select-format" placeholder="Address">
                             <div class="button-spacing"><br></div>
                         </div>
                     </div>
@@ -114,29 +109,27 @@
                     <div style="line-height: 40%"><br></div>
                     <div class="row">
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Alternative Name(s)">
+                            <input type="text" class="form-control form-select-format" placeholder="Alternative Name(s)">
                             <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Current Project Owner">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; State Permit Name (DEQ)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Project Owner (At last application)">
+                            <input type="text" class="form-control form-select-format" placeholder="Current Project Owner">
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Parent Project Name">
+                            <input type="text" class="form-control form-select-format" placeholder="State Permit Name (DEQ)">
                             <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Previous Project Applicant">
+                            <input type="text" class="form-control form-select-format" placeholder="Project Owner (At last application)">
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input class="form-control form-select-format" placeholder="Previous Project Data ID">
+                            <input tyoe="text" class="form-control form-select-format" placeholder="Parent Project Name">
                             <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Entity ID (EIA)">
+                            <input type="text" class="form-control form-select-format" placeholder="Previous Project Applicant">
+                            <div class="button-spacing"><br></div>
+                        </div>
+                        <div class="col">
+                            <input type="number" min="0" class="form-control form-select-format" placeholder="Previous Project Data ID">
+                            <div class="button-spacing"><br></div>
+                            <input type="number" min="0" class="form-control form-select-format" placeholder="Entity ID (EIA)">
                             <div class="button-spacing"><br></div>
                         </div>
                     </div>
