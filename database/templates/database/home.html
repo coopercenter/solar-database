@@ -79,6 +79,14 @@
             iconUrl: '../../static/images/sheepIcon.png',
             iconSize: [40, 25],
         })
+        var beeIcon = L.icon({
+            iconUrl: '../../static/images/beeIcon.png',
+            iconSize: [35, 30],
+        })
+        var cropIcon = L.icon({
+            iconUrl: '../../static/images/cropIcon.png',
+            iconSize: [30, 35],
+        })
 
         data.forEach(data => {
             if (data.longitude !== null && data.latitude !== null
@@ -93,8 +101,34 @@
                                             .on('mouseout', function() {
                                                 permitStatusMarker.closePopup()
                                             })
-                
-                    if (data.sheep_grazing != null) {
+                    
+                    if (data.apiaries != null) {
+                        var beeMarker = L.marker([data.latitude, data.longitude], {icon: beeIcon})
+                                            .on('click', function() {
+                                            window.location.href ="/project/" + data.data_id
+                                            })
+                                            .on('mouseover', function() {
+                                                beeMarker.bindPopup(data.project_name).openPopup()
+                                            })
+                                            .on('mouseout', function() {
+                                                beeMarker.closePopup()
+                                            })
+                        projectTypeMarkers.addLayer(beeMarker)
+                    }
+                    else if (data.agrivoltaic_crop_cover != null) {
+                        var cropMarker = L.marker([data.latitude, data.longitude], {icon: cropIcon})
+                                            .on('click', function() {
+                                            window.location.href ="/project/" + data.data_id
+                                            })
+                                            .on('mouseover', function() {
+                                                cropMarker.bindPopup(data.project_name).openPopup()
+                                            })
+                                            .on('mouseout', function() {
+                                                cropMarker.closePopup()
+                                            })
+                        projectTypeMarkers.addLayer(cropMarker)
+                    }
+                    else if (data.sheep_grazing != null) {
                         var sheepMarker = L.marker([data.latitude, data.longitude], {icon: sheepIcon})
                                             .on('click', function() {
                                             window.location.href ="/project/" + data.data_id
