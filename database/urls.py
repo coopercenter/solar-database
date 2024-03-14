@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.home, name='database-home'),
     path('about/', views.about, name='database-about'),
     path('data/', views.data, name='database-data'),
-    path('project/<pk>/', ProjectView.as_view(), name='database-project')
+    path('project/<pk>/', ProjectView.as_view(), name='database-project'),
+    path('export-csv/', views.export_csv, name='export_csv'),
 ]
