@@ -71,6 +71,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'solar_database.wsgi.application'
 
+if os.path.exists('hidden/name.txt') :
+    with open('hidden/name.txt') as f:
+        NAME = str(f.read().strip())
+else:
+    NAME = os.environ['NAME']  
+
+if os.path.exists('hidden/user.txt'):
+    with open('hidden/user.txt') as f:
+        USER = str(f.read().strip())
+else:
+    USER = os.environ['USER']   
+
+if os.path.exists('hidden/password.txt'):
+    with open('hidden/password.txt') as f:
+        PASSWORD = str(f.read().strip())
+else:
+    PASSWORD = os.environ['PASSWORD']    
+
+if os.path.exists('hidden/host.txt'):
+    with open('hidden/host.txt') as f:
+        HOST = str(f.read().strip())
+else:
+    HOST = os.environ['HOST'] 
+
+if os.path.exists('hidden/port.txt'):
+    with open('hidden/port.txt') as f:
+        PORT = str(f.read().strip())
+else:
+    PORT = os.environ['PORT'] 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -78,11 +107,11 @@ WSGI_APPLICATION = 'solar_database.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'va_solar_data',
-        'USER': 'wee2wr',
-        'PASSWORD': 'cepsUVa2023S01ar!',
-        'HOST': 'va-energy.postgres.database.azure.com',
-        'PORT': '5432',
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': PORT,
     }
 }
 
