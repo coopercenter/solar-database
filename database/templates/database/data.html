@@ -385,7 +385,43 @@
     <div style="line-height: 300%"><br></div>
 
     <h5>Search Result(s)</h5>
+
+    {{ filter|json_script:"filter_json" }}
+
     <div style="line-height: 85%"><br></div>
+
+    <style> #map { height: 350px; } </style>
+    <p class="card-text" id="map"></p>
+
+    <div style="line-height: 50%"><br></div>
+
+    <script>
+        var map = L.map('map').setView([38.2, -79.2569], 7)
+
+        let data = JSON.parse(document.getElementById('filter_json').textContent)
+
+        var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map)
+
+        data.forEach(data => {
+            if (data.longitude !== null && data.latitude !== null
+                && data.longitude.indexOf(';') == -1 && data.latitude.indexOf(';') == -1) {
+                L.marker([data.latitude, data.longitude])
+                    .on('click', function() {
+                        window.location.href ="/project/" + data.data_id
+                    })
+                    .on('mouseover', function() {
+                        this.bindPopup(data.project_name).openPopup()
+                    })
+                    .on('mouseout', function() {
+                        this.closePopup()
+                    })
+                    .addTo(map)
+            }
+        })
+    </script>
 
     <table id="projectData" class="table table-hover">
         <thead>

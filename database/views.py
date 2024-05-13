@@ -41,8 +41,11 @@ def data(request):
     if project_name:
         data = data.filter(project_name__icontains=project_name)
 
+    filter = list(data.values('latitude', 'longitude', 'project_name', 'data_id'))
+
     context = {
         'data': data,
+        'filter': filter,
     }
 
     return render(request, 'database/data.html', context)
