@@ -36,10 +36,12 @@ def about(request):
 
 def data(request):
     data = SolarProjectData.objects.all()
-    project_name = request.GET.get('project_name')
 
-    if project_name:
-        data = data.filter(project_name__icontains=project_name)
+    if request.GET.get('project_name'):
+        data = data.filter(project_name__icontains = request.GET.get('project_name'))
+        
+    if request.GET.get('locality'):
+        data = data.filter(locality__icontains = request.GET.get('locality'))
 
     filter = list(data.values('latitude', 'longitude', 'project_name', 'data_id'))
 
