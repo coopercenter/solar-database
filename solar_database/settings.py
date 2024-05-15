@@ -24,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+if os.path.exists('hidden'):
+    DEBUG = True
+else:
+    DEBUG = False
+
+ALLOWED_HOSTS = ['https://va-solar-db.azurewebsites.net/', '127.0.0.1']
 
 
 # Application definition
@@ -158,6 +162,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "database/static"),
-    ]
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "database/static"),
+        ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'database/static')
