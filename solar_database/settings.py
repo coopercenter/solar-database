@@ -30,7 +30,7 @@ if os.path.exists('hidden'):
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
 
 # Application definition
@@ -154,13 +154,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
