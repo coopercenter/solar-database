@@ -22,6 +22,10 @@ def export_csv(request):
     return response
 
 def home(request):
+
+    return render(request, 'database/home.html')
+
+def dash(request):
     data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'data_id',
                                                 'sheep_grazing', 'apiaries', 'agrivoltaic_crop_cover'))
 
@@ -29,7 +33,7 @@ def home(request):
         'data': data,
     }
 
-    return render(request, 'database/home.html', context)
+    return render(request, 'database/dash.html', context)
 
 def about(request):
     return render(request, 'database/about.html')
