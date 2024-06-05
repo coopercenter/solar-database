@@ -1,7 +1,7 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
-    <h4>Browse and Export Data</h4>
+    <h5>Browse and Export Data</h5>
     <br>
 
     <div>
@@ -449,24 +449,24 @@
         <tbody>
             {% for project in data %}
             <tr>
-                <td>{{ project.project_name }}</td>
+                <td style="cursor: pointer;">{{ project.project_name }}</td>
 
-                <td>{{ project.locality }}</td>
-                <td>{{ project.city_county }}</td>
-                <td>{{ project.address }}</td>
-                <td>{{ project.tax_map_parcel }}</td>
-                <td>{{ project.land_use_at_time_of_local_application }}</td>
-                <td>{{ project.base_zoning }}</td>
-                <td>{{ project.data_id }}</td>
+                <td style="cursor: pointer;">{{ project.locality }}</td>
+                <td style="cursor: pointer;">{{ project.city_county }}</td>
+                <td style="cursor: pointer;">{{ project.address }}</td>
+                <td style="cursor: pointer;">{{ project.tax_map_parcel }}</td>
+                <td style="cursor: pointer;">{{ project.land_use_at_time_of_local_application }}</td>
+                <td style="cursor: pointer;">{{ project.base_zoning }}</td>
+                <td style="cursor: pointer;">{{ project.data_id }}</td>
                 
-                <td>{{ project.alternate_names }}</td>
-                <td>{{ project.vdeq_emd_permit_name }}</td>
-                <td>{{ project.parent_project }}</td>
-                <td>{{ project.data_id_for_previous_project }}</td>
-                <td>{{ project.current_project_owner }}</td>
-                <td>{{ project.project_owner }}</td>
-                <td>{{ project.previous_project_owner_applicant }}</td>
-                <td>{{ project.entity_id_eia }}</td>
+                <td style="cursor: pointer;">{{ project.alternate_names }}</td>
+                <td style="cursor: pointer;">{{ project.vdeq_emd_permit_name }}</td>
+                <td style="cursor: pointer;">{{ project.parent_project }}</td>
+                <td style="cursor: pointer;">{{ project.data_id_for_previous_project }}</td>
+                <td style="cursor: pointer;">{{ project.current_project_owner }}</td>
+                <td style="cursor: pointer;">{{ project.project_owner }}</td>
+                <td style="cursor: pointer;">{{ project.previous_project_owner_applicant }}</td>
+                <td style="cursor: pointer;">{{ project.entity_id_eia }}</td>
             </tr>
             {% endfor %}
         </tbody>
