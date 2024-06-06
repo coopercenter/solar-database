@@ -9,12 +9,20 @@
           <div class="col">
             <div style="line-height: 135%"><br></div>
             <h5>Explore Solar Projects</h5>in Virginia
+
+            <div style="line-height: 150%"><br></div>
+
+            <div style="font-size: 14px" ><i>Search Project(s)</i></div>
             
-            <div style="line-height: 200%"><br></div>
+            <div style="line-height: 60%"><br></div>
+
+            <input id="searchInput" class="form-control-sm form-select-format" type="text" placeholder="ex. Martin Solar Center">
+            
+            <div style="line-height: 150%"><br></div>
             
             <div style="font-size: 14px" ><i>Choose Map Layer</i></div>
             
-            <div style="line-height: 80%"><br></div>
+            <div style="line-height: 60%"><br></div>
 
             <select id="layerSelection" class="form-select form-select-format">
                 <option value="status">&#160; Local Permit Status</option>
@@ -24,8 +32,6 @@
             </select>
 
             <div style="line-height: 200%"><br></div>
-
-            <button id="layerButton" class="btn btn-light btn-sm">Search</button>
           </div>
           <div class="col-9">
             <style> #map { height: 400px; width: 818px } </style>
@@ -154,16 +160,48 @@
             'project': projectType,
         }
 
-        var layerButton = document.getElementById("layerButton")
+        var layerButton = document.getElementById("layerSelection")
           
-        layerButton.addEventListener("click", function() {
-            var mapLayer = document.getElementById('layerSelection').value
+        layerButton.addEventListener("change", function() {
+            var mapLayer = layerButton.value
 
             map.eachLayer(function (layer) {
                 map.removeLayer(layer)
             });
 
             mapLayers[mapLayer].addTo(map)
+        });
+
+        var searchInput = document.getElementById("searchInput")
+
+        searchInput.addEventListener("input", function() {
+            var projectSearchMarkers = L.layerGroup()
+            var searchInput = document.getElementById("searchInput").value.toLowerCase()
+
+            data.forEach(data => {
+                if (data.longitude !== null && data.latitude !== null
+                    && data.longitude.indexOf(';') == -1 && data.latitude.indexOf(';') == -1
+                    && ((data.project_name).toLowerCase()).includes(searchInput)) {
+                    var projectMarker = L.marker([data.latitude, data.longitude])
+                                                .on('click', function() {
+                                                    window.location.href ="/project/" + data.data_id
+                                                })
+                                                .on('mouseover', function() {
+                                                    projectMarker.bindPopup(data.project_name).openPopup()
+                                                })
+                                                .on('mouseout', function() {
+                                                    projectMarker.closePopup()
+                                                })
+                    projectSearchMarkers.addLayer(projectMarker)
+                }
+            })
+
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer)
+            });
+
+            var projectSearch = L.layerGroup().addLayer(mapBase).addLayer(projectSearchMarkers)
+            projectSearch.addTo(map)
         });
     </script>
 {% endblock content %}
