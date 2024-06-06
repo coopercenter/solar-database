@@ -364,7 +364,7 @@
         </h6>
         
         <div class="card-body">
-            <select id="dateCategoryFilter" class="form-select form-select-format">
+            <!-- <select id="dateCategoryFilter" class="form-select form-select-format">
                 <option selected>&#160; Data Category</option>
                 <option value="location">&#160; Location</option>
                 <option value="namingAndOwnership">&#160; Naming and Ownership</option>
@@ -372,7 +372,69 @@
                 <option value="localPermitProcess">&#160; Local Permit Process</option>
                 <option value="generationDetails">&#160; Generation Details</option>
                 <option value="statePermitProcess">&#160; State Permit Process</option>
-            </select>
+            </select> 
+            <br><br> -->
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="localityCheck">
+                <label class="form-check-label" for="localityCheck">
+                    Locality
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="statusCheck">
+                <label class="form-check-label" for="statusCheck">
+                    State Permit Status
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="pathCheck">
+                <label class="form-check-label" for="pathCheck">
+                    State Permit Path
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="capacityCheck">
+                <label class="form-check-label" for="capacityCheck">
+                    Nameplate Capacity (MW)
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="statusCheck">
+                <label class="form-check-label" for="statusCheck">
+                    Project Status
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="localCheck">
+                <label class="form-check-label" for="localCheck">
+                    Local Permit Status
+                </label>
+            </div>
+            <div style="line-height: 50%"><br></div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="acreageCheck">
+                <label class="form-check-label" for="acreageCheck">
+                    Project Acreage
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="pjmCheck">
+                <label class="form-check-label" for="pjmCheck">
+                    PJM Queue Status
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="actionCheck">
+                <label class="form-check-label" for="actionCheck">
+                    Local Action Date
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="zoneCheck">
+                <label class="form-check-label" for="zoneCheck">
+                    Local Zoning Submittal Date
+                </label>
+            </div>
             <br><br>
             <button id="columnFilterButton" class="btn btn-light btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
         </div>
