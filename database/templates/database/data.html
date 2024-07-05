@@ -66,7 +66,11 @@
                             <option selected disabled>&#160; Solar Tracking Technology</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <input type="text" class="form-control form-select-format" placeholder="Local Action Date">
+                        <select class="form-select form-select-format">
+                            <option selected disabled>&#160; Sheep Grazing (Agrivoltaics)</option>
+                            <option value="yes">&#160; Yes</option>
+                            <option value="no">&#160; No</option>
+                        </select>
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
@@ -78,7 +82,11 @@
                             <option value="purchased">&#160; Purchased</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <input type="text" class="form-control form-select-format" placeholder="Local Zoning Submittal Date">
+                        <select class="form-select form-select-format">
+                            <option selected disabled>&#160; Crop Cover (Agrivoltaics)</option>
+                            <option value="yes">&#160; Yes</option>
+                            <option value="no">&#160; No</option>
+                        </select>
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
@@ -92,8 +100,18 @@
                             </div>
                         </div>
                         <div class="button-spacing"><br></div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Solar Panel Type Required
+                            </button>
+                            <div class="dropdown-menu">
+                            </div>
+                        </div>
+                        <div class="button-spacing"><br></div>
                         <select class="form-select form-select-format">
-                            <option selected disabled>&#160; Solar Panel Type Required</option>
+                            <option selected disabled>&#160; Apiaries (Agrivoltaics)</option>
+                            <option value="yes">&#160; Yes</option>
+                            <option value="no">&#160; No</option>
                         </select>
                         <div class="button-spacing"><br></div>
                     </div>
@@ -103,10 +121,75 @@
                     Additional Filters
                     </button>
                 </p>
-                <br>
                 <div class="collapse" id="additional-filters">
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; Local Zoning Permit Status
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; Project Owner at Local Submittal
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#8239; Local Land Use Submittal Date
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="minInput">
+                                 - <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="maxInput"> &#160; 
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; Current Project Owner
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#8201; Board of Supervisors Action Date
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="minInput">
+                                 - <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="maxInput"> &#160; 
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <select class="form-select form-select-format">
+                                <option selected disabled>&#160; Shared Solar Program</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
+                            </select>
+                            <div class="button-spacing"><br></div>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control form-select-format" placeholder="Siting Agreement">
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; Energy Offtaker
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                        </div>
+                    </div>
                 </div>
-                <div style="line-height: 40%"><br></div>
+                <div style="line-height: 150%"><br></div>
                 <button type="submit" class="btn btn-light btn-sm">Apply Filter(s)</button>
             </div>
         </form>
