@@ -195,6 +195,15 @@
         </form>
     </div>
 
+    <br><br>
+
+    <h5>Filter Result(s)</h5>
+
+    <div style="line-height: 85%"><br></div>
+
+    <style> #map { height: 350px; } </style>
+    <p class="card-text" id="map"></p>
+
     <br>
 
     <div class="card">
@@ -272,13 +281,6 @@
     <br>
 
     {{ filter|json_script:"filter_json" }}
-
-    <div style="line-height: 85%"><br></div>
-
-    <style> #map { height: 350px; } </style>
-    <p class="card-text" id="map"></p>
-
-    <div style="line-height: 100%"><br></div>
 
     <script>
         var map = L.map('map').setView([38.2, -79.2569], 7)
