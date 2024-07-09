@@ -66,11 +66,36 @@
                             <option selected disabled>&#160; Solar Tracking Technology</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected disabled>&#160; Sheep Grazing (Agrivoltaics)</option>
-                            <option value="yes">&#160; Yes</option>
-                            <option value="no">&#160; No</option>
-                        </select>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Agrivoltaics
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="sheepCheck">
+                                    <label class="form-check-label button-font" for="sheepCheck">
+                                        Sheep Grazing
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="cropCheck">
+                                    <label class="form-check-label button-font" for="cropCheck">
+                                        Crop Cover
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="apiariesCheck">
+                                    <label class="form-check-label button-font" for="apiariesCheck">
+                                        Apiaries
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
@@ -82,11 +107,15 @@
                             <option value="purchased">&#160; Purchased</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected disabled>&#160; Crop Cover (Agrivoltaics)</option>
-                            <option value="yes">&#160; Yes</option>
-                            <option value="no">&#160; No</option>
-                        </select>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Project Acreage
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="minInput" placeholder="Min.">
+                                 - <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="maxInput" placeholder="Max."> &#160; 
+                            </div>
+                        </div>
                         <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
@@ -108,11 +137,7 @@
                             </div>
                         </div>
                         <div class="button-spacing"><br></div>
-                        <select class="form-select form-select-format">
-                            <option selected disabled>&#160; Apiaries (Agrivoltaics)</option>
-                            <option value="yes">&#160; Yes</option>
-                            <option value="no">&#160; No</option>
-                        </select>
+                        <input type="text" class="form-control form-select-format" placeholder="Land Use at Local Action">
                         <div class="button-spacing"><br></div>
                     </div>
                 </div>
@@ -134,7 +159,15 @@
                             <div class="button-spacing"><br></div>
                             <div class="dropdown">
                                 <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
-                                    &#8201; Project Owner at Local Submittal
+                                    &#8201; Project Owner at Local Action
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; 15.2-2232 Review Status
                                 </button>
                                 <div class="dropdown-menu">
                                 </div>
@@ -158,6 +191,14 @@
                                 </div>
                             </div>
                             <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; State Permit Path
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
                             <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
@@ -174,9 +215,19 @@
                                 <option value="no">&#160; No</option>
                             </select>
                             <div class="button-spacing"><br></div>
+                            <select class="form-select form-select-format">
+                                <option selected disabled>&#160; Abandoned Mine Land</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
+                            </select>
+                            <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control form-select-format" placeholder="Siting Agreement">
+                            <select class="form-select form-select-format">
+                                <option selected disabled>&#160; Siting Agreement</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
+                            </select>
                             <div class="button-spacing"><br></div>
                             <div class="dropdown">
                                 <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
@@ -186,6 +237,13 @@
                                 </div>
                             </div>
                             <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; In Operation
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -271,6 +329,43 @@
                 <input class="form-check-input" type= "checkbox" value="" id="zoneCheck">
                 <label class="form-check-label" for="zoneCheck">
                     Local Zoning Submittal Date
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="localityCheck" checked>
+                <label class="form-check-label" for="localityCheck">
+                    Locality
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="cityCheck" checked>
+                <label class="form-check-label" for="cityCheck">
+                    City/County
+                </label>
+            </div>
+            <div style="line-height: 50%"><br></div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="addressCheck" checked>
+                <label class="form-check-label" for="addressCheck">
+                    Address
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="parcelCheck" checked>
+                <label class="form-check-label" for="parcelCheck">
+                    Tax Map Parcel #
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="currentCheck" checked>
+                <label class="form-check-label" for="currentCheck">
+                    Current Land Use
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="baseCheck" checked>
+                <label class="form-check-label" for="baseCheck">
+                    Base Zoning
                 </label>
             </div>
             <br><br>
