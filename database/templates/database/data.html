@@ -20,50 +20,124 @@
             <form method="get" action="{% url 'database-data' %}">
                 <div class="row">
                     <div class="col form-group">
-                        <input type="text" name="project_name" class="form-control form-select-format" placeholder="Project Name">
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Locality
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="westPointCheck">
+                                    <label class="form-check-label button-font" for="westPointCheck">
+                                        West Point
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="colonialBeachPointCheck">
+                                    <label class="form-check-label button-font" for="colonialBeachPointCheck">
+                                        Colonial Beach
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="button-spacing"><br></div>
-                        <input type="number" min="0" class="form-control form-select-format" placeholder="Nameplate Capacity (MW)">
-                        <div class="button-spacing"><br></div>
-                        <input type="number" min="0" class="form-control form-select-format" placeholder="PJM Queue Status">
-                    </div>
-                    <div class="col">
-                        <input type="text" name="locality" class="form-control form-select-format" placeholder="Locality">
-                        <div class="button-spacing"><br></div>
-                        <input type="text" class="form-control form-select-format" placeholder="Project Status">
-                        <div class="button-spacing"><br></div>
-                        <input type="text" class="form-control form-select-format" placeholder="Local Action Date">
-                        <div class="button-spacing"><br></div>
-                    </div>
-                    <div class="col">
                         <select class="form-select form-select-format">
-                            <option selected>&#160; State Permit Status</option>
-                            <option value="approved">&#160; Approved</option>
-                            <option value="denied">&#160; Denied</option>
-                            <option value="withdrawn">&#160; Withdrawn</option>
-                            <option value="pending">&#160; Pending</option>
-                            <option value="byright">&#160; By-Right</option>
+                            <option selected disabled>&#160; Energy Storage Onsite</option>
+                            <option value="yes">&#160; Yes</option>
+                            <option value="no">&#160; No</option>
                         </select>
                         <div class="button-spacing"><br></div>
                         <select class="form-select form-select-format">
-                            <option selected>&#160; Local Permit Status</option>
-                            <option value="approved">&#160; Approved</option>
-                            <option value="denied">&#160; Denied</option>
-                            <option value="withdrawn">&#160; Withdrawn</option>
-                            <option value="pending">&#160; Pending</option>
-                            <option value="byright">&#160; By-Right</option>
+                            <option selected disabled>&#160; Pollinator-Smart Required</option>
+                            <option value="yes">&#160; Yes</option>
+                            <option value="no">&#160; No</option>
                         </select>
-                        <div class="button-spacing"><br></div>
-                        <input type="text" class="form-control form-select-format" placeholder="Local Zoning Submittal Date">
-                        <div class="button-spacing"><br></div>
                     </div>
                     <div class="col">
                         <select class="form-select form-select-format">
-                            <option selected>&#160; State Permit Path</option>
-                            <option value="vdeq">&#160; Virginia Department of Environmental Quality &#160;</option>
-                            <option value="scc">&#160; State Corporation Commission</option>
+                            <option selected disabled>&#160; Unit of Government</option>
+                            <option value="city">&#160; City</option>
+                            <option value="county">&#160; County</option>
                         </select>
                         <div class="button-spacing"><br></div>
-                        <input type="number" min="0" class="form-control form-select-format" placeholder="Project Acreage">
+                        <select class="form-select form-select-format">
+                            <option selected disabled>&#160; Solar Tracking Technology</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Agrivoltaics
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="sheepCheck">
+                                    <label class="form-check-label button-font" for="sheepCheck">
+                                        Sheep Grazing
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="cropCheck">
+                                    <label class="form-check-label button-font" for="cropCheck">
+                                        Crop Cover
+                                    </label>
+                                </div>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    &#160; &#160; 
+                                    <input class="form-check-input" type= "checkbox" value="" id="apiariesCheck">
+                                    <label class="form-check-label button-font" for="apiariesCheck">
+                                        Apiaries
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-spacing"><br></div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control form-select-format" placeholder="Base Zoning">
+                        <div class="button-spacing"><br></div>
+                        <select class="form-select form-select-format">
+                            <option selected disabled>&#160; Leased or Purchased</option>
+                            <option value="leased">&#160; Leased</option>
+                            <option value="purchased">&#160; Purchased</option>
+                        </select>
+                        <div class="button-spacing"><br></div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Project Acreage
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="minInput" placeholder="Min.">
+                                 - <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="maxInput" placeholder="Max."> &#160; 
+                            </div>
+                        </div>
+                        <div class="button-spacing"><br></div>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Nameplate Capacity (MW)
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="minInput" placeholder="Min.">
+                                 - <input style="width: 60px; font-size: 14px;" min="0" max="999" type="number" id="numberInput" name="maxInput" placeholder="Max."> &#160; 
+                            </div>
+                        </div>
+                        <div class="button-spacing"><br></div>
+                        <div class="dropdown">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#160; Solar Panel Type Required
+                            </button>
+                            <div class="dropdown-menu">
+                            </div>
+                        </div>
+                        <div class="button-spacing"><br></div>
+                        <input type="text" class="form-control form-select-format" placeholder="Land Use at Local Action">
                         <div class="button-spacing"><br></div>
                     </div>
                 </div>
@@ -72,289 +146,121 @@
                     Additional Filters
                     </button>
                 </p>
-                <div style="line-height: 40%"><br></div>
                 <div class="collapse" id="additional-filters">
-                    <h6>Location</h6>
-                    <div style="line-height: 40%"><br></div>
                     <div class="row">
+                        <div class="col form-group">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; Local Zoning Permit Status
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; Project Owner at Local Action
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; 15.2-2232 Review Status
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                        </div>
                         <div class="col">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#8239; Local Land Use Submittal Date
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="minInput">
+                                 - <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="maxInput"> &#160; 
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; Current Project Owner
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; State Permit Path
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
+                            <div class="button-spacing"><br></div>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                &#8201; Board of Supervisors Action Date
+                            </button>
+                            <div class="dropdown-menu">
+                                &#160; <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="minInput">
+                                 - <input style="width: 115px; font-size: 14px;" type="date" id="dateInput" name="maxInput"> &#160; 
+                            </div>
+                            <div class="button-spacing"><br></div>
                             <select class="form-select form-select-format">
-                                <option selected>&#160; Government Unit</option>
-                                <option value="city">&#160; City</option>
-                                <option value="county">&#160; County</option>
-                                <option value="town">&#160; Town</option>
+                                <option selected disabled>&#160; Shared Solar Program</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
                             </select>
                             <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Tax Map Parcel #">
+                            <select class="form-select form-select-format">
+                                <option selected disabled>&#160; Abandoned Mine Land</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
+                            </select>
                             <div class="button-spacing"><br></div>
                         </div>
                         <div class="col">
-                            <input type="number" step="0.01" min="0" class="form-control form-select-format" placeholder="Longitude">
+                            <select class="form-select form-select-format">
+                                <option selected disabled>&#160; Siting Agreement</option>
+                                <option value="yes">&#160; Yes</option>
+                                <option value="no">&#160; No</option>
+                            </select>
                             <div class="button-spacing"><br></div>
-                            <input type="text" class="form-control form-select-format" placeholder="Current Land Use">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#8201; Energy Offtaker
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
                             <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input type="number" step="0.01" min="0" class="form-control form-select-format" placeholder="Latitude">
-                            <div class="button-spacing"><br></div>
-                            <input type="text" class="form-control form-select-format" placeholder="Base Zoning">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control form-select-format" placeholder="Address">
-                            <div class="button-spacing"><br></div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle form-select form-select-format" style="text-align: left; border: 0.7px solid #000000;" data-toggle="dropdown">
+                                    &#160; In Operation
+                                </button>
+                                <div class="dropdown-menu">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <h6>Naming and Ownership</h6>
-                    <div style="line-height: 40%"><br></div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" class="form-control form-select-format" placeholder="Alternative Name(s)">
-                            <div class="button-spacing"><br></div>
-                            <input type="text" class="form-control form-select-format" placeholder="Current Project Owner">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control form-select-format" placeholder="State Permit Name (DEQ)">
-                            <div class="button-spacing"><br></div>
-                            <input type="text" class="form-control form-select-format" placeholder="Project Owner (At last application)">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input tyoe="text" class="form-control form-select-format" placeholder="Parent Project Name">
-                            <div class="button-spacing"><br></div>
-                            <input type="text" class="form-control form-select-format" placeholder="Previous Project Applicant">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input type="number" min="0" class="form-control form-select-format" placeholder="Previous Project Data ID">
-                            <div class="button-spacing"><br></div>
-                            <input type="number" min="0" class="form-control form-select-format" placeholder="Entity ID (EIA)">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                    </div>
-                    <br>
-                    <h6>Features</h6>
-                    <div style="line-height: 40%"><br></div>
-                    <div class="row">
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Permit Nameplate Capacity (MW)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Lease Acreage</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Panel Type (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Agrivoltic Crop Cover</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Parcel(s) Acreage</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Under Panel Area</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Panel Type Specified By Locality</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Apiaries</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; In Fence Area</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Battery Size</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Pollinator-Smart Features</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Total Acreage</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Axis Design</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Sheep Grazing</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                    </div>
-                    <br>
-                    <h6>Local Permit Process</h6>
-                    <div style="line-height: 40%"><br></div>
-                    <div class="row">
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Application Submission Date</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Executed Sitting Agreement</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Commission Action Date</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; 2232/Comp Plan Status</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Zoning Permit Type</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                    </div>
-                    <br>
-                    <h6>Generation Details</h6>
-                    <div style="line-height: 40%"><br></div>
-                    <div class="row">
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Offtaker</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="Generator ID (EIA)">
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Operating Year (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Net-Metering</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Operator (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Interconnection (PJM)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Operation Commence (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Facility Type</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input class="form-control form-select-format" placeholder="Plant ID (EIA)">
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Type of Interconnection (SCC)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Construction Commenced (DEQ)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Sector (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Operating Month (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Project Classification (EIA)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                    </div>
-                    <br>
-                    <h6>State Permit Process</h6>
-                    <div style="line-height: 40%"><br></div>
-                    <div class="row">
-                        <div class="col">
-                            <input class="form-control form-select-format" placeholder="NOI Recieved Date">
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Interconnection Report</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; Qualifying Facility</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <input class="form-control form-select-format" placeholder="DEQ Permit #">
-                            <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="SCC CPCN #">
-                            <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="QF FERC Docket #">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; DEQ SWM Status</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; RPC Program Compliance (SCC)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <input class="form-control form-select-format" placeholder="PJM Queue #">
-                            <div class="button-spacing"><br></div>
-                        </div>
-                        <div class="col">
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; State Permit Source</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                            <select class="form-select form-select-format">
-                                <option selected>&#160; RPC Development Plan (SCC)</option>
-                            </select>
-                            <div class="button-spacing"><br></div>
-                        </div>
-                    </div>
-                    <br>
                 </div>
-                <br>
+                <div style="line-height: 150%"><br></div>
                 <button type="submit" class="btn btn-light btn-sm">Apply Filter(s)</button>
             </div>
         </form>
     </div>
+
+    <br><br>
+
+    <h5>Filter Result(s)</h5>
+
+    <div style="line-height: 85%"><br></div>
+
+    <style> #map { height: 350px; } </style>
+    <p class="card-text" id="map"></p>
 
     <br>
 
@@ -364,16 +270,6 @@
         </h6>
         
         <div class="card-body">
-            <!-- <select id="dateCategoryFilter" class="form-select form-select-format">
-                <option selected>&#160; Data Category</option>
-                <option value="location">&#160; Location</option>
-                <option value="namingAndOwnership">&#160; Naming and Ownership</option>
-                <option value="features">&#160; Features</option>
-                <option value="localPermitProcess">&#160; Local Permit Process</option>
-                <option value="generationDetails">&#160; Generation Details</option>
-                <option value="statePermitProcess">&#160; State Permit Process</option>
-            </select> 
-            <br><br> -->
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type= "checkbox" value="" id="localityCheck">
                 <label class="form-check-label" for="localityCheck">
@@ -435,23 +331,51 @@
                     Local Zoning Submittal Date
                 </label>
             </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="localityCheck" checked>
+                <label class="form-check-label" for="localityCheck">
+                    Locality
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="cityCheck" checked>
+                <label class="form-check-label" for="cityCheck">
+                    City/County
+                </label>
+            </div>
+            <div style="line-height: 50%"><br></div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="addressCheck" checked>
+                <label class="form-check-label" for="addressCheck">
+                    Address
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="parcelCheck" checked>
+                <label class="form-check-label" for="parcelCheck">
+                    Tax Map Parcel #
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="currentCheck" checked>
+                <label class="form-check-label" for="currentCheck">
+                    Current Land Use
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type= "checkbox" value="" id="baseCheck" checked>
+                <label class="form-check-label" for="baseCheck">
+                    Base Zoning
+                </label>
+            </div>
             <br><br>
             <button id="columnFilterButton" class="btn btn-light btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
         </div>
     </div>
 
-    <div style="line-height: 300%"><br></div>
-
-    <h5>Search Result(s)</h5>
+    <br>
 
     {{ filter|json_script:"filter_json" }}
-
-    <div style="line-height: 85%"><br></div>
-
-    <style> #map { height: 350px; } </style>
-    <p class="card-text" id="map"></p>
-
-    <div style="line-height: 50%"><br></div>
 
     <script>
         var map = L.map('map').setView([38.2, -79.2569], 7)
@@ -535,7 +459,7 @@
     <script>
         $(document).ready(function () {
           var table = $('#projectData').DataTable({
-            searching: false,
+            searching: true,
             lengthChange: false,
             scrollX: true,
             columnDefs: [
