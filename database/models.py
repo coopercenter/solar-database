@@ -26,7 +26,7 @@ class LocalSolarPolicyData(models.Model):
         db_table = 'local_solar_policy_data'
 
 
-class SolarProjectData(models.Model):
+class SolarProjectMock(models.Model):
     data_id = models.BigIntegerField(db_column='Data ID', blank=True, null=False, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     locality = models.TextField(db_column='Locality', blank=True, null=True)  # Field name made lowercase.
     city_county = models.TextField(db_column='City/County', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
@@ -118,3 +118,39 @@ class SolarProjectData(models.Model):
     
     def __str__(self):
         return f"{self.project_name}"
+
+class SolarProjectData(models.Model):
+    data_id = models.BigIntegerField(db_column='Data ID', blank=True, null=False, primary_key=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    locality = models.TextField(db_column='Locality', blank=True, null=True)  # Field name made lowercase.
+    region = models.TextField(db_column='Region', blank=True, null=True)  # Field name made lowercase.
+    additional_localities = models.TextField(db_column='Additional Localities', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    project_name = models.TextField(db_column='Project Name', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    project_phases = models.TextField(db_column='Project Phases', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    alternative_names = models.TextField(db_column='Alternative Names', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    owner_developer_at_local_action = models.TextField(db_column='Owner/Developer at Local Action', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    latest_nameplate_capacity_per_local_action_mw_in_ac_field = models.FloatField(db_column='Latest Nameplate Capacity per Local Action (MW in AC)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    phase_mw_in_ac_field = models.TextField(db_column='Phase MW (in AC)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    local_permit_status = models.TextField(db_column='Local Permit Status', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    best_available_project_acreage = models.FloatField(db_column='Best Available Project Acreage', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    latitude = models.FloatField(db_column='Latitude', blank=True, null=True)  # Field name made lowercase.
+    longitude = models.FloatField(db_column='Longitude', blank=True, null=True)  # Field name made lowercase.
+    location_description = models.TextField(db_column='Location Description', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    date_of_final_action = models.TextField(db_column='Date of Final Action', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    year_of_final_action = models.TextField(db_column='Year of Final Action', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    siting_agreement_executed_field = models.TextField(db_column='Siting Agreement Executed? ', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    date_siting_agreement_executed_field = models.TextField(db_column='Date - Siting Agreement Executed ', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    siting_agreement_link = models.TextField(db_column='Siting Agreement Link', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    deq_permit_number = models.TextField(db_column='DEQ Permit Number', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    scc_certificate_number = models.TextField(db_column='SCC Certificate Number', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    shared_solar_program_enrollled_dominion_field = models.DateTimeField(db_column='Shared Solar Program- Enrollled (Dominion)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    abandoned_mine_land_aml_program_funding_field = models.TextField(db_column='Abandoned Mine Land (AML) program/funding?', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    energy_storage_onsite = models.TextField(db_column='Energy Storage Onsite', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    energy_storage_capacity_mw_field = models.TextField(db_column='Energy Storage Capacity (MW)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    queue_pjm_field = models.TextField(db_column='Queue # (PJM)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    plant_id_eia_field = models.BigIntegerField(db_column='Plant ID (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    operating_status_eia_field = models.TextField(db_column='Operating Status (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    project_status_eia_field = models.TextField(db_column='Project Status (EIA)', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+
+    class Meta:
+        managed = False
+        db_table = 'solar_data_public'

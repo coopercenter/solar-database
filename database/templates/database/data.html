@@ -212,7 +212,7 @@
           $('#projectData tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
             var data_id = data[7]
-            window.location.href = '/project/' + data_id + '/';
+            window.location.href = '/project/' + parseInt(data_id) + '/';
           });
           
         });
