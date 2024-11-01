@@ -21,14 +21,9 @@ def export_csv(request):
 
     return response
 
-def home(request):
-
-    return render(request, 'database/home.html')
-
 def dash(request):
-    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'data_id',
-                                                'sheep_grazing', 'apiaries', 'agrivoltaic_crop_cover'))
-
+    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'data_id'))
+    
     context = {
         'data': data,
     }
@@ -41,17 +36,8 @@ def about(request):
 def data(request):
     data = SolarProjectData.objects.all()
 
-    if request.GET.get('project_name'):
-        data = data.filter(project_name__icontains = request.GET.get('project_name'))
-        
-    if request.GET.get('locality'):
-        data = data.filter(locality__icontains = request.GET.get('locality'))
-
-    filter = list(data.values('latitude', 'longitude', 'project_name', 'data_id'))
-
     context = {
         'data': data,
-        'filter': filter,
     }
 
     return render(request, 'database/data.html', context)
