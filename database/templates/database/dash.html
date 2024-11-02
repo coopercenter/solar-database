@@ -12,9 +12,15 @@
 
             <div style="line-height: 185%"><br></div>
             
+            <div class="search-box">
+                <input type="text" class="form-control" style="font-size: 13px; width: 240px; height: 30px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" placeholder="Search by Project Name">
+            </div>
+
+            <div style="line-height: 75%"><br></div>
+
             <div class="dropdown">
                 <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
-                    &#160; Project Identifying Information
+                    &#160; Locality
                 </button>
             </div>
 
@@ -22,29 +28,57 @@
 
             <div class="dropdown">
                 <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
-                    &#160; Location and Site Details
+                    &#160; Permit Status
                 </button>
+                <div class="dropdown-menu p-2" style="width: 240px;">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input status-box" type= "checkbox" id="approved">
+                        <label class="form-check-label button-font" for="approved">
+                            Approved
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input status-box" type= "checkbox" id="denied">
+                        <label class="form-check-label button-font" for="denied">
+                            Denied
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input status-box" type= "checkbox" id="withdrawn">
+                        <label class="form-check-label button-font" for="withdrawn">
+                            Withdrawn
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input status-box" type= "checkbox" id="pending">
+                        <label class="form-check-label button-font" for="pending">
+                            Pending
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input status-box" type= "checkbox" value="" id="by-right">
+                        <label class="form-check-label button-font" for="byright">
+                            By-right
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div style="line-height: 75%"><br></div>
 
             <div class="dropdown">
                 <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
-                    &#160; Permit Information
-                </button>
-            </div>
-
-            <div style="line-height: 75%"><br></div>
-
-            <div class="dropdown">
-                <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
-                    &#160; Project Features
+                    &#160; Project Size
                 </button>
             </div>
 
             <br>
 
-            <button class="btn btn-light btn-sm" style="margin-right: 20px">Apply Filter(s)</button>
+            <button class="filter-btn btn btn-light btn-sm" style="margin-right: 20px">Apply Filter(s)</button>
 
           </div>
           <div class="col-9">
@@ -94,25 +128,45 @@
         })
 
         var projectMarkers = L.layerGroup();
+        mapBase.addTo(map);
+        projectMarkers.addTo(map);
 
-        data.forEach(data => {
-            if (data.longitude !== null && data.latitude !== null) {
-                var projectMarker = L.marker([data.latitude, data.longitude])
-                                            .on('click', function() {
-                                                window.location.href ="/project/" + data.data_id
-                                            })
-                                            .on('mouseover', function() {
-                                                    projectMarker.bindPopup(data.project_name).openPopup()
-                                                })
-                                            .on('mouseout', function() {
-                                                projectMarker.closePopup()
-                                            })
-                
-                projectMarkers.addLayer(projectMarker)
-            }
-        })
+        function updateMarkers(filteredData) {
+            projectMarkers.clearLayers();
 
-        mapBase.addTo(map)
-        projectMarkers.addTo(map)
+            filteredData.forEach(data => {
+                if (data.longitude !== null && data.latitude !== null) {
+                    var projectMarker = L.marker([data.latitude, data.longitude])
+                        .on('click', function() {
+                            window.location.href = "/project/" + data.data_id;
+                        })
+                        .on('mouseover', function() {
+                            projectMarker.bindPopup(data.project_name).openPopup();
+                        })
+                        .on('mouseout', function() {
+                            projectMarker.closePopup();
+                        });
+                    
+                    projectMarkers.addLayer(projectMarker);
+                }
+            });
+        }
+
+        updateMarkers(data);
+
+        document.querySelector('.filter-btn').addEventListener('click', function() {
+            let search = document.querySelector('.search-box input').value.toLowerCase();
+
+            let status = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+
+            console.log(status)
+
+            let filteredData = data.filter(item => 
+                (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
+                (status.length == 0 || (item.local_permit_status && status.includes(item.local_permit_status.toLowerCase())))
+            );
+
+            updateMarkers(filteredData);
+        });
     </script>
 {% endblock content %}
