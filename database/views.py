@@ -22,7 +22,7 @@ def export_csv(request):
     return response
 
 def dash(request):
-    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'data_id'))
+    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'local_permit_status', 'data_id'))
     
     context = {
         'data': data,
