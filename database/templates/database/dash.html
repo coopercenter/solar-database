@@ -846,7 +846,9 @@
         document.querySelector('.filter-btn').addEventListener('click', function() {
             let search = document.querySelector('.search-box input').value.toLowerCase();
             let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
-            let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+            let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
+
+            console.log(localityList)
 
             let filteredData = data.filter(item => 
                 (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
