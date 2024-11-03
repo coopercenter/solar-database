@@ -763,6 +763,35 @@
                 <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
                     &#160; Project Size
                 </button>
+                <div class="dropdown-menu p-2" style="width: 240px;">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input size-box" type="checkbox" id="5mw">
+                        <label class="form-check-label button-font" for="5mw">
+                            &lt;5 MW
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input size-box" type="checkbox" id="5mw20mw">
+                        <label class="form-check-label button-font" for="5mw20mw">
+                            5 MW - 20 MW
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input size-box" type="checkbox" id="21mw150mw">
+                        <label class="form-check-label button-font" for="21mw150mw">
+                            21 MW - 150 MW
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input size-box" type="checkbox" id="150mw">
+                        <label class="form-check-label button-font" for="150mw">
+                            &gt;150 MW
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <br>
@@ -809,7 +838,22 @@
     <script>
         var map = L.map('map').setView([38.2, -79.2569], 7)
 
-        let data = JSON.parse(document.getElementById('data_json').textContent)
+        let JSONData = JSON.parse(document.getElementById('data_json').textContent)
+
+        let data = JSONData.map(item => {
+            const capacity = parseFloat(item.latest_nameplate_capacity_per_local_action_mw_in_ac_field); 
+
+            if (capacity < 5) {
+                item.size = "5mw";
+            } else if (capacity >= 5 && capacity < 20) {
+                item.size = "5mw20mw";
+            } else if (capacity >= 21 && capacity < 150) {
+                item.size = "21mw150mw";
+            } else if (capacity >= 150) {
+                item.size = "150mw";
+            }
+            return item;
+        });
 
         var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 20,
@@ -847,13 +891,15 @@
             let search = document.querySelector('.search-box input').value.toLowerCase();
             let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
             let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
+            let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
 
             console.log(localityList)
 
             let filteredData = data.filter(item => 
                 (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
                 (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
-                (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase())))
+                (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
+                (sizeList.length == 0 || (item.latest_nameplate_capacity_per_local_action_mw_in_ac_field && sizeList.includes(item.size)))
             );
 
             updateMarkers(filteredData);

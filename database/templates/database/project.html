@@ -94,7 +94,13 @@
                     Naming and Ownership
                 </h6>
                 <div class="card-body">
-                    <div><b>Alternative Name(s)</b> <br> {{ object.alternative_names }}</div>
+                    <div><b>Alternative Name(s)</b> <br> 
+                    {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
+                        {{ object.alternative_names }}
+                    {% else %}
+                        None
+                    {% endif %}
+                    </div>
                     <div style="height: 12px;"></div>
                     <div><b>Owner Developer (At Local Action)</b> <br> {{ object.owner_developer_at_local_action }}</div>
                 </div>
