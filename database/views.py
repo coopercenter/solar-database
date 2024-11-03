@@ -7,17 +7,20 @@ from django.views.generic import DetailView
 def export_csv(request):
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="allsolarprojects.csv"'},
+        headers={"Content-Disposition": 'attachment; filename="solarprojects.csv"'},
     )
 
     data = SolarProjectData.objects.all()
 
-    field_names = [field.name for field in SolarProjectData._meta.fields]
+    excluded_fields = {'longitude', 'latitude', 'year_of_final_action'}
+    field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
+
     writer = csv.DictWriter(response, fieldnames=field_names)
     writer.writeheader()
 
     for obj in data:
-        writer.writerow({field.name: getattr(obj, field.name) for field in SolarProjectData._meta.fields})
+        row = {field: getattr(obj, field) for field in field_names}
+        writer.writerow(row)
 
     return response
 
