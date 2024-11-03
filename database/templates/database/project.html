@@ -43,12 +43,48 @@
                 </h6>
                 <div class="card-body">
                     <div><b>Locality</b> <br> {{ object.locality }}</div>
-                    <div style="height: 15px;"></div>
+                    <div style="height: 12px;"></div>
                     <div><b>Region</b> <br> {{ object.region}}</div>
-                    <div style="height: 15px;"></div>
+                    <div style="height: 12px;"></div>
                     <div><b>Additional Localities</b> <br> {{ object.additional_localities }}</div>
-                    <div style="height: 15px;"></div>
+                    <div style="height: 12px;"></div>
                     <div><b>Location Description</b> <br> {{ object.location_description }}</div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="card">
+                <h6 class="card-header">
+                    Generation Details
+                </h6>
+                <div class="card-body">
+                    <div><b>Plant ID (EIA)</b> <br> {{  object.plant_id_eia_field  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_capacity_mw_field  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Energy Storage Onsite</b> <br> {{ object.energy_storage_onsite }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.energy_storage_capacity_mw_field }}</div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="card">
+                <h6 class="card-header">
+                    State Permit Process
+                </h6>
+                <div class="card-body">
+                    <div><b>Permit Number (DEQ)</b> <br> {{  object.deq_permit_number  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Certificate Number (SCC)</b> <br> {{ object.scc_certificate_number }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Queue Number (PJM)</b> <br> {{ object.queue_pjm_field  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Operating Status (EIA)</b> <br> {{ object.operating_status_eia_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Status (EIA)</b> <br> {{ object.project_status_eia_field }}</div>
                 </div>
             </div>
         </div>
@@ -59,274 +95,52 @@
                 </h6>
                 <div class="card-body">
                     <div><b>Alternative Name(s)</b> <br> {{ object.alternative_names }}</div>
-                    <div style="height: 15px;"></div>
+                    <div style="height: 12px;"></div>
                     <div><b>Owner Developer (At Local Action)</b> <br> {{ object.owner_developer_at_local_action }}</div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <br>
+            <br>
 
-    <div class="card">
-        <h6 class="card-header">
-            Features
-        </h6>
-        <div class="card-body">
-            <table id="projectData" class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td style="width: 300px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Nameplate Capacity (MW):</td>
-                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.nameplate_capacity_at_local_action }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Nameplate Capacity (MW): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Parcel(s) Acreage: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.field_parcel_acreage }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Acreage: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.project_acreage }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Total Acreage: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.total_acreage }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Lease Acreage: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.lease_acreage }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> In Fence Area: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.in_fence_area }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Under Panel Area: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.under_panel_area }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Battery Size: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.battery_size}} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Axis Design: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.axis_design }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Panel Design (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.panel_type }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Panel Type Specified by Locality: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.panel_type_specified_by_locality }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Pollinator-Smart Features: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.contains_pollinator_smart_features }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Sheep Grazing: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.sheep_grazing }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Agrivoltaic Crop Cover: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.agrivoltaic_crop_cover }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Apriaries: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.apiaries }} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <div class="card">
+                <h6 class="card-header">
+                    Features
+                </h6>
+                <div class="card-body">
+                    <div><b>Nameplate Capacity (Latest per Local Action/MW in AC)</b> <br> {{ object.latest_nameplate_capacity_per_local_action_mw_in_ac_field  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Phase Capacity (MW in AC)</b> <br> {{ object.phase_mw_in_ac_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.best_available_project_acreage }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Shared Solar Program (Dominion)</b> <br> {{ object.shared_solar_program_enrollled_dominion_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Abandoned Mine Land (AML) Program</b> <br> {{ object.abandoned_mine_land_aml_program_funding_field }}</div>
+                </div>
+            </div>
 
-    <br>
+            <br>
 
-    <div class="card">
-        <h6 class="card-header">
-            Generational Details
-        </h6>
-        <div class="card-body">
-            <table id="projectData" class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td style="width: 370px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Offtaker: </td>
-                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.offtaker }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Operator (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.operator }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Plant ID (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.plant_id }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Sector (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.sector }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Generator ID (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.generator_id }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Interconnection (PJM): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.interconnection }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Type of Interconnection (SCC): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.type_of_interconnection }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Operating Month (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.operating_month }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Operating Year (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.operating_year}} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Planned Commercial Operation Commence (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.us_eia_planned_commercial_operation_commence }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Construction Commenced (DEQ): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.vdeq_reps_construction_commenced }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Classification (EIA): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.us_eia_classification }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Net-Metering: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.net_metering }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 0px; padding-left: 2px; padding-right: 0.5px"> Facility Type: </td>
-                        <td style="padding-top: 1px; padding-bottom: 0px; padding-left: 0.5px"> {{ object.scc_facility_type }} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card">
-        <h6 class="card-header">
-            Local Permit Process
-        </h6>
-        <div class="card-body">
-            <table id="projectData" class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td style="width: 265px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Application Submission Date: </td>
-                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_zoning_application_submittal_date }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Planning Commission Action Date: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.planning_commission_action_date }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Local Action Date: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_bos_and_cc_action_date }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Local Permitting Status: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.local_permit_status }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> 2232/Comp Plan Status: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.status_of_2232_comp_plan_review }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Zoning Permit Type: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.zoning_permit_type }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Executed Siting Agreement: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.executed_siting_agreement }} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <br>
-
-    <div class="card">
-        <h6 class="card-header">
-            State Permit Process
-        </h6>
-        <div class="card-body">
-            <table id="projectData" class="table table-borderless">
-                <tbody>
-                    <tr>
-                        <td style="width: 280px; font-weight: 600; padding-top: 0px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Project Status (EIA): </td>
-                        <td style="padding-top: 0px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.project_status}} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Path: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.state_permit_path }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> NOI Recieved Date: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> DEQ Permit Number: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.deq_permit_number }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Status </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> State Permit Source: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ state_permit_source }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Interconnection Agreeement Report: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.vdeq_reps_final_interconnection_agreement_report }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> SCC CPCN Number: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.scc_cpcn_number }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> DEQ SWM Status: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.deq_swm_status }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> RPS Program Compliance (SCC): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.rps_program_compliance }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> RPS Development Plan (SCC): </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.rps_development_plan }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> Qualifying Facility: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.qualifying_facility }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> QF FERC Docket Number: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.qf_ferc_docket_number }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> PJM Queue Status: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> {{ object.pjm_queue }} </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: 600;  padding-top: 1px; padding-bottom: 1px; padding-left: 2px; padding-right: 0.5px"> PJM Queue Number: </td>
-                        <td style="padding-top: 1px; padding-bottom: 1px; padding-left: 0.5px"> </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="card">
+                <h6 class="card-header">
+                    Local Permit Process
+                </h6>
+                <div class="card-body">
+                    <div><b>Final Action Date</b> <br> {{ object.date_of_final_action }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Executed Siting Agreement</b> <br> 
+                    {% if object.siting_agreement_link is None%}
+                        None
+                    {% else %}
+                        <a href="{{ object.siting_agreement_link }}" target="_blank"> {{ object.siting_agreement_link }} </a></div>
+                    {% endif %}
+                    </div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Siting Agreement Date</b> <br> {{ object.date_siting_agreement_executed_field }}</div>
+                </div>
+            </div>
         </div>
     </div>
 
