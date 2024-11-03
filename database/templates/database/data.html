@@ -8,140 +8,18 @@
         <a class="btn btn-light btn-sm" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a>
     </div>
 
-    <div style="line-height: 200%"><br></div>
-
-    <div class="card">
-        <h6 class="card-header">
-          Columns Displayed
-        </h6>
-        
-        <div class="card-body">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="localityCheck">
-                <label class="form-check-label" for="localityCheck">
-                    Locality
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="statusCheck">
-                <label class="form-check-label" for="statusCheck">
-                    State Permit Status
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="pathCheck">
-                <label class="form-check-label" for="pathCheck">
-                    State Permit Path
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="capacityCheck">
-                <label class="form-check-label" for="capacityCheck">
-                    Nameplate Capacity (MW)
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="statusCheck">
-                <label class="form-check-label" for="statusCheck">
-                    Project Status
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="localCheck">
-                <label class="form-check-label" for="localCheck">
-                    Local Permit Status
-                </label>
-            </div>
-            <div style="line-height: 50%"><br></div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="acreageCheck">
-                <label class="form-check-label" for="acreageCheck">
-                    Project Acreage
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="pjmCheck">
-                <label class="form-check-label" for="pjmCheck">
-                    PJM Queue Status
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="actionCheck">
-                <label class="form-check-label" for="actionCheck">
-                    Local Action Date
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="zoneCheck">
-                <label class="form-check-label" for="zoneCheck">
-                    Local Zoning Submittal Date
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="localityCheck" checked>
-                <label class="form-check-label" for="localityCheck">
-                    Locality
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="cityCheck" checked>
-                <label class="form-check-label" for="cityCheck">
-                    City/County
-                </label>
-            </div>
-            <div style="line-height: 50%"><br></div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="addressCheck" checked>
-                <label class="form-check-label" for="addressCheck">
-                    Address
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="parcelCheck" checked>
-                <label class="form-check-label" for="parcelCheck">
-                    Tax Map Parcel #
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="currentCheck" checked>
-                <label class="form-check-label" for="currentCheck">
-                    Current Land Use
-                </label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type= "checkbox" value="" id="baseCheck" checked>
-                <label class="form-check-label" for="baseCheck">
-                    Base Zoning
-                </label>
-            </div>
-            <br><br>
-            <button id="columnFilterButton" class="btn btn-light btn-sm" style="margin-right: 20px">Apply Column(s) Displayed</button>
-        </div>
-    </div>
-
-    <br>
-
     <table id="projectData" class="table table-hover">
         <thead>
             <tr>
                 <th style="font-weight: 600">Project Name</th>
 
-                <th style="font-weight: 600">Locality</th>
-                <th style="font-weight: 600">County/City</th>
-                <th style="font-weight: 600">Address</th>
-                <th style="font-weight: 600">Tax Map Parcel #</th>
-                <th style="font-weight: 600">Current Land Use</th>
-                <th style="font-weight: 600">Base Zoning</th>
+                <th style="font-weight: 600; width: 100px">Locality</th>
+                <th style="font-weight: 600">Local Permit Status</th>
+                <th style="font-weight: 600">Region</th>
+                <th style="font-weight: 600">Nameplate Capacity</th>
+                <th style="font-weight: 600">Project Acreage</th>
+                <th style="font-weight: 600">Owner/Developer</th>
                 <th>data_id</th>
-
-                <th style="font-weight: 600">Alternative Name(s)</th>
-                <th style="font-weight: 600">State Permit Name</th>
-                <th style="font-weight: 600">Parent Project Name</th>
-                <th style="font-weight: 600">Previous Project Data ID</th>
-                <th style="font-weight: 600">Current Project Owner</th>
-                <th style="font-weight: 600">Project Owner</th>
-                <th style="font-weight: 600">Previous Project Applicant</th>
-                <th style="font-weight: 600">Entity ID</th>
             </tr>
         </thead>
         <tbody>
@@ -150,21 +28,13 @@
                 <td style="cursor: pointer;">{{ project.project_name }}</td>
 
                 <td style="cursor: pointer;">{{ project.locality }}</td>
-                <td style="cursor: pointer;">{{ project.city_county }}</td>
-                <td style="cursor: pointer;">{{ project.address }}</td>
-                <td style="cursor: pointer;">{{ project.tax_map_parcel }}</td>
-                <td style="cursor: pointer;">{{ project.land_use_at_time_of_local_application }}</td>
-                <td style="cursor: pointer;">{{ project.base_zoning }}</td>
+                <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
+                <td style="cursor: pointer;">{{ project.region }}</td>
+                <td style="cursor: pointer;">{{ project.latest_nameplate_capacity_per_local_action_mw_in_ac_field }}</td>
+                <td style="cursor: pointer;">{{ project.best_available_project_acreage }}</td>
+                <td style="cursor: pointer;">{{ project.owner_developer_at_local_action }}</td>
+
                 <td style="cursor: pointer;">{{ project.data_id }}</td>
-                
-                <td style="cursor: pointer;">{{ project.alternate_names }}</td>
-                <td style="cursor: pointer;">{{ project.vdeq_emd_permit_name }}</td>
-                <td style="cursor: pointer;">{{ project.parent_project }}</td>
-                <td style="cursor: pointer;">{{ project.data_id_for_previous_project }}</td>
-                <td style="cursor: pointer;">{{ project.current_project_owner }}</td>
-                <td style="cursor: pointer;">{{ project.project_owner }}</td>
-                <td style="cursor: pointer;">{{ project.previous_project_owner_applicant }}</td>
-                <td style="cursor: pointer;">{{ project.entity_id_eia }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -179,35 +49,17 @@
             lengthChange: false,
             scrollX: true,
             columnDefs: [
-                { width: '250px', targets: 0 }, 
-                { width: '100px', targets: 1 },
-                { width: '100px', targets: 2 },
-                { width: '500px', targets: 3 },
+                { width: '250px', targets: 0 },
+                { width: '100px', targets: 1 }, 
+                { width: '150px', targets: 2 },
+                { width: '100px', targets: 3 },
                 { width: '200px', targets: 4 },
-                { width: '200px', targets: 5 },
-                { width: '200px', targets: 6 },
-
-                { width: '350px', targets: 8 },
-                { width: '200px', targets: 9 },
-                { width: '200px', targets: 10 },
-                { width: '200px', targets: 11 },
-                { width: '200px', targets: 12 },
-                { width: '200px', targets: 13 },
-                { width: '200px', targets: 14 },
-                { width: '100px', targets: 15 },
+                { width: '180px', targets: 5 },
+                { width: '550px', targets: 6 },
             ]
           });
 
           table.column(7).visible(false)
-          
-          table.column(8).visible(false)
-          table.column(9).visible(false)
-          table.column(10).visible(false)
-          table.column(11).visible(false)
-          table.column(12).visible(false)
-          table.column(13).visible(false)
-          table.column(14).visible(false)
-          table.column(15).visible(false)
           
           $('#projectData tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
