@@ -131,10 +131,10 @@
                     <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Executed Siting Agreement</b> <br> 
-                    {% if object.siting_agreement_link is None%}
-                        None
+                    {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
+                        <a href="{{ object.siting_agreement_link }}" target="_blank"> {{ object.siting_agreement_link }} </a> (External)
                     {% else %}
-                        <a href="{{ object.siting_agreement_link }}" target="_blank"> {{ object.siting_agreement_link }} </a></div>
+                        None 
                     {% endif %}
                     </div>
                     <div style="height: 12px;"></div>
