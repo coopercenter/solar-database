@@ -4,6 +4,10 @@ import csv
 from .models import SolarProjectData
 from django.views.generic import DetailView
 
+import pandas as pd
+import plotly.express as px
+from plotly.offline import plot
+
 def export_csv(request):
     response = HttpResponse(
         content_type="text/csv",
@@ -25,10 +29,46 @@ def export_csv(request):
     return response
 
 def dash(request):
+    plotData = SolarProjectData.objects.values('latest_nameplate_capacity_per_local_action_mw_in_ac_field', 'local_permit_status')
+
+    df = pd.DataFrame.from_records(plotData)
+
+    df['local_permit_status'] = df['local_permit_status'].str.strip()
+
+    mwPieData = df.groupby('local_permit_status').agg(
+        {'latest_nameplate_capacity_per_local_action_mw_in_ac_field': 'sum'}
+    ).reset_index()
+
+    mwPieChart = px.pie(
+        mwPieData,
+        values = 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
+        names = 'local_permit_status',  
+        title ='Total MW by Local Permit Status'
+    )
+
+    mwPieChart.update_layout(
+        title = dict(
+            text ='Total Megawatts by Local Permit Status',
+            font = dict(size = 18, family ='Roboto', color = 'black', weight= 'bold')
+        ),
+        legend = dict(
+            font = dict(size = 12, family='Roboto')
+        )
+    )
+
+    mwPieChart.update_traces(
+        textinfo = 'percent',
+        textfont = dict(size = 14, family='Roboto'),
+        hovertemplate='<b>%{label}</b><br>Total: %{value} MW'  
+    )
+
+    mwPieChart_div = plot(mwPieChart, output_type='div')
+    
     data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'locality', 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 'local_permit_status', 'data_id'))
     
     context = {
         'data': data,
+        'mwPieChart_div': mwPieChart_div
     }
 
     return render(request, 'database/dash.html', context)
