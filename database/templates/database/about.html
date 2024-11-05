@@ -1,5 +1,11 @@
 {% extends "database/base.html" %}
+{% load static %}  
+
 {% block content %}
     <br><br>
-    <h4>About</h4>
+
+    <embed src="{% static 'about_db.pdf' %}" type="application/pdf" width="100%" height="770px">
+
+    <br><br>
+
 {% endblock content %}
