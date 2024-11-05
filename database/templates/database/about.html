@@ -3,9 +3,12 @@
 
 {% block content %}
     <br><br>
+    <h4>About</h4>
+    <br>
 
-    <embed src="{% static 'about_db.pdf' %}" type="application/pdf" width="100%" height="770px">
+    <a href="{% static 'about_db.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download About</a>
+    <a href="{% static 'data_dictionary.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download Data Dictionary</a>
 
-    <br><br>
+    <div style="line-height: 1800%"><br></div>
 
 {% endblock content %}
