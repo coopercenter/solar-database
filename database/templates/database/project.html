@@ -39,16 +39,26 @@
         <div>
             <div class="card">
                 <h6 class="card-header">
-                    Location
+                    Project Overview
                 </h6>
                 <div class="card-body">
                     <div><b>Locality</b> <br> {{ object.locality }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Region</b> <br> {{ object.region}}</div>
-                    <div style="height: 12px;"></div>
                     <div><b>Additional Localities</b> <br> {{ object.additional_localities }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Location Description</b> <br> {{ object.location_description }}</div>
+                    <div><b>Region</b> <br> {{ object.region}}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Date of Final Action</b> <br> {{ object.date_of_final_action }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Nameplate Capacity (Latest per Local Action/MW in AC)</b> <br> {{ object.latest_nameplate_capacity_per_local_action_mw_in_ac_field  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Phases</b> <br> {{ object.project_phases  }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Phase Capacity (MW in AC)</b> <br> {{ object.phase_mw_in_ac_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.best_available_project_acreage }}</div>
                 </div>
             </div>
 
@@ -56,24 +66,7 @@
 
             <div class="card">
                 <h6 class="card-header">
-                    Generation Details
-                </h6>
-                <div class="card-body">
-                    <div><b>Plant ID (EIA)</b> <br> {{  object.plant_id_eia_field  }}</div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_capacity_mw_field  }}</div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Energy Storage Onsite</b> <br> {{ object.energy_storage_onsite }}</div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.energy_storage_capacity_mw_field }}</div>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="card">
-                <h6 class="card-header">
-                    State Permit Process
+                    Additional Permitting Details
                 </h6>
                 <div class="card-body">
                     <div><b>Permit Number (DEQ)</b> <br> {{  object.deq_permit_number  }}</div>
@@ -91,7 +84,7 @@
         <div>
             <div class="card">
                 <h6 class="card-header">
-                    Naming and Ownership
+                    Additional Project Details
                 </h6>
                 <div class="card-body">
                     <div><b>Alternative Name(s)</b> <br> 
@@ -103,48 +96,28 @@
                     </div>
                     <div style="height: 12px;"></div>
                     <div><b>Owner Developer (At Local Action)</b> <br> {{ object.owner_developer_at_local_action }}</div>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="card">
-                <h6 class="card-header">
-                    Features
-                </h6>
-                <div class="card-body">
-                    <div><b>Nameplate Capacity (Latest per Local Action/MW in AC)</b> <br> {{ object.latest_nameplate_capacity_per_local_action_mw_in_ac_field  }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Phase Capacity (MW in AC)</b> <br> {{ object.phase_mw_in_ac_field }}</div>
+                    <div><b>Location Description</b> <br> {{ object.location_description }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.best_available_project_acreage }}</div>
+                    <div><b>Siting Agreement Executed</b> <br> {{ object.siting_agreement_executed_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Siting Agreement Date</b> <br> {{ object.date_siting_agreement_executed_field }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Executed Siting Agreement</b> <br> 
+                        {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
+                            <a href="{{ object.siting_agreement_link }}" target="_blank"> External Link </a>
+                        {% else %}
+                            None 
+                        {% endif %}
+                    </div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Energy Storage Onsite</b> <br> {{ object.energy_storage_onsite }}</div>
+                    <div style="height: 12px;"></div>
+                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_capacity_mw_field  }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Shared Solar Program (Dominion)</b> <br> {{ object.shared_solar_program_enrollled_dominion_field }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Abandoned Mine Land (AML) Program</b> <br> {{ object.abandoned_mine_land_aml_program_funding_field }}</div>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="card">
-                <h6 class="card-header">
-                    Local Permit Process
-                </h6>
-                <div class="card-body">
-                    <div><b>Final Action Date</b> <br> {{ object.date_of_final_action }}</div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Executed Siting Agreement</b> <br> 
-                    {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
-                        <a href="{{ object.siting_agreement_link }}" target="_blank"> {{ object.siting_agreement_link }} </a>
-                    {% else %}
-                        None 
-                    {% endif %}
-                    </div>
-                    <div style="height: 12px;"></div>
-                    <div><b>Siting Agreement Date</b> <br> {{ object.date_siting_agreement_executed_field }}</div>
                 </div>
             </div>
         </div>

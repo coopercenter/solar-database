@@ -2,6 +2,8 @@
 {% block content %}
     <br><br>
     <h4>Browse and Export Data</h4>
+    <p><i>Current as of 11/3/2024 (Will be updated quarterly)</i></p>
+    
     <br>
 
     <div>
@@ -16,7 +18,7 @@
                 <th style="font-weight: 600; width: 100px">Locality</th>
                 <th style="font-weight: 600">Local Permit Status</th>
                 <th style="font-weight: 600">Region</th>
-                <th style="font-weight: 600">Nameplate Capacity</th>
+                <th style="font-weight: 600">Nameplate Capacity (MW)</th>
                 <th style="font-weight: 600">Project Acreage</th>
                 <th style="font-weight: 600">Owner/Developer</th>
                 <th>data_id</th>
@@ -49,13 +51,13 @@
             lengthChange: false,
             scrollX: true,
             columnDefs: [
-                { width: '250px', targets: 0 },
+                { width: '300px', targets: 0 },
                 { width: '100px', targets: 1 }, 
                 { width: '150px', targets: 2 },
                 { width: '100px', targets: 3 },
                 { width: '200px', targets: 4 },
                 { width: '180px', targets: 5 },
-                { width: '550px', targets: 6 },
+                { width: '650px', targets: 6 },
             ]
           });
 
