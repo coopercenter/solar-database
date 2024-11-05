@@ -43,6 +43,7 @@ def dash(request):
         mwPieData,
         values = 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
         names = 'local_permit_status',  
+        color_discrete_sequence=[px.colors.qualitative.Safe[6], px.colors.qualitative.Safe[7], px.colors.qualitative.Safe[1], px.colors.qualitative.Safe[0], px.colors.qualitative.Safe[2], px.colors.qualitative.Safe[5]],
         title ='Total MW by Local Permit Status'
     )
 
