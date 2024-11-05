@@ -731,6 +731,10 @@
                             </label>
                         </div>
                     </div>
+
+                    <div style="line-height: 65%"><br></div>
+
+                    <button class="select-all-btn btn btn-light btn-sm">Select All</button>
                 </div>
             </div>
 
@@ -817,7 +821,8 @@
 
             <br>
 
-            <button class="filter-btn btn btn-light btn-sm" style="margin-right: 20px">Apply Filter(s)</button>
+            <button class="filter-btn btn btn-light btn-sm" style="margin-right: 10px">Apply Filter(s)</button>
+            <button class="clear-filter-btn btn btn-light btn-sm" style="margin-right: 20px">Clear Filter(s)</button>
 
           </div>
           <div class="col-9">
@@ -910,6 +915,24 @@
             );
 
             updateMarkers(filteredData);
+        });
+
+        document.querySelector('.select-all-btn').addEventListener('click', function () {
+            document.querySelectorAll('.locality-box').forEach(function (checkbox) {
+                checkbox.checked = true;
+            });
+        });
+
+        document.querySelector('.clear-filter-btn').addEventListener('click', function () {
+            document.querySelectorAll('.locality-box').forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+            document.querySelectorAll('.size-box').forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+            document.querySelectorAll('.status-box').forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
         });
     </script>
 
