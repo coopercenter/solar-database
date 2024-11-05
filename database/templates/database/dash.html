@@ -2,6 +2,27 @@
 {% block content %}
     <br><br>
 
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Welcome to the Virginia Solar Database</h5>
+          <p class="card-text">This database provides a comprehensive summary of large-scale solar projects proposed for siting approval at the local level in Virginia. The 
+            purpose is to provide information on the status of local permitting, details about project characteristics and attributes, and to provide a
+            mechanism to link and track projects across local, state, and interconnection permitting. While the information we have compiled is all already publicly available, this is the state’s first and only comprehensive source of the data provided.  
+            <br><br>
+            The datapoints collected were sourced from local government archives, Virginia Department of Environmental Quality permitting records, State Corporation Commission 
+            docket records, Energy Information Administration (EIA) data, PJM Queue data, and various press, utility, industry/developer, and stakeholder media. This data has been collected and vetted to the best of our ability; however, we recognize there may be errors. The database is a living document that will be updated 
+            at least quarterly.
+            <br><br>
+            To learn more about how stakeholder engagement informed the project, data collection methodology, and details about the datapoints collected, please visit our <a href="/about">About</a> page. 
+            <br><br>
+            If you find errors in the data or project omissions, have any questions, or would like to sponsor this project to ensure its ongoing success, contact Elizabeth Marshall, 
+            Senior Program Manager, Weldon Cooper Center at UVA, <a href="mailto:emm2t@virginia.edu">emm2t@virginia.edu</a>.
+          </p>
+        </div>
+      </div>
+
+    <br><br>
+
     {{ data|json_script:"data_json" }}
 
     <div class="container">
