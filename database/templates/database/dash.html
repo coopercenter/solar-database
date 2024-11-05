@@ -1,4 +1,7 @@
 {% extends "database/base.html" %}
+
+{% load static %}
+
 {% block content %}
     <br><br>
 
@@ -836,12 +839,26 @@
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
         <div>
-            {% autoescape off %}
+            <img src="{% static 'images/acreage_bar.png' %}" width="300" height="300">
+            <br>
+            <img src="{% static 'images/annual_mw_bar.png' %}" width="500" height="300">
+            <br>
+            <img src="{% static 'images/mw_pie.png' %}" width="300" height="300">
+            <br>
+            <img src="{% static 'images/mw_size_range.png' %}" width="600" height="300">
+
+            <!-- {% autoescape off %}
                 {{ mwPieChart_div }}
-            {% endautoescape %}
+            {% endautoescape %} -->
         </div>
         <div>
-
+            <img src="{% static 'images/project_count_bar.png' %}" width="500" height="300">
+            <br>
+            <img src="{% static 'images/project_line.png' %}" width="520" height="300">
+            <br>
+            <img src="{% static 'images/regional_mw_bar.png' %}" width="520" height="300">
+            <br>
+            <img src="{% static 'images/project_size_range.png' %}" width="600" height="300">
         </div>
     </div>
 
