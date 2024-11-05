@@ -50,16 +50,16 @@ def dash(request):
     mwPieChart.update_layout(
         title = dict(
             text ='Total Megawatts by Local Permit Status',
-            font = dict(size = 18, family ='Roboto', color = 'black', weight= 'bold')
+            font = dict(size = 18, family ='Arial', color = 'black', weight= 600)
         ),
         legend = dict(
-            font = dict(size = 12, family='Roboto')
+            font = dict(size = 12, family='Arial')
         )
     )
 
     mwPieChart.update_traces(
         textinfo = 'percent',
-        textfont = dict(size = 14, family='Roboto'),
+        textfont = dict(size = 14, family='Arial'),
         hovertemplate='<b>%{label}</b><br>Total: %{value} MW'  
     )
 
