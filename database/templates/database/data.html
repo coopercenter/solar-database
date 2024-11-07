@@ -60,13 +60,13 @@
                 { width: '100px', targets: 2 }, 
                 { width: '150px', targets: 3 },
                 { width: '100px', targets: 4 },
-                { width: '200px', targets: 5 },
-                { width: '180px', targets: 6 },
-                { width: '650px', targets: 7 },
+                { width: '200px', targets: 5, type: 'num' },
+                { width: '180px', targets: 6, type: 'num' },
+                { width: '650px', targets: 7},
             ]
           });
 
-          table.column(7).visible(false)
+          table.column(8).visible(false)
           
           $('#projectData tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
