@@ -90,7 +90,9 @@ def dash(request):
 
     # acreageChart_div = plot(acreageChart, output_type='div')
     
-    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 'locality', 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 'local_permit_status', 'data_id'))
+    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
+                                                'locality', 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
+                                                'local_permit_status', 'data_id', 'alternative_names'))
     
     context = {
         'data': data,

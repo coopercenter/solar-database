@@ -87,13 +87,7 @@
                     Additional Project Details
                 </h6>
                 <div class="card-body">
-                    <div><b>Alternative Name(s)</b> <br> 
-                    {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
-                        {{ object.alternative_names }}
-                    {% else %}
-                        None
-                    {% endif %}
-                    </div>
+                    <div><b>Alternative Name(s)</b> <br> {{ object.alternative_names }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Owner Developer (At Local Action)</b> <br> {{ object.owner_developer_at_local_action }}</div>
                     <div style="height: 12px;"></div>
@@ -104,7 +98,7 @@
                     <div><b>Siting Agreement Date</b> <br> {{ object.date_siting_agreement_executed_field }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Executed Siting Agreement</b> <br> 
-                        {% if object.siting_agreement_link and object.siting_agreement_link != " "%}
+                        {% if object.siting_agreement_link.strip %}
                             <a href="{{ object.siting_agreement_link }}" target="_blank"> External Link </a>
                         {% else %}
                             None 

@@ -900,7 +900,7 @@
             let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
 
             let filteredData = data.filter(item => 
-                (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
+                (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alternative_names && item.alternative_names.toLowerCase().includes(search)) ) &&
                 (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
                 (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
                 (sizeList.length == 0 || (item.latest_nameplate_capacity_per_local_action_mw_in_ac_field && sizeList.includes(item.size)))
