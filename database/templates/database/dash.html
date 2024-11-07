@@ -893,7 +893,19 @@
         mapBase.addTo(map);
         projectMarkers.addTo(map);
 
-        function updateMarkers(filteredData) {
+        function updateMarkers() {
+            let search = document.querySelector('.search-box input').value.toLowerCase();
+            let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+            let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
+            let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+
+            let filteredData = data.filter(item => 
+                (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
+                (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
+                (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
+                (sizeList.length == 0 || (item.latest_nameplate_capacity_per_local_action_mw_in_ac_field && sizeList.includes(item.size)))
+            );
+
             projectMarkers.clearLayers();
 
             filteredData.forEach(data => {
@@ -917,21 +929,7 @@
         updateMarkers(data);
 
         document.querySelector('.filter-btn').addEventListener('click', function() {
-            let search = document.querySelector('.search-box input').value.toLowerCase();
-            let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
-            let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
-            let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
-
-            console.log(localityList)
-
-            let filteredData = data.filter(item => 
-                (!search || (item.project_name && item.project_name.toLowerCase().includes(search))) &&
-                (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
-                (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
-                (sizeList.length == 0 || (item.latest_nameplate_capacity_per_local_action_mw_in_ac_field && sizeList.includes(item.size)))
-            );
-
-            updateMarkers(filteredData);
+            updateMarkers();
         });
 
         document.querySelector('.select-all-btn').addEventListener('click', function () {
@@ -950,6 +948,8 @@
             document.querySelectorAll('.status-box').forEach(function (checkbox) {
                 checkbox.checked = false;
             });
+
+            updateMarkers();
         });
     </script>
 
