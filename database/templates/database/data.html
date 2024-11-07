@@ -14,8 +14,9 @@
         <thead>
             <tr>
                 <th style="font-weight: 600">Project Name</th>
+                <th style="font-weight: 600">Project Phase(s)</th>
 
-                <th style="font-weight: 600; width: 100px">Locality</th>
+                <th style="font-weight: 600;">Locality</th>
                 <th style="font-weight: 600">Local Permit Status</th>
                 <th style="font-weight: 600">Region</th>
                 <th style="font-weight: 600">Nameplate Capacity (MW)</th>
@@ -28,6 +29,7 @@
             {% for project in data %}
             <tr>
                 <td style="cursor: pointer;">{{ project.project_name }}</td>
+                <td style="cursor: pointer;">{{ project.project_phases }}</td>
 
                 <td style="cursor: pointer;">{{ project.locality }}</td>
                 <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
@@ -54,12 +56,13 @@
             paging: false, 
             columnDefs: [
                 { width: '300px', targets: 0 },
-                { width: '100px', targets: 1 }, 
-                { width: '150px', targets: 2 },
-                { width: '100px', targets: 3 },
-                { width: '200px', targets: 4 },
-                { width: '180px', targets: 5 },
-                { width: '650px', targets: 6 },
+                { width: '300px', targets: 1 }, 
+                { width: '100px', targets: 2 }, 
+                { width: '150px', targets: 3 },
+                { width: '100px', targets: 4 },
+                { width: '200px', targets: 5 },
+                { width: '180px', targets: 6 },
+                { width: '650px', targets: 7 },
             ]
           });
 
