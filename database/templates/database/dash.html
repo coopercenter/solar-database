@@ -392,9 +392,9 @@
                         </div>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input locality-box" type="checkbox" id="loudon">
-                            <label class="form-check-label button-font" for="loudon">
-                                Loudon
+                            <input class="form-check-input locality-box" type="checkbox" id="loudoun">
+                            <label class="form-check-label button-font" for="loudoun">
+                                Loudoun
                             </label>
                         </div>
                         <br>
@@ -836,29 +836,33 @@
     </div>
 
     <br>
+    <div class="card">
+        <div class="card-body" style="background-color:#F1F1EF">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0px; width: 100%;">
+                <div>
+                    <img src="{% static 'images/acreage_pie_web.png' %}" width="400" height="400">
+                    <br>
+                    <img src="{% static 'images/proj_count_bar_web.png' %}" width="550" height="330">
+                    <br>
+                    <img src="{% static 'images/annual_mw_bar_web.png' %}" width="550" height="330">
+                    <br>
+                    <img src="{% static 'images/mw_size_bar_web.png' %}" width="550" height="330">
+        
+                    <!-- {% autoescape off %}
+                        {{ mwPieChart_div }}
+                    {% endautoescape %} -->
+                </div>
+                <div>
+                    <img src="{% static 'images/mw_pie_web.png' %}" width="400" height="400">
+                    <br>
+                    <img src="{% static 'images/proj_rate_line_web.png' %}" width="550" height="330">
+                    <br>
+                    <img src="{% static 'images/regional_bar_web.png' %}" width="550" height="330">
+                    <br>
+                    <img src="{% static 'images/proj_size_bar_web.png' %}" width="550" height="330">
+                </div>
+            </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
-        <div>
-            <img src="{% static 'images/acreage_bar.png' %}" width="300" height="300">
-            <br>
-            <img src="{% static 'images/annual_mw.png' %}" width="500" height="300">
-            <br>
-            <img src="{% static 'images/mw_pie.png' %}" width="300" height="300">
-            <br>
-            <img src="{% static 'images/mw_size_range.png' %}" width="600" height="300">
-
-            <!-- {% autoescape off %}
-                {{ mwPieChart_div }}
-            {% endautoescape %} -->
-        </div>
-        <div>
-            <img src="{% static 'images/project_count.png' %}" width="500" height="300">
-            <br>
-            <img src="{% static 'images/line_project.png' %}" width="520" height="300">
-            <br>
-            <img src="{% static 'images/regional_mw_bar.png' %}" width="520" height="300">
-            <br>
-            <img src="{% static 'images/project_size_range.png' %}" width="600" height="300">
         </div>
     </div>
 
@@ -870,7 +874,7 @@
         let JSONData = JSON.parse(document.getElementById('data_json').textContent)
 
         let data = JSONData.map(item => {
-            const capacity = parseFloat(item.latest_nameplate_capacity_per_local_action_mw_in_ac_field); 
+            const capacity = parseFloat(item.project_mw); 
 
             if (capacity < 5) {
                 item.size = "5mw";
@@ -900,10 +904,10 @@
             let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
 
             let filteredData = data.filter(item => 
-                (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alternative_names && item.alternative_names.toLowerCase().includes(search)) ) &&
+                (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alt_names && item.alt_names.toLowerCase().includes(search)) ) &&
                 (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
                 (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
-                (sizeList.length == 0 || (item.latest_nameplate_capacity_per_local_action_mw_in_ac_field && sizeList.includes(item.size)))
+                (sizeList.length == 0 || (item.project_mw && sizeList.includes(item.size)))
             );
 
             projectMarkers.clearLayers();

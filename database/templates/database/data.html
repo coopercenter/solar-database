@@ -17,11 +17,11 @@
                 <th style="font-weight: 600">Project Phases</th>
 
                 <th style="font-weight: 600;">Locality</th>
-                <th style="font-weight: 600">Local Permit Status</th>
                 <th style="font-weight: 600">Region</th>
-                <th style="font-weight: 600">Nameplate Capacity (MW)</th>
-                <th style="font-weight: 600">Project Acreage</th>
-                <th style="font-weight: 600">Owner/Developer</th>
+                <th style="font-weight: 600">Nameplate Capacity (MW) at Local Action</th>
+                <th style="font-weight: 600">Local Permit Status</th>
+                <th style="font-weight: 600">Best Available Project Acreage</th>
+                <th style="font-weight: 600">Owner/Developer at Local Action</th>
                 <th>data_id</th>
             </tr>
         </thead>
@@ -29,14 +29,14 @@
             {% for project in data %}
             <tr>
                 <td style="cursor: pointer;">{{ project.project_name }}</td>
-                <td style="cursor: pointer;">{{ project.project_phases }}</td>
+                <td style="cursor: pointer;">{{ project.project_phase }}</td>
 
                 <td style="cursor: pointer;">{{ project.locality }}</td>
-                <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
                 <td style="cursor: pointer;">{{ project.region }}</td>
-                <td style="cursor: pointer;">{{ project.latest_nameplate_capacity_per_local_action_mw_in_ac_field }}</td>
-                <td style="cursor: pointer;">{{ project.best_available_project_acreage }}</td>
-                <td style="cursor: pointer;">{{ project.owner_developer_at_local_action }}</td>
+                <td style="cursor: pointer;">{{ project.project_mw }}</td>
+                <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
+                <td style="cursor: pointer;">{{ project.public_project_acres }}</td>
+                <td style="cursor: pointer;">{{ project.local_action_project_owner }}</td>
 
                 <td style="cursor: pointer;">{{ project.data_id }}</td>
             </tr>
