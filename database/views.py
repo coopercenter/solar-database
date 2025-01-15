@@ -17,7 +17,7 @@ def export_csv(request):
 
     data = SolarProjectData.objects.all()
 
-    excluded_fields = {'longitude', 'latitude', 'year_of_final_action'}
+    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
     field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
 
     writer = csv.DictWriter(response, fieldnames=field_names)
@@ -91,8 +91,8 @@ def dash(request):
     # acreageChart_div = plot(acreageChart, output_type='div')
     
     data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
-                                                'locality', 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
-                                                'local_permit_status', 'data_id', 'alternative_names'))
+                                                'locality', 'project_mw', 
+                                                'local_permit_status', 'data_id', 'alt_names'))
     
     context = {
         'data': data,

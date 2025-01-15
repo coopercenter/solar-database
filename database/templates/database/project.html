@@ -50,15 +50,15 @@
                     <div style="height: 12px;"></div>
                     <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Date of Final Action</b> <br> {{ object.date_of_final_action }}</div>
+                    <div><b>Date of Final Action</b> <br> {{ object.final_action_date }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Nameplate Capacity (Latest per Local Action/MW in AC)</b> <br> {{ object.latest_nameplate_capacity_per_local_action_mw_in_ac_field  }}</div>
+                    <div><b>Latest Nameplate Capacity per Local Action (MW in AC)</b> <br> {{ object.project_mw  }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Project Phases</b> <br> {{ object.project_phases  }}</div>
+                    <div><b>Project Phases</b> <br> {{ object.project_phase  }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Phase Capacity (MW in AC)</b> <br> {{ object.phase_mw_in_ac_field }}</div>
+                    <div><b>Phase MW (in AC)</b> <br> {{ object.phase_mw }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.best_available_project_acreage }}</div>
+                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.public_project_acres }}</div>
                 </div>
             </div>
 
@@ -73,11 +73,11 @@
                     <div style="height: 12px;"></div>
                     <div><b>Certificate Number (SCC)</b> <br> {{ object.scc_certificate_number }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Queue Number (PJM)</b> <br> {{ object.queue_pjm_field  }}</div>
+                    <div><b>Queue Number (PJM)</b> <br> {{ object.pjm_queue_number  }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Operating Status (EIA)</b> <br> {{ object.operating_status_eia_field }}</div>
+                    <div><b>Operating Status (EIA)</b> <br> {{ object.eia_operating_status }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Project Status (EIA)</b> <br> {{ object.project_status_eia_field }}</div>
+                    <div><b>Project Status (EIA)</b> <br> {{ object.eia_project_status }}</div>
                 </div>
             </div>
         </div>
@@ -87,17 +87,17 @@
                     Additional Project Details
                 </h6>
                 <div class="card-body">
-                    <div><b>Alternative Name(s)</b> <br> {{ object.alternative_names }}</div>
+                    <div><b>Alternative Name(s)</b> <br> {{ object.alt_names }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Owner Developer (At Local Action)</b> <br> {{ object.owner_developer_at_local_action }}</div>
+                    <div><b>Owner Developer At Local Action</b> <br> {{ object.local_action_project_owner }}</div>
                     <div style="height: 12px;"></div>
                     <div><b>Location Description</b> <br> {{ object.location_description }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Siting Agreement Executed</b> <br> {{ object.siting_agreement_executed_field }}</div>
+                    <div><b>Siting Agreement Executed?</b> <br> {{ object.siting_agreement_exists }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Siting Agreement Date</b> <br> {{ object.date_siting_agreement_executed_field }}</div>
+                    <div><b> Date - Siting Agreement Executed</b> <br> {{ object.siting_agreement_date}}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Executed Siting Agreement</b> <br> 
+                    <div><b>Siting Agreement Link</b> <br> 
                         {% if object.siting_agreement_link.strip %}
                             <a href="{{ object.siting_agreement_link }}" target="_blank"> External Link </a>
                         {% else %}
@@ -107,11 +107,11 @@
                     <div style="height: 12px;"></div>
                     <div><b>Energy Storage Onsite</b> <br> {{ object.energy_storage_onsite }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_capacity_mw_field  }}</div>
+                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_mw }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Shared Solar Program (Dominion)</b> <br> {{ object.shared_solar_program_enrollled_dominion_field }}</div>
+                    <div><b>Shared Solar Program - Enrolled (Dominion)</b> <br> {{ object.shared_solar_enrolled }}</div>
                     <div style="height: 12px;"></div>
-                    <div><b>Abandoned Mine Land (AML) Program</b> <br> {{ object.abandoned_mine_land_aml_program_funding_field }}</div>
+                    <div><b>Abandoned Mine Land (AML) Program/Funding</b> <br> {{ object.aml_program_or_funding }}</div>
                 </div>
             </div>
         </div>
