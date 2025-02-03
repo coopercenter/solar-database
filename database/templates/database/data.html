@@ -1,13 +1,19 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
-    <h4>Browse and Export Data</h4>
-    <p><i>Current as of 11/3/2024 (Will be updated quarterly)</i></p>
+    <h4>Browse and Download Data</h4>
+    <p><i>Current as of November 3rd, 2024 (Will be updated quarterly)</i></p>
 
     <br>
 
-    <div>
-        <a class="btn btn-light btn-sm" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a>
+    <div class="card" style="width: 24rem;">
+        <div class="card-body">
+          <h6 class="card-title">Download Virginia Solar Database Data</h6>
+            <div>
+                <div style="line-height: 20%"><br></div>
+                <a class="btn btn-light btn-sm" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a>
+            </div>
+        </div>
     </div>
 
     <table id="projectData" class="table table-hover">
