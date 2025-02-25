@@ -30,7 +30,7 @@ DEBUG = True
 #else:
     # DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org', 'va-solar-db-dev.azurewebsites.net']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net' '127.0.0.1', 'solardatabase.coopercenter.org']
 
 
 # Application definition
@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'dpd_static_support',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'channels',
+    'channels_redis',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -54,8 +60,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
+
+
+# Add CHANNEL_LAYERS
+CHANNEL_LAYERS = {
+   'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+                'CONFIG': {
+                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379,'solardatabase.coopercenter.org'),],
+                          }
+              }
+}
 
 ROOT_URLCONF = 'solar_database.urls'
 
@@ -159,8 +179,55 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Staticfiles finders for locating dash app assets and related files
+
+STATICFILES_FINDERS = [
+
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Add PLOTLY_COMPONENTS
+PLOTLY_COMPONENTS = [
+    'dash_bootstrap_components',
+    'dpd_components',
+    'dpd_static_support',
+    'dash_mantine_components',
+    ]
+
+PLOTLY_DASH = {
+
+    # Route used for the message pipe websocket connection
+    "ws_route" :   "dpd/ws/channel",
+
+    # Route used for direct http insertion of pipe messages
+    "http_route" : "dpd/views",
+
+    # Flag controlling existince of http poke endpoint
+    "http_poke_enabled" : True,
+
+
+    # Timeout for caching of initial arguments in seconds
+    "cache_timeout_initial_arguments": 60,
+
+    # Name of view wrapping function
+    "view_decorator": None,
+
+    # Flag to control location of initial argument storage
+    "cache_arguments": True,
+
+    # Flag controlling local serving of assets
+    "serve_locally": False,
+}
+
+#Add X_FRAME_OPTIONS = 'SAMEORIGIN' to settings.py to enable frames within HTML documents
+X_FRAME_OPTIONS = 'SAMEORIGIN'
