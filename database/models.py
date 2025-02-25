@@ -62,4 +62,14 @@ class SolarProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solar_data_public'
+        db_table = 'dev_solar_data_public'
+
+class CountyData(models.Model):
+    locality = models.TextField(db_column='locality',primary_key=True)
+    fips = models.BigIntegerField(db_column='fips')
+    locality_mapping = models.TextField(db_column='locality_mapping')
+
+    class Meta:
+        managed = False
+        db_table = 'county_fips'
+
