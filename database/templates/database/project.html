@@ -1,6 +1,7 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
+    <div class="container">
     <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     {% if object.project_name.strip %}
@@ -8,11 +9,11 @@
     {% else %}
         <h4>{{ object.project_phases }}</h4>
     {% endif %}
-
+    </div>
     {% if object.latitude is not None and object.longitude is not None %}
         <br>
         <style> #map { height: 350px; } </style>
-        <div id="map"></div>
+        <div class="container" id="map"></div>
 
         {{ object.longitude|json_script:"longitude_json" }}
         {{ object.latitude|json_script:"latitude_json" }}
@@ -35,7 +36,7 @@
 
     <br>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
         <div>
             <div class="card">
                 <h6 class="card-header">

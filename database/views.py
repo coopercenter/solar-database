@@ -4,10 +4,8 @@ import csv
 from .models import SolarProjectData
 from django.views.generic import DetailView
 
-import pandas as pd
-import numpy as np
-import plotly.express as px
-from plotly.offline import plot
+
+from . import plotly_dash
 
 def export_csv(request):
     response = HttpResponse(
@@ -30,84 +28,19 @@ def export_csv(request):
     return response
 
 def dash(request):
-    # plotData = SolarProjectData.objects.values('latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
-                                               # 'local_permit_status', 
-                                               # 'best_available_project_acreage')
-
-    # df = pd.DataFrame.from_records(plotData)
-
-    # df['local_permit_status'] = df['local_permit_status'].str.strip()
-
-     #mwPieData = df.groupby('local_permit_status').agg({'latest_nameplate_capacity_per_local_action_mw_in_ac_field': 'sum'}).reset_index()
-
-    # mwPieChart = px.pie(
-        # mwPieData,
-        # values = 'latest_nameplate_capacity_per_local_action_mw_in_ac_field', 
-        # names = 'local_permit_status',  
-        # color_discrete_sequence=['rgb(37, 202, 211)', 'rgb(253, 218, 36)', 'rgb(229, 114, 0)', 'rgb(200, 203, 210)', 'rgb(35, 45, 75)','rgb(98, 187, 70)'],
-        # category_orders={"local_permit_status": ["Approved", "Approved/Amended", "Denied", "Withdrawn", "By-right","Pending"]},
-        # title ='Total MW by Local Permit Status',
-    # )
-
-    # mwPieChart.update_layout(
-        # title = dict(
-            # text ='Total Megawatts by Local Permit Status',
-            # font = dict(size = 18, family ='Roboto', color = 'black', weight= 500)
-        # ),
-        # legend = dict(
-            # font = dict(size = 12, family='Roboto')
-        # )
-    # )
-
-    # mwPieChart.update_traces(
-        # textinfo = 'percent + value',
-        # textfont = dict(size = 14, family='Roboto'),
-        # hovertemplate='<b>%{label}</b><br>Nameplate Capacity: %{value} MW'  
-    # )
-
-    # mwPieChart_div = plot(mwPieChart, output_type='div') 
-
-    # acreageData = df.groupby('local_permit_status').agg({'best_available_project_acreage':'sum'}).reset_index()
-
-    # acreageChart = px.bar(acreageData, x = 'local_permit_status', y='best_available_project_acreage',
-                    # color_discrete_sequence = ['rgb(37, 202, 211)'],
-                    # category_orders = {"Local Permit Status": ["Approved", "Approved/Amended", "Denied", "Withdrawn", "By-right", "Pending"]},
-                    # labels = {
-                    #'best_available_project_acreage': "Total Acreage",
-                    # 'local_permit_status':''
-                 # },
-                 # title = "Project Acreage by Local Permit Status")
-    
-    # acreageChart.update_layout(
-        # legend = dict(
-            # font = dict(size = 12, family='Roboto')
-        # ),
-        # title = dict(
-            # text ='Project Acreage by Local Permit Status',
-            # font = dict(size = 18, family ='Roboto', color = 'black', weight= 500)
-        # ),
-    # )
-
-    # acreageChart_div = plot(acreageChart, output_type='div')
-    
-    data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
-                                                'locality', 'project_mw', 
-                                                'local_permit_status', 'data_id', 'alt_names'))
-    
-    context = {
-        'data': data,
-    }
-
-    return render(request, 'database/dash.html', context)
+    return render(request, 'database/dash.html')
 
 def about(request):
     return render(request, 'database/about.html')
 
 def data(request):
+    map_data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
+                                                'locality', 'project_mw', 
+                                                'local_permit_status', 'data_id', 'alt_names'))
     data = SolarProjectData.objects.all()
-
     context = {
         'data': data,
+        'map_data': map_data,
     }
 
     return render(request, 'database/data.html', context)

@@ -28,31 +28,27 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-background navbar-expand-lg navbar-dark">
-          <div class="container">
-            <a class="navbar-brand"><h2 class="navbar-text" style="color:white;">Virginia Solar Database</h2></a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
+        <nav class="navbar navbar-background navbar-expand-lg navbar-dark"> <!-- navbar-dark is edited from Bootstrap in styles.ccss to match CooperCenter website -->
+          <div class="container-fluid" style="margin-left: 30px">
+            <img src="{% static 'images/uva.png' %}" style="max-width: 100px"></img>   <!-- <a class="navbar-brand"><h2 class="navbar-text">Virginia Solar Database</h2></a> <!-- navbar-text is rooted in Bootstrap stylesheet and modified in styles.css-->
+            <p style="color: #FFFFFF; font-size: 30px; font-weight: 50; margin-top: 10px; margin-left: 5px; margin-right: 5px">|</p>
+            <img src="{% static 'images/cooper-long.png' %}" style="width: 228px;"></img>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="nav ml-auto">
-                <li class="nav-item px-1.8">
+                <ul class="nav ml-auto">
+                  <li class="nav-item px-1.8">
                   <a class="nav-link navbar-text" style="color:white; font-weight: 400; font-size: 17px;" href="/">Home</a>
                 </li>
                 <li class="nav-item px-2">
-                  <a class="nav-link btn btn-outline-light" href="/about/">About</a>
+                  <a class="nav-link btn btn--blue-d" href="/about/">About</a> <!-- final button layer from styles.css -->
                 </li>
                 <li class="nav-item px-2">
-                  <a class="nav-link btn btn-outline-light" href="/data/">Data</a>
+                  <a class="nav-link btn btn--blue-d" href="/data/">Data</a>  <!-- final button layer from styles.css -->
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-
-        <div class="container">
+        <div class="container-fluid"> <!-- style="margin-left: 100px; width: max-width" -->
             {% block content %} {% endblock %}
         </div>
 
