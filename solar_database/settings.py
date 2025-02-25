@@ -25,12 +25,12 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-if os.path.exists('hidden'):
-    DEBUG = True
-else:
-    DEBUG = False
+# if os.path.exists('hidden'):
+DEBUG = True
+#else:
+    # DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org', 'va-solar-db-dev.azurewebsites.net']
 
 
 # Application definition
