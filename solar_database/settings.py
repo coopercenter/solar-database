@@ -139,6 +139,9 @@ DATABASES = {
         'PASSWORD': PASSWORD,
         'HOST': HOST,
         'PORT': PORT,
+        'OPTIONS': {
+            'sslmode':'require'
+        }
     }
 }
 
@@ -226,7 +229,7 @@ PLOTLY_DASH = {
     "cache_arguments": True,
 
     # Flag controlling local serving of assets
-    "serve_locally": True,
+    "serve_locally": False,
 }
 
 #Add X_FRAME_OPTIONS = 'SAMEORIGIN' to settings.py to enable frames within HTML documents
