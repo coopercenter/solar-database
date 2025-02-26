@@ -192,6 +192,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'database', 'static'),
+    ]
+
 # Staticfiles finders for locating dash app assets and related files
 
 STATICFILES_FINDERS = [
