@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     "whitenoise.runserver_nostatic",
 
-    'daphne',
+    'uvicorn',
 
     'database.apps.DatabaseConfig',
     'django.contrib.admin',
