@@ -10,9 +10,6 @@ from dash import dcc
 from dash import html
 from django.urls import path, include
 
-urlpatterns = [
-    path('django_plotly_dash/', include('django_plotly_dash.urls')),]
-
 def export_csv(request):
     response = HttpResponse(
         content_type="text/csv",

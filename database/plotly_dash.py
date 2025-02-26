@@ -9,7 +9,6 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-import json
 import os
 
 #consider a visual update with https://www.dash-mantine-components.com/getting-started
@@ -875,5 +874,5 @@ def update_size_chart(value):
     elif value=='sizeProjectsBar':
         return sizeProjectsBar
     
-#if __name__ == '__main__':
-#  dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))###
+if __name__ == '__main__':
+    dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
