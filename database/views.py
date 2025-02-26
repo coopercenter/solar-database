@@ -31,7 +31,7 @@ def export_csv(request):
     return response
 
 def dash(request):
-    app = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY])
+    app = DjangoDash(name='SolarDashTest',add_bootstrap_links=True, serve_locally=True, external_stylesheets=[dbc.themes.FLATLY])
     app.layout =  dbc.Container(html.H1('TESTING'))
     context = {
         'app':app
