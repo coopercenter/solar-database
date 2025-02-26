@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from .views import ProjectView
-from . import plotly_dash
 from django.urls import path, include
 
 urlpatterns = [

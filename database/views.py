@@ -8,7 +8,10 @@ from django_plotly_dash import DjangoDash
 import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
-from plotly.offline import plot
+from django.urls import path, include
+
+urlpatterns = [
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),]
 
 def export_csv(request):
     response = HttpResponse(
