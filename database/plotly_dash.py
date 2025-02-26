@@ -442,9 +442,9 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                          tickvals=['Up to 5MW', '5MW-20MW', '21MW-150MW', 'More than 150MW'],
                                          title=''))
 
-app = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
+dashapp = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
 
-app.layout =  dbc.Container([
+dashapp.layout =  dbc.Container([
     #html.Link(rel="stylesheet",href='https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css'), #putting the link here extends to more of the siteand and gets the container to fit better, but I dislike the confusion about which styles are applied where
     html.Link(rel="stylesheet", href="static/css/styles.css"),
     #buid the state overview page
@@ -589,7 +589,7 @@ app.layout =  dbc.Container([
                             className='dashboard-container')
 
 #Define a callback to plot the map with a time slider
-@app.callback(
+@dashapp.callback(
         Output("stateMap", "figure"), 
         Input("mapButtons","value"),
         Input("years", "value"))
@@ -838,7 +838,7 @@ def update_map(map_type,slide_year):
         return deniedRateMap
 
 # Define a callback to update the pie graph
-@app.callback(
+@dashapp.callback(
     Output('pieChart', 'figure'),
     [Input(component_id='pieButtons', component_property='value')]
 )
@@ -851,7 +851,7 @@ def update_pie_chart(value):
         return acrePieChart
     
 # Define a callback to update the annual bar graph
-@app.callback(
+@dashapp.callback(
     Output('annualLine', 'figure'),
     [Input(component_id='annualButtons', component_property='value')]
 )
@@ -864,7 +864,7 @@ def update_annual_chart(value):
         return projectsAnnualLine
     
 # Define a callback to update the size bar graph
-@app.callback(
+@dashapp.callback(
     Output('sizeBar', 'figure'),
     [Input(component_id='sizeButtons', component_property='value')]
 )
@@ -875,4 +875,4 @@ def update_size_chart(value):
         return sizeProjectsBar
     
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
+    dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
