@@ -64,8 +64,7 @@ countyData = CountyData.objects.values('locality',
 countyDf = pd.DataFrame.from_records(countyData)
 
 ##works in local django but maybe not Azure?
-#counties = requests.get('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json').json()
-counties=[]
+counties = requests.get('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json').json()
 
 mapData = pd.merge(df,countyDf,how='left',on='locality')
 #set up the data for the permit status map with the time slider
