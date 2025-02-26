@@ -441,7 +441,7 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                          tickvals=['Up to 5MW', '5MW-20MW', '21MW-150MW', 'More than 150MW'],
                                          title=''))
 
-app = DjangoDash(name='SolarDash',add_bootstrap_links=True) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
+app = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
 
 app.layout =  dbc.Container([
     #html.Link(rel="stylesheet",href='https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css'), #putting the link here extends to more of the siteand and gets the container to fit better, but I dislike the confusion about which styles are applied where

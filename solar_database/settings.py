@@ -30,8 +30,7 @@ DEBUG = True
 #else:
     # DEBUG = False
 
-#ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 5432,8050, 'solardatabase.coopercenter.org']
 
 
 # Application definition
@@ -70,20 +69,14 @@ MIDDLEWARE = [
 
 
 # Add CHANNEL_LAYERS
-#CHANNEL_LAYERS = {
-#   'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#                'CONFIG': {
-#                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379,'solardatabase.coopercenter.org'),],
-#                          }
-#              }
-#}
 CHANNEL_LAYERS = {
    'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
                 'CONFIG': {
-                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379,5432,8050,'solardatabase.coopercenter.org'),],
+                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379, 5432, 8050, 'solardatabase.coopercenter.org'),],
                           }
               }
 }
+
 
 ROOT_URLCONF = 'solar_database.urls'
 

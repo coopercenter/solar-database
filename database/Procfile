@@ -1,0 +1,1 @@
+web: guincorn va-solar-db-dev.wsgi
