@@ -52,7 +52,6 @@ INSTALLED_APPS = [
 
     'dpd_static_support',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
-    'channels',
     'channels_redis',
     'django_bootstrap5',
 
