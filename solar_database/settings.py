@@ -30,7 +30,8 @@ DEBUG = True
 #else:
     # DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
+#ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -201,7 +202,6 @@ PLOTLY_COMPONENTS = [
     'dash_bootstrap_components',
     'dpd_components',
     'dpd_static_support',
-    'dash_mantine_components',
     ]
 
 PLOTLY_DASH = {

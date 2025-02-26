@@ -9,6 +9,7 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+import json
 
 #consider a visual update with https://www.dash-mantine-components.com/getting-started
 
@@ -62,7 +63,7 @@ countyData = CountyData.objects.values('locality',
                                         'locality_mapping')
 countyDf = pd.DataFrame.from_records(countyData)
 
-#hopefully this call works in the Django environment
+##works in local django but maybe not Azure?
 counties = requests.get('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json').json()
 
 mapData = pd.merge(df,countyDf,how='left',on='locality')
