@@ -30,7 +30,7 @@ DEBUG = True
 #else:
     # DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 5432,8050, 'solardatabase.coopercenter.org']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', '5432','8050', 'solardatabase.coopercenter.org']
 
 
 # Application definition
