@@ -29,7 +29,10 @@ def export_csv(request):
 
 def dash(request):
     app = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY])
-    return render(request, 'database/dash.html')
+    context={
+        'app': app
+    }
+    return render(request, 'database/dash.html',context)
 
 def about(request):
     return render(request, 'database/about.html')
