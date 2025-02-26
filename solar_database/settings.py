@@ -229,7 +229,7 @@ PLOTLY_DASH = {
     "cache_arguments": True,
 
     # Flag controlling local serving of assets
-    "serve_locally": False,
+    "serve_locally": True,
 }
 
 #Add X_FRAME_OPTIONS = 'SAMEORIGIN' to settings.py to enable frames within HTML documents

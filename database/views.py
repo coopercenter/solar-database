@@ -4,6 +4,11 @@ import csv
 from .models import SolarProjectData
 from django.views.generic import DetailView
 from . import plotly_dash
+from django_plotly_dash import DjangoDash
+import dash_bootstrap_components as dbc
+from dash import dcc
+from dash import html
+from plotly.offline import plot
 
 def export_csv(request):
     response = HttpResponse(
@@ -26,7 +31,12 @@ def export_csv(request):
     return response
 
 def dash(request):
-    return render(request, 'database/dash.html')
+    app = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY])
+    app.layout =  dbc.Container(html.H1('TESTING'))
+    context = {
+        'app':app
+    }
+    return render(request, 'database/dash.html',context)
 
 def about(request):
     return render(request, 'database/about.html')
