@@ -444,6 +444,7 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
 
 dashapp = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
 
+
 dashapp.layout =  dbc.Container([
     #html.Link(rel="stylesheet",href='https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css'), #putting the link here extends to more of the siteand and gets the container to fit better, but I dislike the confusion about which styles are applied where
     html.Link(rel="stylesheet", href="static/css/styles.css"),
@@ -874,5 +875,5 @@ def update_size_chart(value):
     elif value=='sizeProjectsBar':
         return sizeProjectsBar
     
-if __name__ == '__main__':
-    dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
+#if __name__ == '__main__':
+#  dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))###

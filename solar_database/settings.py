@@ -30,12 +30,18 @@ DEBUG = True
 #else:
     # DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', '5432','8050', 'solardatabase.coopercenter.org']
+#ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', '5432','8050', 'solardatabase.coopercenter.org']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    "whitenoise.runserver_nostatic",
+
+    'daphne',
+
     'database.apps.DatabaseConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +55,7 @@ INSTALLED_APPS = [
     'channels',
     'channels_redis',
     'django_bootstrap5',
+
 ]
 
 MIDDLEWARE = [
@@ -72,7 +79,7 @@ MIDDLEWARE = [
 CHANNEL_LAYERS = {
    'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
                 'CONFIG': {
-                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379, 5432, 8050, 'solardatabase.coopercenter.org'),],
+                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379, 'solardatabase.coopercenter.org'),],
                           }
               }
 }
@@ -97,6 +104,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'solar_database.wsgi.application'
+
+ASGI_APPLICATION = 'solar_database.asgi.application'
 
 if os.path.exists('hidden/name.txt') :
     with open('hidden/name.txt') as f:
