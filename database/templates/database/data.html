@@ -1,21 +1,25 @@
 {% extends "database/base.html" %}
 {% block content %}
+{% load static %} 
+
     <br><br>
-    <h1 style="margin-left: 100px">Data</h1>
-    <h4 style="margin-left: 100px">Browse and Export Data</h4>
-    <p style="margin-left: 100px"><i>Current as of 02/24/2025 (Will be updated quarterly)</i></p>
-
-    <br>
-
-    <div>
-        <a class="btn btn-light btn-sm" href="{% url 'export_csv' %}" style="margin-right: 20px; margin-left: 100px">Export All to CSV</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
-    </div>
-    <br>
+    <div class="'container-fluid">
+        <div style="width: 1500px; margin-left: auto; margin-right: auto">
+            <div class="card-body">
+                <h1>Data</h1>
+                <br>
+                <h4>Browse and Export Data</h4>
+                <p><i>Current as of 02/24/2025 (Will be updated quarterly)</i></p>
+                <h3>NEW DATA! Local Pollinator-Friendly Requirements</h3>
+                <a class="btn btn-light btn-med" href="{% static 'VA_Localities_Pollinator_Smart_Req_Dec_2023.xlsx' %}" download>Download Local Pollinator Policy Data</a>
+                <p>Explore this inventory of local ordinances and policies as they relate to native and pollinator-friendly plant species for utility-scale solar energy facilities in Virginia. Data was provided by the Virginia Department of Conservation and Recreation based on their December 2023 report, <a href="https://www.dcr.virginia.gov/natural-heritage/document/va-solarordin-natveg.pdf">Virginia Localities Solar Ordinances and Native Vegetation.</a> Additional Pollinator-Smart information is available on the <a href="https://www.dcr.virginia.gov/natural-heritage/pollinator-smart">DCR website.</a></p>
+                <div style="line-height: 20%"><br></div>
+                <a class="btn btn-light btn-med" href="{% url 'export_csv' %}">Export All Solar Data to CSV</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
+            </div>
+        </div>
 
     {{ map_data|json_script:"data_json" }}
-
-    <div class="container-fluid">
-        <div class="row" style="background-color:#F2F4F8; width: 1500px; margin-left: auto; margin-right: auto">
+        <div class="row" style="background-color:#F2F4F8; width: 1455px; margin-left: auto; margin-right: auto">
           <div class="col">
             <div style="line-height: 135%"><br></div>
             <h5>Explore Solar Projects</h5>in Virginia
@@ -822,7 +826,7 @@
     </div>
 
     <br>
-    <div style="width: 1500px; margin-left: auto; margin-right: auto">
+    <div style="width: 1455px; margin-left: auto; margin-right: auto">
     <table id="projectData" class="table table-hover">
         <thead>
             <tr>

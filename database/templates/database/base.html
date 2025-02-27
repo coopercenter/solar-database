@@ -30,9 +30,12 @@
     <body>
         <nav class="navbar navbar-background navbar-expand-lg navbar-dark"> <!-- navbar-dark is edited from Bootstrap in styles.ccss to match CooperCenter website -->
           <div class="container-fluid" style="margin-left: 30px">
-            <img src="{% static 'images/uva.png' %}" style="max-width: 100px"></img>   <!-- <a class="navbar-brand"><h2 class="navbar-text">Virginia Solar Database</h2></a> <!-- navbar-text is rooted in Bootstrap stylesheet and modified in styles.css-->
-            <p style="color: #FFFFFF; font-size: 30px; font-weight: 50; margin-top: 10px; margin-left: 5px; margin-right: 5px">|</p>
-            <img src="{% static 'images/cooper-long.png' %}" style="width: 228px;"></img>
+            
+            <a href="https://www.coopercenter.org/">
+              <img src="{% static 'images/uva-cooper-full.png' %}"></img>
+           </a>
+              <!-- <a class="navbar-brand"><h2 class="navbar-text">Virginia Solar Database</h2></a> <!-- navbar-text is rooted in Bootstrap stylesheet and modified in styles.css-->
+          
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav ml-auto">
                   <li class="nav-item px-1.8">
@@ -55,7 +58,9 @@
         <br>
 
         <div style="text-align: center; background-color: #F1F1EF; position: absolute; width: 100%; padding: 20px;">
+          <a href="https://www.coopercenter.org/energy">
           <img src="../../static/images/VAEnergyLogo.png" width="420" height="95">
+        </a>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -3,9 +3,28 @@
 
 {% block content %}
     <br><br>
-    <h1 style="margin-left: 100px">About</h1>
+<div class="'container-fluid">
+    <div style="width: 1500px; margin-left: auto; margin-right: auto">
+    <h1>About</h1>
+    <br>
     <a href="{% static 'about_db.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download About</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
     <a href="{% static 'data_dictionary.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download Data Dictionary</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
+    <br>
+    <div class="card" style="width: 30rem;">
+        <h6 class="card-header">
+          Changelog
+        </h6>
+        <div class="card-body" style="height: 120px; overflow-y: auto;">
+            <b>January 18th, 2025 <span class="badge badge-pill badge-success">New</span></b>
+            <br> Visualizations revamped. Corrections to data. <br>
+            <div style="line-height: 40%"><br></div>
+            <b>November 3rd, 2024</b>
+            <br> Launched for public release. 
+        </div>
+    </div>
+    </div>
+</div>
+
 
     <div style="line-height: 1800%"><br></div>
 
