@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import ProjectView
 from django.urls import path, include
+from .plotly_dash import dashapp
 
 urlpatterns = [
     path('', views.dash, name='database-home'),
