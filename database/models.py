@@ -52,7 +52,7 @@ class SolarProjectData(models.Model):
     deq_permit_number = models.TextField(db_column='deq_permit_number', blank=True, null=True)
     scc_certificate_number = models.TextField(db_column='scc_certificate_number', blank=True, null=True)
     shared_solar_enrolled = models.DateTimeField(db_column='shared_solar_enrolled', blank=True, null=True)
-    aml_program_or_funding = models.TextField(db_column='aml_program_or_funding', blank=True, null=True)
+    mined_land = models.TextField(db_column='aml_program_or_funding', blank=True, null=True)
     energy_storage_onsite = models.TextField(db_column='energy_storage_onsite', blank=True, null=True)
     energy_storage_mw = models.TextField(db_column='energy_storage_mw', blank=True, null=True)
     pjm_queue_number = models.TextField(db_column='pjm_queue_number', blank=True, null=True)
