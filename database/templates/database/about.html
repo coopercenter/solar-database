@@ -5,12 +5,72 @@
     <br><br>
 <div class="'container-fluid">
     <div style="width: 1500px; margin-left: auto; margin-right: auto">
-    <h1>About</h1>
+    <h1>About the Virginia Solar Database</h1>
+    
     <br>
-    <a href="{% static 'about_db.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download About</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
-    <a href="{% static 'data_dictionary.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download Data Dictionary</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
-    <br>
-    <div class="card" style="width: 30rem;">
+
+    <a href="{% static 'about_db.pdf' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>More About VSD</a>
+    <a href="{% static 'data_dictionary.xlsx' %}" style="margin-right: 20px" class="btn btn-light btn-sm" download>Download Data Dictionary</a>
+
+    <br><br>
+
+    <b>Virginia Solar Database (VSD)</b> was created and is maintained by the Weldon Cooper Center for Public Service at UVA. It includes the Virginia Solar Dashboard, a permit map with links to individual project information sheets, a sortable data table, a downloadable dataset (csv), and data dictionary. 
+
+    <br><br>
+
+    <h5>Background</h5>
+
+    The <a href="https://www.coopercenter.org/virginia-solar-survey">2022 Virginia Solar Survey</a> confirmed the need for ongoing efforts to track and monitor local solar permitting across the state. In 2023, UVA solicited stakeholder input to inform the design of 
+    a new statewide solar database. Stakeholder input determined which datapoints were prioritized and collected, data definitions, data sources, and what database features and tools should be provided. The Virginia Solar Database was 
+    publicly launched in November 2024; data is updated quarterly, and a change log is provided for intermittent updates.  
+
+    <br><br>
+
+    <h5>Purpose</h5>
+
+    The purpose of the Virginia Solar Database is to:
+    <ul>
+        <li>Facilitate tracking projects across local, state, and interconnection permitting;</li>
+        <li>Provide transparent and trusted solar siting information from across the state;</li>
+        <li>Support informed, data-driven policymaking to further Virginia's adopted goals and policies;</li>
+        <li>Enable monitoring of, implementation of, and progress towards Virginia's adopted goals and policies;</li>
+        <li>Provide foundational data to support complex analysis, research, and related land use, energy, and economic development planning.</li>
+    </ul>
+
+    <h5>Data</h5>
+    Based on stakeholder input, 32 unique datapoints are collected for each solar project.  Data is collected and validated by hand, with the 
+    assistance of automated alerts and webscraping tools. Not all data is available for every project. To learn more about data collection methodology, 
+    see “More About VSD” from this page. 
+
+    <br><br>
+
+    Data is sourced from primary sources such as local government archives (meeting minutes, resolutions, land use applications, staff reports, conditions, etc.), 
+    Virginia Department of Environmental Quality (DEQ) permit records, Virginia Department of Conservation and Recreation (DCR) Pollinator Smart Certification 
+    records, Virginia Department of Energy records, Virginia State Corporation Commission (SCC) dockets and final orders, Energy Information Administration (EIA) 
+    data, PJM Interconnection Request data, and various press, utility, industry/developer, and stakeholder media. 
+
+    <br><br>
+
+    See the Data Dictionary for a complete list of datapoints, their associated definitions, and sources for the data. 
+
+    <br><br>
+
+    <h5>Virginia Database Team</h5>
+    VSD was created by the Weldon Cooper Center for Public Service at the University of Virginia. Team members included Elizabeth Marshall, Emily Lien, 
+    Jaden Wang, Katie Treene, Margaret Hance, Matthew Callen, and Nadir Siddiqui.
+
+    <br><br>
+
+    Many thanks to the contributions of our Winter Break '23-'24 undergraduate student research interns: Alex Schwartz, Nneoma Nosike, Tiffany Huyhn, 
+    Claire Lee, and Olivia O'Donnell. 
+
+    <br><br>
+
+    The success of this database relies on the cooperation and participation of many industry stakeholders and government agencies including Virginia Tech, the Virginia Department of Energy, Virginia Department of Environmental Quality, and Virginia Department of Conservation and Recreation. We extend our sincere appreciation and gratitude for their help and efforts to ensure the accuracy of the data presented.    
+
+    <br><br><br>
+
+    <div class="card" style="width: 55rem;">
         <h6 class="card-header">
           Changelog
         </h6>
@@ -24,8 +84,5 @@
     </div>
     </div>
 </div>
-
-
-    <div style="line-height: 1800%"><br></div>
 
 {% endblock content %}
