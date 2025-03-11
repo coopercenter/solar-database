@@ -12,6 +12,7 @@ import dash_bootstrap_components as dbc
 import os
 
 #consider a visual update with https://www.dash-mantine-components.com/getting-started
+#future graph analysis features https://www.datylon.com/blog/types-of-charts-graphs-examples-data-visualization
 
 #get the dataset from the data we loaded in models.py
 plotData = SolarProjectData.objects.values('data_id',
@@ -29,27 +30,24 @@ plotData = SolarProjectData.objects.values('data_id',
 #define a base dataframe
 df = pd.DataFrame.from_records(plotData)
 #data munging to sort out some value inconsistencies and plotting needs
-df.project_mw.replace(np.nan, 0,inplace=True)
-df['local_permit_status']=df.local_permit_status.str.strip()
-df.local_permit_status.replace('PENDING','Pending',inplace=True)
+df['project_mw'] = df['project_mw'].replace(np.nan, 0)
+df['phase_mw'] = df['phase_mw'].replace(np.nan, 0)
 for i in range(0,len(df.index)-1):
     if df.local_permit_status[i] == 'Approved/Amended' and df.project_mw[i]==0:
         df.project_mw[i] = df.phase_mw[i]
 for i in range(0,len(df.index)-1):
     if df.local_permit_status[i] == 'Approved' and df.project_mw[i]==0:
         df.project_mw[i] = df.phase_mw[i]
-#running this again because the previous step of value adjusting introduced missing values again
-df.project_mw.replace(np.nan, 0,inplace=True)
 #create the range categories
-df['mw_size_range'] = pd.cut(df.project_mw,bins=[0,5,20,150,9999],labels=['Up to 5MW','5MW-20MW','21MW-150MW','More than 150MW'],include_lowest=True)
+df['mw_size_range'] = pd.cut(df.project_mw,bins=[0,5,20,150,9999],labels=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],include_lowest=True)
 df['mw_size_range_int'] = pd.cut(df.project_mw,bins=[0,5,20,150,9999],labels=['1','5','10','25'],include_lowest=True).astype('int')
 #define the dataset for the pie charts
 pieData = df.groupby('local_permit_status').agg({'project_mw':'sum','phase_mw':'sum','data_id':'count','public_project_acres':'sum'}).reset_index()
 #define the data used in the annual line charts, summing the relevant values by year and by status then calculating an annual rate of status action
 annualData = pd.DataFrame(df.groupby(['final_action_year','local_permit_status']).agg({'data_id':'count','project_mw':'sum'}).reset_index())
-annualData.rename(columns={'data_id':'project_count'},inplace=True)
+annualData = annualData.rename(columns={'data_id':'project_count'})
 annualTotal = df.groupby('final_action_year').agg({'data_id':'count'}).reset_index()
-annualTotal.rename(columns={'data_id':'annual_total'},inplace=True)
+annualTotal = annualTotal.rename(columns={'data_id':'annual_total'})
 annualData = pd.merge(annualData,annualTotal,on='final_action_year')
 annualData['annual_rate'] = round(annualData['project_count']/annualData['annual_total'],2)
 #define the regional data, straightforward summary of relevant datapoints by region. More could be added
@@ -63,7 +61,7 @@ countyData = CountyData.objects.values('locality',
                                         'locality_mapping')
 countyDf = pd.DataFrame.from_records(countyData)
 
-##works in local django but maybe not Azure?
+#get the county json 
 counties = requests.get('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json').json()
 
 mapData = pd.merge(df,countyDf,how='left',on='locality')
@@ -211,7 +209,7 @@ mwAnnualLine.update_traces(line=dict(width=3),
                            marker=dict(size=15),
                            hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Megawatts: %{y}<br>Projects: %{customdata[1]}<br><extra></extra>')
 
-mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
+mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                            #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                            paper_bgcolor='#F2F4F8',
                            plot_bgcolor='#F2F4F8',
@@ -224,8 +222,10 @@ mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                        y=1,
                                        title=''),
                            xaxis=dict(title='',
+                                      type='category',
+                                      categoryorder='category ascending',
                                       tickmode='array',
-                                      tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025]),
+                                      tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]),
                            yaxis=dict(tickformat=",.0f",
                                       title="Megawatts"))
 
@@ -259,7 +259,7 @@ rateAnnualLine.update_traces(line=dict(width=3),
                              marker=dict(size=15),
                              hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Rate of Local Action: %{y}<br>Local Status Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
 
-rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
+rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                              paper_bgcolor='#F2F4F8',
                              plot_bgcolor='#F2F4F8',
                              legend=dict(font=dict(size=10,
@@ -272,8 +272,10 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                        color='#242e4c'),
                              #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                              yaxis=dict(title="Percent of Projects",tickformat='.0%'),
-                             xaxis=dict(tickmode='array',
+                             xaxis=dict(type='category',
+                                        tickmode='array',
                                         tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
+                                        categoryorder='category ascending',
                                         title=''))
 
 rateAnnualLine_div=plot(rateAnnualLine,output_type='div')
@@ -306,7 +308,7 @@ projectsAnnualLine.update_traces(line=dict(width=3),
                                  marker=dict(size=15),
                                  hovertemplate="<b>%{customdata[0]}</b><br>Year: %{x}<br>Project Count: %{y}<br>Megawatts: %{customdata[1]:,.0f}<br><extra></extra>")
 
-projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
+projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                 #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                                  paper_bgcolor='#F2F4F8',
                                  plot_bgcolor='#F2F4F8',
@@ -319,7 +321,9 @@ projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                              title=''),
                                  xaxis=dict(title='',
                                             tickmode='array',
-                                            tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025]),
+                                            tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+                                            type='category',
+                                            categoryorder='category ascending'),
                                  yaxis=dict(tickformat=",.0f",
                                             title="Projects"))
 
@@ -328,7 +332,7 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                        y='project_mw', 
                        color='local_permit_status',
                        custom_data=['local_permit_status','public_project_acres','data_id'],
-                       height=600,
+                       height=630,
                        width=600,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -350,7 +354,7 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                       barmode='stack')
 mwRegionalBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>Local Status Megawatts: %{y}<br>Local Status Projects: %{customdata[2]}<br>Local Status Project Acres (Best Available Estimate): %{customdata[1]:,.0f}<br><extra></extra>")
 
-mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
+mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=75, b=0),
                             paper_bgcolor='#F2F4F8',
                             plot_bgcolor='#F2F4F8',
                             legend=dict(font=dict(size=10,
@@ -400,7 +404,7 @@ sizeMWBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                   color='#242e4c'),
                         #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                         xaxis=dict(tickmode='array',
-                                   tickvals=['Up to 5MW', '5MW-20MW', '21MW-150MW', 'More than 150MW'],
+                                   tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                    title=''),
                         yaxis=dict(tickformat=",.0f",
                                    title='Total MW'))
@@ -438,7 +442,7 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                               #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                               yaxis=dict(title="Total Projects"),
                               xaxis=dict(tickmode='array',
-                                         tickvals=['Up to 5MW', '5MW-20MW', '21MW-150MW', 'More than 150MW'],
+                                         tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                          title=''))
 
 dashapp = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
@@ -455,7 +459,7 @@ dashapp.layout =  dbc.Container([
                       style={
                           'margin-left':90
                       }),
-            html.Div(html.P('Visualizations reflect all projects in the database as of February 24, 2025. Project Size map includes all proposed projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
+            html.Div(html.P('Visualizations reflect all projects in the database as of March 11, 2025. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
                      style={
                           'margin-left':125,
                           'margin-right':190
@@ -688,7 +692,7 @@ def update_map(map_type,slide_year):
             color='mw_size_range',
             custom_data=['project_name','locality','local_permit_status','mw_size_range','final_action_year','project_mw','public_project_acres'],
             color_discrete_sequence=['rgb(229, 114, 0)','rgb(253, 218, 36)', 'rgb(40, 67, 118)', 'rgb(98, 187, 70)'],
-            category_orders={"mw_size_range": ["Up to 5MW", "5MW-20MW", "21MW-150MW", "More than 150MW"]},
+            category_orders={"mw_size_range": ['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<']},
             labels={'locality':'Locality',
                     'local_permit_status':'Local Permit Status',
                     'project_mw':'Project Megawatts',
@@ -721,7 +725,7 @@ def update_map(map_type,slide_year):
         return sizeMap
     
     elif map_type=='approvedMWMap':
-        approvedMWMap = px.choropleth_map(mapDataClean[(mapDataClean.local_permit_status=='Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index(),
+        approvedMWMap = px.choropleth_map(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index(),
                                          geojson=counties, 
                                          locations='fips', 
                                          color='project_mw',
@@ -770,7 +774,7 @@ def update_map(map_type,slide_year):
         return deniedMWMap
     elif map_type=='approvedRateMap':
         rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
-        approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Approved/Amended'])) & (mapDataClean['final_action_year']<= slide_year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
+        approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= slide_year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
         approved_rate = pd.merge(rate_heatmap_workshop,approved_fips,how='left',on='fips')
         approved_rate['approved_mw'] = approved_rate['approved_mw'].replace(np.nan,0)
         approved_rate['approved_projects'] = approved_rate['approved_projects'].replace(np.nan,0)

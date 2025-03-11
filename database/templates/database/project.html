@@ -184,7 +184,7 @@
                     </div>
 
                     <div style="height: 12px;"></div>
-                    <div><b> Date - Siting Agreement Executed</b> <br>
+                    <div><b> Date - Siting Agreement Action</b> <br>
                         {% if object.siting_agreement_date.strip %}
                             {{ object.siting_agreement_date}}
                         {% else %}
@@ -195,7 +195,7 @@
                     <div style="height: 12px;"></div>
                     <div><b>Siting Agreement Link</b> <br> 
                         {% if object.siting_agreement_link.strip %}
-                            <a href="{{ object.siting_agreement_link }}" target="_blank"> External Link </a>
+                            <a href="{{ object.siting_agreement_link }}" target="_blank"> Link to Document </a>
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -232,6 +232,39 @@
                     <div><b>Mined Land</b> <br>
                         {% if object.mined_land.strip %}
                             {{ object.mined_land }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <h6 class="card-header">
+                    Pollinator-Smart Details
+                </h6>
+                <div class="card-body">
+                    <div><b>Pollinator-Smart Certified?</b> <br> 
+                        {% if object.dcr_pollinator_certified.strip %}
+                            {{ object.dcr_pollinator_certified }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Pollinator-Smart Stage of Development</b> <br> 
+                        {% if object.dcr_pollinator_status.strip %}
+                            {{ object.dcr_pollinator_status }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Pollinator-Smart Scorecard (Link to DCR) </b> <br> 
+                        {% if object.dcr_pollinator_scorecard.strip %}
+                        <a href="{{ object.dcr_pollinator_scorecard }}" target="_blank"> {{ object.dcr_pollinator_scorecard_name }} </a>
                         {% else %}
                             &nbsp;
                         {% endif %}
