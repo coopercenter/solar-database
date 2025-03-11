@@ -186,7 +186,7 @@ mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING')
                        y="project_mw",
                        color='local_permit_status',
                        custom_data=['local_permit_status','project_count'],
-                       height=500,
+                       height=575,
                        width=625,
                        markers=True,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
@@ -234,7 +234,7 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                          y='annual_rate',
                          color='local_permit_status',
                          custom_data = ['local_permit_status','project_count','annual_total'],
-                         height=500,
+                         height=575,
                          width=625,
                          markers=True,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
@@ -257,7 +257,7 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
 
 rateAnnualLine.update_traces(line=dict(width=3),
                              marker=dict(size=15),
-                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Rate of Local Action: %{y}<br>Local Status Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
+                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
 
 rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                              paper_bgcolor='#F2F4F8',
@@ -285,7 +285,7 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                              y="project_count",
                              color='local_permit_status',
                              custom_data=['local_permit_status','project_mw'],
-                             height=500,
+                             height=575,
                              width=625,
                              markers=True,
                              color_discrete_sequence=['rgb(40, 67, 118)', 
@@ -306,7 +306,7 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
      
 projectsAnnualLine.update_traces(line=dict(width=3),
                                  marker=dict(size=15),
-                                 hovertemplate="<b>%{customdata[0]}</b><br>Year: %{x}<br>Project Count: %{y}<br>Megawatts: %{customdata[1]:,.0f}<br><extra></extra>")
+                                 hovertemplate="<b>%{customdata[0]}</b><br>Year: %{x}<br>Projects: %{y}<br>Megawatts: %{customdata[1]:,.0f}<br><extra></extra>")
 
 projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                 #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
@@ -332,7 +332,7 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                        y='project_mw', 
                        color='local_permit_status',
                        custom_data=['local_permit_status','public_project_acres','data_id'],
-                       height=630,
+                       height=705,
                        width=600,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -352,7 +352,7 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                               'data_id':'Project Count',
                               'local_permit_status':'Local Permit Status'},
                       barmode='stack')
-mwRegionalBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>Local Status Megawatts: %{y}<br>Local Status Projects: %{customdata[2]}<br>Local Status Project Acres (Best Available Estimate): %{customdata[1]:,.0f}<br><extra></extra>")
+mwRegionalBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Project Acres (Best Available Estimate): %{customdata[1]:,.0f}<br><extra></extra>")
 
 mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=75, b=0),
                             paper_bgcolor='#F2F4F8',
@@ -557,7 +557,8 @@ dashapp.layout =  dbc.Container([
             value='rateLine'
             ),
             #annual line chart
-            html.Div(dcc.Graph(id='annualLine'),style={'width':625})]), 
+            html.Div(dcc.Graph(id='annualLine'),style={'width':625,
+                                                       'margin-bottom':0,})]), 
             #size category block
             html.Div([
             #size categories universal title
@@ -577,7 +578,7 @@ dashapp.layout =  dbc.Container([
             #size category bar chart
             html.Div(dcc.Graph(id='sizeBar'),style={'width':625})])],
             style={'margin-right':50,
-                   'margin-left':30})
+                   'margin-left':30,})
             ],
         style={
             #style the container that holds the graphs
