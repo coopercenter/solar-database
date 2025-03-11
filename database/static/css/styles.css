@@ -2,6 +2,7 @@
 /* lowermost style layer for the nav bars from the Bootstrap css, edited to match CooperCenter website*/
 .navbar-dark{
     height: 60px;
+    width: 100vw;
 }
 
 /* Adjust the background color to match the CooperCenter website from the Bootstrap default*/
@@ -32,6 +33,7 @@
 .dashboard-container {
     margin-left: auto;
     margin-right: auto;
+    width: 90vw;
     margin-top: 50px;
     margin-bottom: 50px;
     background-color: #F2F4F8; 

@@ -457,11 +457,11 @@ dashapp.layout =  dbc.Container([
             #dashboard
             [html.Div(html.H1('Virginia Solar Dashboard'),
                       style={
-                          'margin-left':90
+                          'margin-left': '4dvw',
                       }),
             html.Div(html.P('Visualizations reflect all projects in the database as of March 11, 2025. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
                      style={
-                          'margin-left':125,
+                          'margin-left':'4dvw',
                           'margin-right':190
                       }),
             html.Div(dbc.RadioItems(
@@ -478,11 +478,12 @@ dashapp.layout =  dbc.Container([
                 {"label": "Project Denial Rate","value":'deniedRateMap'}
             ],
             value='statusPermitMap'
-        ),style={'margin-left':125}),
+        ),style={'margin-left':'4dvw',}),
             #switchable maps
             html.Div(dcc.Graph(id='stateMap'),
                      style={
-                         'margin-left':125
+                         'margin-left':'5dvw',
+                         'width':'75dvw',
                      }),
             html.Div([
             html.Label("Select year to map solar progress over time", htmlFor="years"),
@@ -505,8 +506,8 @@ dashapp.layout =  dbc.Container([
                               int(years[12]):str(years[12])},
                       id='years'
             )],
-            style={'margin-right':150,
-                   'margin-left':125})
+            style={'width':'75dvw',
+                   'margin-left':'5dvw',})
                              ]),
         #summary graphs
         html.Div(
@@ -584,13 +585,12 @@ dashapp.layout =  dbc.Container([
             #style the container that holds the graphs
             'margin-top': 35,
             'margin-right': 0,
-            'margin-left':125,
+            'margin-left':'5dvw',
             'margin-bottom': 35,
             'display': 'flex'
         })])],
                             fluid=True,
-                            style={'display': 'flex',
-                                   'width':1500},
+                            style={'display': 'flex'},
                             className='dashboard-container')
 
 #Define a callback to plot the map with a time slider
@@ -623,7 +623,7 @@ def update_map(map_type,slide_year):
                                 'longitude':False},
             lat='latitude',
             lon='longitude',
-            zoom=6.5, 
+            zoom=6.6, 
             center = {"lat": 38.00692, "lon": -79.40695},
                 )
         statusMap.update_layout(
@@ -636,7 +636,7 @@ def update_map(map_type,slide_year):
                                       color='#242e4c'),
                              title='Project Size'),
                 margin={"r":0,"t":10,"l":0,"b":0},
-                width=1200,
+                #width=1200,
                 height=600,
                 map_style='carto-positron-nolabels',
                 paper_bgcolor='rgba(0,0,0,0)',
@@ -705,7 +705,7 @@ def update_map(map_type,slide_year):
             size='mw_size_range_int',
             lat='latitude',
             lon='longitude',
-            zoom=6.5, 
+            zoom=6.6, 
             center = {"lat": 38.00692, "lon": -79.40695},
                 )
         sizeMap.update_layout(
@@ -715,7 +715,7 @@ def update_map(map_type,slide_year):
                             orientation='h',
                             yanchor='bottom',y=1),
                 margin={"r":0,"t":10,"l":0,"b":0},
-                width=1200,
+                #width=1200,
                 height=600,
                 map_style='carto-positron-nolabels',
                 paper_bgcolor='rgba(0,0,0,0)')
@@ -739,7 +739,7 @@ def update_map(map_type,slide_year):
                                                  'data_id':'Number of Projects'})
         approvedMWMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Approved Megawatts: %{customdata[1]:,.0f}<br>Approved Projects: %{customdata[2]:,.0f}<br><extra></extra>")
         approvedMWMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                        width=1300,
+                        #width=1300,
                         height=600,
                         map_style='carto-positron-nolabels',
                         paper_bgcolor='rgba(0,0,0,0)',
@@ -765,7 +765,7 @@ def update_map(map_type,slide_year):
                                                 'data_id':'Number of Projects'})
         deniedMWMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Denied Megawatts: %{customdata[1]:,.0f}<br>Denied Projects: %{customdata[2]:,.0f}<br><extra></extra>")
         deniedMWMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                  width=1300,
+                                  #width=1300,
                                   height=600,
                                   map_style='carto-positron-nolabels',
                                   paper_bgcolor='rgba(0,0,0,0)',
@@ -797,7 +797,7 @@ def update_map(map_type,slide_year):
                                                     'approved_projects':'Cumulative Approved Projects'})
         approvedRateMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Project Approval Rate: %{customdata[1]:.0%}<br>Approved Projects: %{customdata[3]}<br>Total Projects: %{customdata[4]}<br><extra></extra>")
         approvedRateMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                      width=1300,
+                                      #width=1300,
                                       height=600,
                                       map_style='carto-positron-nolabels',
                                       paper_bgcolor='rgba(0,0,0,0)',
@@ -832,7 +832,7 @@ def update_map(map_type,slide_year):
                                                   'denied_projects':'Cumulative Denied Projects'})
         deniedRateMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Project Denial Rate: %{customdata[1]:.0%}<br>Denied Projects: %{customdata[3]}<br>Total Projects: %{customdata[4]}<br><extra></extra>")
         deniedRateMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                    width=1300,
+                                    #width=1300,
                                     height=600,
                                     map_style='carto-positron-nolabels',
                                     paper_bgcolor='rgba(0,0,0,0)',
