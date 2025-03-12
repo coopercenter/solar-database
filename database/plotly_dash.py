@@ -98,7 +98,7 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                          font_color='#242e4c',
                          autosize=False,
                          #width=495,
-                         height=495,
+                         #height=495,
                          legend=dict(font=dict(size=9,
                                                color='#242e4c'),
                                       orientation='h',
@@ -134,7 +134,7 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                font_color='#242e4c',
                                autosize=False,
                                #width=495,
-                               height=495,
+                               #height=495,
                                legend=dict(font=dict(size=9,
                                                      color='#242e4c'),
                                            orientation='h',
@@ -171,7 +171,7 @@ acrePieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                            font_color='#242e4c',
                            autosize=False,
                            #width=495,
-                           height=495,
+                           #height=495,
                            legend=dict(font=dict(size=9,
                                                  color='#242e4c'),
                                        orientation='h',
@@ -277,8 +277,6 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                         tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
                                         categoryorder='category ascending',
                                         title=''))
-
-rateAnnualLine_div=plot(rateAnnualLine,output_type='div')
 
 projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING') & (annualData['local_permit_status'] != 'NA')],
                              x="final_action_year", 
@@ -529,7 +527,7 @@ dashapp.layout =  dbc.Container([
             ],
             value='mwPie'
         ),
-            #pie charts
+            #pie chart block
             html.Div(dcc.Graph(id='pieChart'),style={'width':'33dvw',})]),         
             #regional bar block
             html.Div([
