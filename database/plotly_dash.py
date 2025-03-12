@@ -97,7 +97,7 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                          paper_bgcolor='#F2F4F8',
                          font_color='#242e4c',
                          autosize=False,
-                         width=495,
+                         #width=495,
                          height=495,
                          legend=dict(font=dict(size=9,
                                                color='#242e4c'),
@@ -133,7 +133,7 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                paper_bgcolor='#F2F4F8',
                                font_color='#242e4c',
                                autosize=False,
-                               width=495,
+                               #width=495,
                                height=495,
                                legend=dict(font=dict(size=9,
                                                      color='#242e4c'),
@@ -170,7 +170,7 @@ acrePieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                            paper_bgcolor='#F2F4F8',
                            font_color='#242e4c',
                            autosize=False,
-                           width=495,
+                           #width=495,
                            height=495,
                            legend=dict(font=dict(size=9,
                                                  color='#242e4c'),
@@ -186,8 +186,8 @@ mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING')
                        y="project_mw",
                        color='local_permit_status',
                        custom_data=['local_permit_status','project_count'],
-                       height=575,
-                       width=625,
+                       height=550,
+                       #width=625,
                        markers=True,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -234,8 +234,8 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                          y='annual_rate',
                          color='local_permit_status',
                          custom_data = ['local_permit_status','project_count','annual_total'],
-                         height=575,
-                         width=625,
+                         height=550,
+                         #width=625,
                          markers=True,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(253, 218, 36)', 
@@ -285,8 +285,8 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                              y="project_count",
                              color='local_permit_status',
                              custom_data=['local_permit_status','project_mw'],
-                             height=575,
-                             width=625,
+                             height=550,
+                             #width=625,
                              markers=True,
                              color_discrete_sequence=['rgb(40, 67, 118)', 
                                                       'rgb(253, 218, 36)', 
@@ -332,8 +332,8 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                        y='project_mw', 
                        color='local_permit_status',
                        custom_data=['local_permit_status','public_project_acres','data_id'],
-                       height=705,
-                       width=600,
+                       height=680,
+                       #width=600,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
                                                 'rgb(229, 114, 0)', 
@@ -370,7 +370,7 @@ mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=75, b=0),
                                        tickmode='array',
                                        tickvals=['Southern','Central','Hampton Roads','Valley','Northern','Eastern','West Central','Southwest'],title=''),
                             yaxis=dict(tickformat=",.0f",
-                                       title="Megawatts"))
+                                       title="Total Megawatts"))
      
 mwRegionalBar_div = plot(mwRegionalBar,output_type='div')
 
@@ -380,7 +380,7 @@ sizeMWBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin
                    color='local_permit_status',
                    custom_data=['local_permit_status','data_id'],
                    height=500,
-                   width=625,
+                   #width=625,
                    color_discrete_sequence=['rgb(40, 67, 118)', 
                                             'rgb(229, 114, 0)',
                                             'rgb(200, 203, 210)'],
@@ -407,7 +407,7 @@ sizeMWBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                    tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                    title=''),
                         yaxis=dict(tickformat=",.0f",
-                                   title='Total MW'))
+                                   title='Total Megawatts'))
 
 sizeProjectsBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin(["Approved","Denied",'Withdrawn'])], 
                          x="mw_size_range", 
@@ -415,7 +415,7 @@ sizeProjectsBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'
                          color='local_permit_status',
                          custom_data=['local_permit_status','project_mw'],
                          height=500,
-                         width=625,
+                         #width=625,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(229, 114, 0)',
                                                   'rgb(200, 203, 210)'],
@@ -530,13 +530,13 @@ dashapp.layout =  dbc.Container([
             value='mwPie'
         ),
             #pie charts
-            html.Div(dcc.Graph(id='pieChart'),style={'width':495,})]),         
+            html.Div(dcc.Graph(id='pieChart'),style={'width':'33dvw',})]),         
             #regional bar block
             html.Div([
                 #regional title
                 html.H3('Regional Megawatts by Local Permit Status'), 
                 #regional graph
-                dcc.Graph(figure=mwRegionalBar)],style={'width':620,
+                dcc.Graph(figure=mwRegionalBar)],style={'width':'38dvw',
                                                         'margin-top':35})
                 ]),
         dbc.Row([
@@ -558,7 +558,7 @@ dashapp.layout =  dbc.Container([
             value='rateLine'
             ),
             #annual line chart
-            html.Div(dcc.Graph(id='annualLine'),style={'width':625,
+            html.Div(dcc.Graph(id='annualLine'),style={'width':'39dvw',
                                                        'margin-bottom':0,})]), 
             #size category block
             html.Div([
@@ -577,9 +577,9 @@ dashapp.layout =  dbc.Container([
             value='sizeMWBar'
             ),
             #size category bar chart
-            html.Div(dcc.Graph(id='sizeBar'),style={'width':625})])],
+            html.Div(dcc.Graph(id='sizeBar'),style={'width':'38dvw'})])],
             style={'margin-right':50,
-                   'margin-left':30,})
+                   'margin-left':45,})
             ],
         style={
             #style the container that holds the graphs
