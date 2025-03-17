@@ -97,13 +97,14 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                          paper_bgcolor='#F2F4F8',
                          font_color='#242e4c',
                          autosize=False,
-                         #width=495,
-                         #height=495,
-                         legend=dict(font=dict(size=9,
+                         width=450,
+                         height=450,
+                         legend=dict(font=dict(size=8,
                                                color='#242e4c'),
                                       orientation='h',
                                       yanchor="bottom",
                                       y=1,
+                                      x=-.13,
                                       title=''))
      
 mwPieChart.update_traces(texttemplate="%{value:,.0f} MW (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Nameplate Megawatt Capacity: %{value:,.0f} MW')
@@ -133,13 +134,14 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                paper_bgcolor='#F2F4F8',
                                font_color='#242e4c',
                                autosize=False,
-                               #width=495,
-                               #height=495,
-                               legend=dict(font=dict(size=9,
+                               width=450,
+                               height=450,
+                               legend=dict(font=dict(size=8,
                                                      color='#242e4c'),
                                            orientation='h',
                                            yanchor="bottom",
                                            y=1,
+                                           x=-.1,
                                            title=''))
      
 projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Projects: %{value:,.0f}')
@@ -170,13 +172,14 @@ acrePieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                            paper_bgcolor='#F2F4F8',
                            font_color='#242e4c',
                            autosize=False,
-                           #width=495,
-                           #height=495,
-                           legend=dict(font=dict(size=9,
+                           width=450,
+                           height=450,
+                           legend=dict(font=dict(size=8,
                                                  color='#242e4c'),
                                        orientation='h',
                                        yanchor="bottom",
                                        y=1,
+                                       x=-.4,
                                        title=''))
      
 acrePieChart.update_traces(texttemplate="%{value:,.3s} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Project Acres (Best Available Esimate): %{value:,.0f}')
@@ -186,8 +189,8 @@ mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING')
                        y="project_mw",
                        color='local_permit_status',
                        custom_data=['local_permit_status','project_count'],
-                       height=550,
-                       #width=625,
+                       height=460,
+                       width=600,
                        markers=True,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -205,21 +208,22 @@ mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING')
                                 'local_permit_status':'Local Permit Status',
                                 'project_mw':'Megawatts'})
      
-mwAnnualLine.update_traces(line=dict(width=3),
-                           marker=dict(size=15),
+mwAnnualLine.update_traces(line=dict(width=2),
+                           marker=dict(size=10),
                            hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Megawatts: %{y}<br>Projects: %{customdata[1]}<br><extra></extra>')
 
 mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                            #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                            paper_bgcolor='#F2F4F8',
                            plot_bgcolor='#F2F4F8',
-                           font=dict(size=12,
+                           font=dict(size=10,
                                      color='#242e4c'),
                            legend=dict(font=dict(size=10,
                                                  color='#242e4c'),
                                        orientation='h',
                                        yanchor="bottom",
                                        y=1,
+                                       x=-.07,
                                        title=''),
                            xaxis=dict(title='',
                                       type='category',
@@ -234,8 +238,8 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                          y='annual_rate',
                          color='local_permit_status',
                          custom_data = ['local_permit_status','project_count','annual_total'],
-                         height=550,
-                         #width=625,
+                         height=460,
+                         width=600,
                          markers=True,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(253, 218, 36)', 
@@ -255,8 +259,8 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                                  'annual_total':'Total Projects for Year',
                                  'project_count':'Status Projects'})
 
-rateAnnualLine.update_traces(line=dict(width=3),
-                             marker=dict(size=15),
+rateAnnualLine.update_traces(line=dict(width=2),
+                             marker=dict(size=10),
                              hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
 
 rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
@@ -267,8 +271,9 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                          orientation='h',
                                          yanchor="bottom",
                                          y=1,
+                                         x=-.07,
                                          title=''),
-                             font=dict(size=12,
+                             font=dict(size=10,
                                        color='#242e4c'),
                              #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                              yaxis=dict(title="Percent of Projects",tickformat='.0%'),
@@ -283,8 +288,8 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                              y="project_count",
                              color='local_permit_status',
                              custom_data=['local_permit_status','project_mw'],
-                             height=550,
-                             #width=625,
+                             height=460,
+                             width=600,
                              markers=True,
                              color_discrete_sequence=['rgb(40, 67, 118)', 
                                                       'rgb(253, 218, 36)', 
@@ -302,20 +307,21 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                                      'local_permit_status':'Local Permit Status',
                                      'project_count':'Project Count'})
      
-projectsAnnualLine.update_traces(line=dict(width=3),
-                                 marker=dict(size=15),
+projectsAnnualLine.update_traces(line=dict(width=2),
+                                 marker=dict(size=10),
                                  hovertemplate="<b>%{customdata[0]}</b><br>Year: %{x}<br>Projects: %{y}<br>Megawatts: %{customdata[1]:,.0f}<br><extra></extra>")
 
 projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                 #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                                  paper_bgcolor='#F2F4F8',
                                  plot_bgcolor='#F2F4F8',
-                                 font=dict(size=12,color='#242e4c'),
+                                 font=dict(size=10,color='#242e4c'),
                                  legend=dict(font=dict(size=10,
                                                        color='#242e4c'),
                                              orientation='h',
                                              yanchor="bottom",
                                              y=1,
+                                             x=-.04,
                                              title=''),
                                  xaxis=dict(title='',
                                             tickmode='array',
@@ -330,8 +336,8 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                        y='project_mw', 
                        color='local_permit_status',
                        custom_data=['local_permit_status','public_project_acres','data_id'],
-                       height=680,
-                       #width=600,
+                       height=640,
+                       width=600,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
                                                 'rgb(229, 114, 0)', 
@@ -352,7 +358,7 @@ mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA']
                       barmode='stack')
 mwRegionalBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Project Acres (Best Available Estimate): %{customdata[1]:,.0f}<br><extra></extra>")
 
-mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=75, b=0),
+mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=60, b=0),
                             paper_bgcolor='#F2F4F8',
                             plot_bgcolor='#F2F4F8',
                             legend=dict(font=dict(size=10,
@@ -360,8 +366,9 @@ mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=75, b=0),
                                          orientation='h',
                                          yanchor="bottom",
                                          y=1,
+                                         x=-.1,
                                          title=''),
-                            font=dict(size=12,color='#242e4c'),
+                            font=dict(size=10,color='#242e4c'),
                             #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                             xaxis=dict(categoryorder='total descending',
                                        tickangle=45,
@@ -377,8 +384,8 @@ sizeMWBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin
                    y="project_mw",
                    color='local_permit_status',
                    custom_data=['local_permit_status','data_id'],
-                   height=500,
-                   #width=625,
+                   height=550,
+                   width=480,
                    color_discrete_sequence=['rgb(40, 67, 118)', 
                                             'rgb(229, 114, 0)',
                                             'rgb(200, 203, 210)'],
@@ -397,8 +404,9 @@ sizeMWBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                     orientation='h',
                                     yanchor="bottom",
                                     y=1,
+                                    x=-.13,
                                     title=''),
-                        font=dict(size=12,
+                        font=dict(size=10,
                                   color='#242e4c'),
                         #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                         xaxis=dict(tickmode='array',
@@ -412,8 +420,8 @@ sizeProjectsBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'
                          y='data_id',
                          color='local_permit_status',
                          custom_data=['local_permit_status','project_mw'],
-                         height=500,
-                         #width=625,
+                         height=550,
+                         width=480,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(229, 114, 0)',
                                                   'rgb(200, 203, 210)'],
@@ -434,8 +442,9 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                           orientation='h',
                                           yanchor="bottom",
                                           y=1,
+                                          x=-.13,
                                           title=''),
-                              font=dict(size=12,
+                              font=dict(size=10,
                                         color='#242e4c'),
                               #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15)),
                               yaxis=dict(title="Total Projects"),
@@ -455,12 +464,12 @@ dashapp.layout =  dbc.Container([
             #dashboard
             [html.Div(html.H1('Virginia Solar Dashboard'),
                       style={
-                          'margin-left': '4dvw',
+                          'margin-left': 8,
                       }),
             html.Div(html.P('Visualizations reflect all projects in the database as of March 11, 2025. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
                      style={
-                          'margin-left':'4dvw',
-                          'margin-right':190
+                          'margin-left':8,
+                          'width':1000
                       }),
             html.Div(dbc.RadioItems(
                 id='mapButtons',
@@ -476,12 +485,12 @@ dashapp.layout =  dbc.Container([
                 {"label": "Project Denial Rate","value":'deniedRateMap'}
             ],
             value='statusPermitMap'
-        ),style={'margin-left':'4dvw',}),
+        ),style={'margin-left':4,}),
             #switchable maps
             html.Div(dcc.Graph(id='stateMap'),
                      style={
-                         'margin-left':'5dvw',
-                         'width':'75dvw',
+                         'margin-left':9,
+                         'width':1184,
                      }),
             html.Div([
             html.Label("Select year to map solar progress over time", htmlFor="years"),
@@ -504,8 +513,8 @@ dashapp.layout =  dbc.Container([
                               int(years[12]):str(years[12])},
                       id='years'
             )],
-            style={'width':'75dvw',
-                   'margin-left':'5dvw',})
+            style={'width':1155,
+                   'margin-left':8,})
                              ]),
         #summary graphs
         html.Div(
@@ -528,14 +537,25 @@ dashapp.layout =  dbc.Container([
             value='mwPie'
         ),
             #pie chart block
-            html.Div(dcc.Graph(id='pieChart'),style={'width':'33dvw',})]),         
-            #regional bar block
+            html.Div(dcc.Graph(id='pieChart'))]), 
+            #size category block
             html.Div([
-                #regional title
-                html.H3('Regional Megawatts by Local Permit Status'), 
-                #regional graph
-                dcc.Graph(figure=mwRegionalBar)],style={'width':'38dvw',
-                                                        'margin-top':35})
+            #size categories universal title
+            html.H3('Size Category Summaries'),
+            #size category buttons
+            dbc.RadioItems(
+                id='sizeButtons',
+                className='btn-group',
+                inputClassName='btn-check',
+                labelClassName="btn btn--blue-d",
+                options=[
+                {"label": "Megawatts", "value": 'sizeMWBar'}, 
+                {"label": "Projects", "value": 'sizeProjectsBar'}
+            ],
+            value='sizeMWBar'
+            ),
+            #size category bar chart
+            html.Div(dcc.Graph(id='sizeBar'),style={'height':575})])
                 ]),
         dbc.Row([
             #annual line chart block
@@ -556,34 +576,24 @@ dashapp.layout =  dbc.Container([
             value='rateLine'
             ),
             #annual line chart
-            html.Div(dcc.Graph(id='annualLine'),style={'width':'39dvw',
-                                                       'margin-bottom':0,})]), 
-            #size category block
+            html.Div(dcc.Graph(id='annualLine'),style={'width':600,})]),
+            #regional bar block
             html.Div([
-            #size categories universal title
-            html.H3('Size Category Summaries'),
-            #size category buttons
-            dbc.RadioItems(
-                id='sizeButtons',
-                className='btn-group',
-                inputClassName='btn-check',
-                labelClassName="btn btn--blue-d",
-                options=[
-                {"label": "Megawatts", "value": 'sizeMWBar'}, 
-                {"label": "Projects", "value": 'sizeProjectsBar'}
+                #regional title
+                html.H3('Regional Megawatts by Local Permit Status'), 
+                #regional graph
+                dcc.Graph(figure=mwRegionalBar)],style={'width':600,
+                                                        'height':715,
+                                                        'margin-top':35})
             ],
-            value='sizeMWBar'
-            ),
-            #size category bar chart
-            html.Div(dcc.Graph(id='sizeBar'),style={'width':'38dvw'})])],
-            style={'margin-right':50,
-                   'margin-left':45,})
+            style={'margin-right':0,
+                   'margin-left':60,})
             ],
         style={
             #style the container that holds the graphs
             'margin-top': 35,
             'margin-right': 0,
-            'margin-left':'5dvw',
+            'margin-left':10,
             'margin-bottom': 35,
             'display': 'flex'
         })])],
@@ -621,7 +631,7 @@ def update_map(map_type,slide_year):
                                 'longitude':False},
             lat='latitude',
             lon='longitude',
-            zoom=6.6, 
+            zoom=6.57, 
             center = {"lat": 38.00692, "lon": -79.40695},
                 )
         statusMap.update_layout(
@@ -634,7 +644,7 @@ def update_map(map_type,slide_year):
                                       color='#242e4c'),
                              title='Project Size'),
                 margin={"r":0,"t":10,"l":0,"b":0},
-                #width=1200,
+                width=1155,
                 height=600,
                 map_style='carto-positron-nolabels',
                 paper_bgcolor='rgba(0,0,0,0)',
@@ -703,7 +713,7 @@ def update_map(map_type,slide_year):
             size='mw_size_range_int',
             lat='latitude',
             lon='longitude',
-            zoom=6.6, 
+            zoom=6.57, 
             center = {"lat": 38.00692, "lon": -79.40695},
                 )
         sizeMap.update_layout(
@@ -713,7 +723,7 @@ def update_map(map_type,slide_year):
                             orientation='h',
                             yanchor='bottom',y=1),
                 margin={"r":0,"t":10,"l":0,"b":0},
-                #width=1200,
+                width=1155,
                 height=600,
                 map_style='carto-positron-nolabels',
                 paper_bgcolor='rgba(0,0,0,0)')
@@ -731,13 +741,13 @@ def update_map(map_type,slide_year):
                                          custom_data=['locality_mapping','project_mw','data_id'],
                                          color_continuous_scale=['#F2F4F8','rgb(40, 67, 118)'],
                                          range_color=(0, 500),
-                                         zoom=6.5, center = {"lat": 38.00692, "lon": -79.40695},
+                                         zoom=6.37, center = {"lat": 38.00692, "lon": -79.40695},
                                          opacity=1,
                                          labels={'project_mw':'Megawatts',
                                                  'data_id':'Number of Projects'})
         approvedMWMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Approved Megawatts: %{customdata[1]:,.0f}<br>Approved Projects: %{customdata[2]:,.0f}<br><extra></extra>")
         approvedMWMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                        #width=1300,
+                        width=1155,
                         height=600,
                         map_style='carto-positron-nolabels',
                         paper_bgcolor='rgba(0,0,0,0)',
@@ -757,13 +767,13 @@ def update_map(map_type,slide_year):
                                         custom_data=['locality_mapping','project_mw','data_id'],
                                         color_continuous_scale=['#F2F4F8','rgb(229, 114, 0)'],
                                         range_color=(0, 500),
-                                        zoom=6.5, center = {"lat": 38.00692, "lon": -79.40695},
+                                        zoom=6.37, center = {"lat": 38.00692, "lon": -79.40695},
                                         opacity=1,
                                         labels={'project_mw':'Megawatts',
                                                 'data_id':'Number of Projects'})
         deniedMWMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Denied Megawatts: %{customdata[1]:,.0f}<br>Denied Projects: %{customdata[2]:,.0f}<br><extra></extra>")
         deniedMWMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                  #width=1300,
+                                  width=1155,
                                   height=600,
                                   map_style='carto-positron-nolabels',
                                   paper_bgcolor='rgba(0,0,0,0)',
@@ -787,7 +797,7 @@ def update_map(map_type,slide_year):
                                             color_continuous_scale=['#F2F4F8','rgb(40, 67, 118)'],
                                             custom_data=['locality_mapping','approval_rate_projects','approval_rate_mw','approved_projects','total_projects'],
                                             range_color=(0, 1),
-                                            zoom=6.5, 
+                                            zoom=6.37, 
                                             center = {"lat": 38.00692, "lon": -79.40695},
                                             opacity=1,
                                             labels={'approval_rate_projects':'Percent Approved',
@@ -795,7 +805,7 @@ def update_map(map_type,slide_year):
                                                     'approved_projects':'Cumulative Approved Projects'})
         approvedRateMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Project Approval Rate: %{customdata[1]:.0%}<br>Approved Projects: %{customdata[3]}<br>Total Projects: %{customdata[4]}<br><extra></extra>")
         approvedRateMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                      #width=1300,
+                                      width=1155,
                                       height=600,
                                       map_style='carto-positron-nolabels',
                                       paper_bgcolor='rgba(0,0,0,0)',
@@ -822,7 +832,7 @@ def update_map(map_type,slide_year):
                                           color_continuous_scale=['#F2F4F8','rgb(229, 114, 0)'],
                                           custom_data=['locality_mapping','denial_rate_projects','denial_rate_mw','denied_projects','total_projects'],
                                           range_color=(0, 1),
-                                          zoom=6.5, 
+                                          zoom=6.37, 
                                           center = {"lat": 38.00692, "lon": -79.40695},
                                           opacity=1,
                                           labels={'denial_rate_projects':'Percent Denied',
@@ -830,7 +840,7 @@ def update_map(map_type,slide_year):
                                                   'denied_projects':'Cumulative Denied Projects'})
         deniedRateMap.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Project Denial Rate: %{customdata[1]:.0%}<br>Denied Projects: %{customdata[3]}<br>Total Projects: %{customdata[4]}<br><extra></extra>")
         deniedRateMap.update_layout(margin={"r":0,"t":0,"l":0,"b":0},
-                                    #width=1300,
+                                    width=1155,
                                     height=600,
                                     map_style='carto-positron-nolabels',
                                     paper_bgcolor='rgba(0,0,0,0)',
