@@ -93,7 +93,7 @@ mwPieChart = px.pie(pieData[pieData.local_permit_status != 'NA'],
                     hover_data={'local_permit_status':False})
      
 mwPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
-                         #title_subtitle=dict(text='Source: Weldon Cooper Center for Public Service', font=dict(size=15))
+                         #title_subtitle=dict(text='Source: Weldon Cooper Center Virginia Solar Database', font=dict(size=6)),
                          paper_bgcolor='#F2F4F8',
                          font_color='#242e4c',
                          autosize=False,
@@ -108,6 +108,8 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                       title=''))
      
 mwPieChart.update_traces(texttemplate="%{value:,.0f} MW (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Nameplate Megawatt Capacity: %{value:,.0f} MW')
+
+mwPieChart.add_annotation(text='<i>Source: Weldon Cooper Center<br> Virginia Solar Database</i>',x=-.07,y=0,font=dict(size=8),showarrow=False)
      
 projectsPieChart= px.pie(pieData[pieData.local_permit_status != 'NA'], 
                          values='data_id', 
@@ -146,6 +148,7 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
      
 projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Projects: %{value:,.0f}')
 
+projectsPieChart.add_annotation(text='<i>Source: Weldon Cooper Center<br> Virginia Solar Database</i>',x=-.07,y=0,font=dict(size=8),showarrow=False)
     
 acrePieChart = px.pie(pieData[pieData.local_permit_status != 'NA'], 
                       values='public_project_acres', 
@@ -183,6 +186,7 @@ acrePieChart.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                        title=''))
      
 acrePieChart.update_traces(texttemplate="%{value:,.3s} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Project Acres (Best Available Esimate): %{value:,.0f}')
+acrePieChart.add_annotation(text='<i>Source: Weldon Cooper Center<br> Virginia Solar Database</i>',x=-.07,y=0,font=dict(size=8),showarrow=False)
 
 mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING') & (annualData['local_permit_status'] != 'NA')],
                        x="final_action_year", 
@@ -232,6 +236,7 @@ mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                       tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]),
                            yaxis=dict(tickformat=",.0f",
                                       title="Megawatts"))
+mwAnnualLine.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.1,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING') & (annualData['local_permit_status'] != 'NA')],  
                          x="final_action_year", 
@@ -282,6 +287,7 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                         tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
                                         categoryorder='category ascending',
                                         title=''))
+rateAnnualLine.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.1,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING') & (annualData['local_permit_status'] != 'NA')],
                              x="final_action_year", 
@@ -330,6 +336,7 @@ projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=50, b=0),
                                             categoryorder='category ascending'),
                                  yaxis=dict(tickformat=",.0f",
                                             title="Projects"))
+projectsAnnualLine.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.1,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 mwRegionalBar = px.bar(regionalData[regionalData['local_permit_status'] != 'NA'], 
                        x="region", 
@@ -377,7 +384,7 @@ mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=60, b=0),
                             yaxis=dict(tickformat=",.0f",
                                        title="Total Megawatts"))
      
-mwRegionalBar_div = plot(mwRegionalBar,output_type='div')
+mwRegionalBar.add_annotation(text='<i>Source: Weldon Cooper Center <br> Virginia Solar Database</i>',x=0,y=-.17,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 sizeMWBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin(["Approved","Denied",'Withdrawn'])], 
                    x="mw_size_range", 
@@ -415,6 +422,8 @@ sizeMWBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                         yaxis=dict(tickformat=",.0f",
                                    title='Total Megawatts'))
 
+sizeMWBar.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.07,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
+
 sizeProjectsBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin(["Approved","Denied",'Withdrawn'])], 
                          x="mw_size_range", 
                          y='data_id',
@@ -451,6 +460,8 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                               xaxis=dict(tickmode='array',
                                          tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                          title=''))
+
+sizeProjectsBar.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.07,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 dashapp = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.FLATLY]) #,external_stylesheets=[dbc.themes.FLATLY] #putting this here limits it to dashboard
 
@@ -657,6 +668,7 @@ def update_map(map_type,slide_year):
             )
         statusMap.update_traces(marker=dict(size=10),
                                 hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Megawatts: %{customdata[5]:,.0f}<br>Year: %{customdata[4]}<br>Best Available Project Acreage: %{customdata[6]:,.0f}<br><extra></extra>")
+        statusMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         """statusSizeMap.add_scatter(x=[None],
                                   y=[None],
                                   name='<5MW',
@@ -730,11 +742,13 @@ def update_map(map_type,slide_year):
         
         sizeMap.update_traces(marker=dict(sizeref=.04),
                               hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Size Category: %{customdata[3]}<br>Project Megawatts: %{customdata[5]:,.0f}<br>Year: %{customdata[4]}<br>Best Available Project Acreage: %{customdata[6]:,.0f}<br><extra></extra>")
+        sizeMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
         return sizeMap
     
     elif map_type=='approvedMWMap':
-        approvedMWMap = px.choropleth_map(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index(),
+        approvedMWFilter = mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+        approvedMWMap = px.choropleth_map(approvedMWFilter,
                                          geojson=counties, 
                                          locations='fips', 
                                          color='project_mw',
@@ -757,10 +771,12 @@ def update_map(map_type,slide_year):
         approvedMWMap.update_geos(
                 fitbounds='locations'
             )
+        approvedMWMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return approvedMWMap
     
     elif map_type=='deniedMWMap':
-        deniedMWMap = px.choropleth_map(mapDataClean[(mapDataClean.local_permit_status=='Denied')& (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index(), 
+        deniedMWFilter = mapDataClean[(mapDataClean.local_permit_status=='Denied')&(mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+        deniedMWMap = px.choropleth_map(deniedMWFilter, 
                                         geojson=counties, 
                                         locations='fips', 
                                         color='project_mw',
@@ -780,6 +796,7 @@ def update_map(map_type,slide_year):
                                   coloraxis_colorbar=dict(tickfont=dict(size=12,color='#242e4c')))
         deniedMWMap.update_coloraxes(colorbar_labelalias={500:'500 and above'})
         deniedMWMap.update_geos(fitbounds='locations')
+        deniedMWMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return deniedMWMap
     elif map_type=='approvedRateMap':
         rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
@@ -813,6 +830,7 @@ def update_map(map_type,slide_year):
                                                                             color='#242e4c'),
                                                               tickformat='.0%'))
         approvedRateMap.update_geos(fitbounds='locations')
+        approvedRateMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return approvedRateMap
 
         
@@ -848,6 +866,7 @@ def update_map(map_type,slide_year):
                                                                           color='#242e4c'),
                                                             tickformat=".0%"))
         deniedRateMap.update_geos(fitbounds='locations')
+        deniedRateMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return deniedRateMap
 
 # Define a callback to update the pie graph
