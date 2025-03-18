@@ -1,12 +1,23 @@
-.navbar-background {
-    background-color: #232D4B;
+
+/* lowermost style layer for the nav bars from the Bootstrap css, edited to match CooperCenter website*/
+.navbar-dark{
+    height: 60px;
+    width: 100vw;
 }
 
+/* Adjust the background color to match the CooperCenter website from the Bootstrap default*/
+.navbar-background {
+    background-color: #141f3d;
+}
+
+/* This edits the navbar-text class from the Bootstrap stylesheet */
 .navbar-text {
     color: white;
     text-decoration: none;
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
 }
 
+/* This edits the navbar-text:hover class from the Bootstrap stylesheet */
 .navbar-text:hover {
     color: #DADADA;
     text-decoration: none;
@@ -18,10 +29,123 @@
     font-size: 14px;
 }
 
+/* modifies the original style from dash_bootstrap_components Flatly css, applied to dashboard */
+.dashboard-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #F2F4F8; 
+    border: 1px transparent;
+}
+
+p {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+h1 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 35px;
+    letter-spacing: 0em;
+}
+
+h2 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 18px;
+}
+/*from Bootstrap CSS, applied to navigation buttons */
 .button-spacing {
     line-height: 70%;
 }
-
+/* from Bootstrap CSS, applied to navigation buttons */
 .button-font {
-    font-size: 12px;
+    font: 'franklin-gothic-urw-cond',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* At the highest level, likely pulling from Bootstrap CSS but specified modifications come from CooperCenter website. Applied to navigation buttons, dashboard buttons, and download buttons */
+.btn {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #cccccc;
+      border-color: #cccccc;
+      color: #666666;
+  
+      &:hover,
+      &:focus {
+        background-color: #cccccc;
+        color: #666666;
+      }
+    }
+  }
+/* original to this stylesheet, pulled from CooperCenter styles, applied to dashboard */
+.btn--blue-d {
+    background-color: #141f3d;
+    border-color: #141f3d;
+    color: #ffffff;
+  
+    &:hover {
+      background-color: #3cc1cc;
+      color: #141f3d;
+    }
+  
+    &.btn--outline {
+      background-color: transparent;
+      color: #141f3d;
+  
+      &:hover {
+        background-color: #141f3d;
+        color: #ffffff;
+      }
+    }
+  }
+
+  /* originally from Bootstrap CSS, fixing width, applied to download buttons */
+.btn-sm{
+    width: 200px;
+  }
+
+.btn-med{
+  width: 400px;
+}
+
+hr {
+    border: 0;
+    border-right: 1px solid #fff;
+    height: 30px;
+    margin: 0 7px;
+    width: 0;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529
 }

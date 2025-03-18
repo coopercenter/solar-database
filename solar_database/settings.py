@@ -25,17 +25,24 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+DATE_FORMAT = ["m d Y"]
+
 if os.path.exists('hidden'):
     DEBUG = True
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
+ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+
+    "whitenoise.runserver_nostatic",
+
+    'uvicorn',
+
     'database.apps.DatabaseConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'dpd_static_support',
+    'channels_redis',
+    'django_bootstrap5',
+
 ]
 
 MIDDLEWARE = [
@@ -54,8 +67,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
+
+
+# Add CHANNEL_LAYERS
+CHANNEL_LAYERS = {
+   'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
+                'CONFIG': {
+                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379, 'solardatabase.coopercenter.org'),],
+                          }
+              }
+}
+
 
 ROOT_URLCONF = 'solar_database.urls'
 
@@ -76,6 +104,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'solar_database.wsgi.application'
+
+ASGI_APPLICATION = 'solar_database.asgi.application'
 
 if os.path.exists('hidden/name.txt') :
     with open('hidden/name.txt') as f:
@@ -118,6 +148,9 @@ DATABASES = {
         'PASSWORD': PASSWORD,
         'HOST': HOST,
         'PORT': PORT,
+        'OPTIONS': {
+            'sslmode':'require'
+        }
     }
 }
 
@@ -159,8 +192,58 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'database', 'static'),
+    ]
+
+# Staticfiles finders for locating dash app assets and related files
+
+STATICFILES_FINDERS = [
+
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Add PLOTLY_COMPONENTS
+PLOTLY_COMPONENTS = [
+    'dash_bootstrap_components',
+    'dpd_components',
+    'dpd_static_support',
+    ]
+
+PLOTLY_DASH = {
+
+    # Route used for the message pipe websocket connection
+    "ws_route" :   "dpd/ws/channel",
+
+    # Route used for direct http insertion of pipe messages
+    "http_route" : "dpd/views",
+
+    # Flag controlling existince of http poke endpoint
+    "http_poke_enabled" : True,
+
+
+    # Timeout for caching of initial arguments in seconds
+    "cache_timeout_initial_arguments": 60,
+
+    # Name of view wrapping function
+    "view_decorator": None,
+
+    # Flag to control location of initial argument storage
+    "cache_arguments": True,
+
+    # Flag controlling local serving of assets
+    "serve_locally": True,
+}
+
+#Add X_FRAME_OPTIONS = 'SAMEORIGIN' to settings.py to enable frames within HTML documents
+X_FRAME_OPTIONS = 'SAMEORIGIN'

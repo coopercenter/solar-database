@@ -1,6 +1,7 @@
 {% extends "database/base.html" %}
 {% block content %}
     <br><br>
+    <div class="container">
     <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     {% if object.project_name.strip %}
@@ -8,11 +9,11 @@
     {% else %}
         <h4>{{ object.project_phases }}</h4>
     {% endif %}
-
+    </div>
     {% if object.latitude is not None and object.longitude is not None %}
         <br>
         <style> #map { height: 350px; } </style>
-        <div id="map"></div>
+        <div class="container" id="map"></div>
 
         {{ object.longitude|json_script:"longitude_json" }}
         {{ object.latitude|json_script:"latitude_json" }}
@@ -35,7 +36,7 @@
 
     <br>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
         <div>
             <div class="card">
                 <h6 class="card-header">
@@ -43,22 +44,48 @@
                 </h6>
                 <div class="card-body">
                     <div><b>Locality</b> <br> {{ object.locality }}</div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Additional Localities</b> <br> {{ object.additional_localities }}</div>
+                    <div><b>Additional Localities</b> <br> 
+                        {% if object.additional_localities.strip %}
+                            {{ object.additional_localities }} 
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Region</b> <br> {{ object.region}}</div>
+                    <div><b>Virginia Region</b> <br> {{ object.region}}</div>
+
                     <div style="height: 12px;"></div>
                     <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
+
                     <div style="height: 12px;"></div>
                     <div><b>Date of Final Action</b> <br> {{ object.final_action_date }}</div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Latest Nameplate Capacity per Local Action (MW in AC)</b> <br> {{ object.project_mw  }}</div>
+                    <div><b>Latest Nameplate Capacity per Local Action (MWac)</b> <br> {{ object.project_mw  }}</div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Project Phases</b> <br> {{ object.project_phase  }}</div>
+                    <div><b>Project Phases</b> <br> 
+                        {% if object.project_phase.strip %}
+                            {{ object.project_phase  }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Phase MW (in AC)</b> <br> {{ object.phase_mw }}</div>
+                    <div><b>Phase Capacity (MWac)</b> <br> 
+                        {% if object.phase_mw.strip %}
+                            {{ object.phase_mw }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Project Acreage (Best Available)</b> <br> {{ object.public_project_acres }}</div>
+                    <div><b>Best Available Project Acreage</b> <br> {{ object.public_project_acres }}</div>
                 </div>
             </div>
 
@@ -69,15 +96,49 @@
                     Additional Permitting Details
                 </h6>
                 <div class="card-body">
-                    <div><b>Permit Number (DEQ)</b> <br> {{  object.deq_permit_number  }}</div>
+                    <div><b>DEQ Permit Number</b> <br> 
+                        {%if object.deq_permit_number.strip %}
+                            {{  object.deq_permit_number  }}
+                        {%else%}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Certificate Number (SCC)</b> <br> {{ object.scc_certificate_number }}</div>
+                    <div><b>SCC Certificate Number</b> <br> 
+                        {%if object.scc_certificate_number.strip%}
+                            {{ object.scc_certificate_number }}
+                        {% else %}
+                            &nbsp;
+                        {%endif%} 
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Queue Number (PJM)</b> <br> {{ object.pjm_queue_number  }}</div>
+                    <div><b>PJM Queue Number</b> <br> 
+                        {% if object.pjm_queue_number.strip %}
+                            {{ object.pjm_queue_number }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Operating Status (EIA)</b> <br> {{ object.eia_operating_status }}</div>
+                    <div><b>EIA - Operating Status</b> <br> 
+                        {%if object.eia_operating_status.strip %}
+                            {{ object.eia_operating_status }}
+                        {%else%}
+                            &nbsp;
+                        {%endif%}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Project Status (EIA)</b> <br> {{ object.eia_project_status }}</div>
+                    <div><b>EIA - Project Status</b> <br> 
+                        {%if object.eia_project_status.strip %}
+                            {{ object.eia_project_status }}
+                        {% else %}
+                            &nbsp;
+                        {% endif%}
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,31 +148,127 @@
                     Additional Project Details
                 </h6>
                 <div class="card-body">
-                    <div><b>Alternative Name(s)</b> <br> {{ object.alt_names }}</div>
+                    <div><b>Alternative Names</b> <br> 
+                        {% if object.alt_names.strip %}
+                            {{ object.alt_names }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Owner Developer At Local Action</b> <br> {{ object.local_action_project_owner }}</div>
+                    <div><b>Owner/Developer At Local Action</b> <br> 
+                        {% if object.local_action_project_owner.strip %}
+                            {{ object.local_action_project_owner }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Location Description</b> <br> {{ object.location_description }}</div>
+                    <div><b>Location Description</b> <br> 
+                        {% if object.location_description.strip %}
+                            {{ object.location_description }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                        </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Siting Agreement Executed?</b> <br> {{ object.siting_agreement_exists }}</div>
+                    <div><b>Siting Agreement Executed?</b> <br>
+                        {% if object.siting_agreement_exists.strip %}
+                         {{ object.siting_agreement_exists }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b> Date - Siting Agreement Executed</b> <br> {{ object.siting_agreement_date}}</div>
+                    <div><b> Date - Siting Agreement Action</b> <br>
+                        {% if object.siting_agreement_date.strip %}
+                            {{ object.siting_agreement_date}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
                     <div><b>Siting Agreement Link</b> <br> 
                         {% if object.siting_agreement_link.strip %}
-                            <a href="{{ object.siting_agreement_link }}" target="_blank"> External Link </a>
+                            <a href="{{ object.siting_agreement_link }}" target="_blank"> Link to Document </a>
                         {% else %}
-                            None 
+                            &nbsp;
                         {% endif %}
                     </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Energy Storage Onsite</b> <br> {{ object.energy_storage_onsite }}</div>
+                    <div><b>Energy Storage Onsite?</b> <br> 
+                        {% if object.energy_storage_onsite.strip %}
+                            {{ object.energy_storage_onsite }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Energy Storage Capacity (MW)</b> <br> {{ object.energy_storage_mw }}</div>
+                    <div><b>Energy Storage Capacity (MW)</b> <br>
+                        {% if object.energy_storage_mw.strip %}
+                            {{ object.energy_storage_mw }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
                     <div style="height: 12px;"></div>
-                    <div><b>Shared Solar Program - Enrolled (Dominion)</b> <br> {{ object.shared_solar_enrolled }}</div>
+                    <div><b>Shared Solar Program - Enrolled (Dominion)</b> <br>
+                        {%if object.shared_solar_enrolled.strip %}
+                            {{ object.shared_solar_enrolled }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+                    
                     <div style="height: 12px;"></div>
-                    <div><b>Abandoned Mine Land (AML) Program/Funding</b> <br> {{ object.aml_program_or_funding }}</div>
+                    <div><b>Mined Land</b> <br>
+                        {% if object.mined_land.strip %}
+                            {{ object.mined_land }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <h6 class="card-header">
+                    Pollinator-Smart Details
+                </h6>
+                <div class="card-body">
+                    <div><b>Pollinator-Smart Certified?</b> <br> 
+                        {% if object.dcr_pollinator_certified.strip %}
+                            {{ object.dcr_pollinator_certified }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Pollinator-Smart Stage of Development</b> <br> 
+                        {% if object.dcr_pollinator_status.strip %}
+                            {{ object.dcr_pollinator_status }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Pollinator-Smart Scorecard (Link to DCR) </b> <br> 
+                        {% if object.dcr_pollinator_scorecard.strip %}
+                        <a href="{{ object.dcr_pollinator_scorecard }}" target="_blank"> {{ object.dcr_pollinator_scorecard_name }} </a>
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

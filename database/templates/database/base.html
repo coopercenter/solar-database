@@ -2,7 +2,6 @@
 <html>
     <head>
         {% load static %}
-
         <title>Solar Database</title>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         
@@ -28,38 +27,39 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-background navbar-expand-lg navbar-dark">
-          <div class="container">
-            <a class="navbar-brand"><h2 class="navbar-text" style="color:white;">Virginia Solar Database</h2></a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
+        <nav class="navbar navbar-background navbar-expand-lg navbar-dark"> <!-- navbar-dark is edited from Bootstrap in styles.ccss to match CooperCenter website -->
+          <div class="container-fluid" style="margin-left: 30px">
+            
+            <a href="https://www.coopercenter.org/">
+              <img src="{% static 'images/uva-cooper-full-new.png' %}" style="max-width: 425px;"></img>
+           </a>
+              <!-- <a class="navbar-brand"><h2 class="navbar-text">Virginia Solar Database</h2></a> <!-- navbar-text is rooted in Bootstrap stylesheet and modified in styles.css-->
+          
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="nav ml-auto">
-                <li class="nav-item px-1.8">
+                <ul class="nav ml-auto">
+                  <li class="nav-item px-1.8">
                   <a class="nav-link navbar-text" style="color:white; font-weight: 400; font-size: 17px;" href="/">Home</a>
                 </li>
                 <li class="nav-item px-2">
-                  <a class="nav-link btn btn-outline-light" href="/about/">About</a>
+                  <a class="nav-link btn btn--blue-d" href="/about/">About</a> <!-- final button layer from styles.css -->
                 </li>
                 <li class="nav-item px-2">
-                  <a class="nav-link btn btn-outline-light" href="/data/">Data</a>
+                  <a class="nav-link btn btn--blue-d" href="/data/">Data</a>  <!-- final button layer from styles.css -->
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-
-        <div class="container">
+        <div class="container-fluid" style="position: relative;"><!-- style="margin-left: 100px; width: max-width" -->
             {% block content %} {% endblock %}
         </div>
 
         <br>
 
         <div style="text-align: center; background-color: #F1F1EF; position: absolute; width: 100%; padding: 20px;">
+          <a href="https://www.coopercenter.org/energy">
           <img src="../../static/images/VAEnergyLogo.png" width="420" height="95">
+        </a>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

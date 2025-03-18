@@ -22,9 +22,10 @@
 
 * Enter 'python3 manage.py runserver' to run the development server. If it opens in your browser with the url http://127.0.0.1:8000/, you're good to start updating the solar database webpage in your new development environment!
 
-## General notes as I work through updating the data and enduring no issues
-* When adding columns or changing their names, start in models.py. Columns are then used in 
-
+### Updating the Data
+* When adding columns or changing their names, start by updating the database names in models.py. 
+* If changing or adding objects in models.py, confirm objects used in views.py, plotly_dash.py, data.html and project.html call the correct object names from models.py.
+* Edit column display names in data.html and project.html.
 
 ### Deprecated Packages
 1. Deprecated packages are outdated past their newest version and should be updated as it may pose both a security risk and result in runtime errors. The runtime error displayed will likely point to the packages that are needing to be updated. 
