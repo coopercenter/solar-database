@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import csv
-from .models import SolarProjectData
+from .models import SolarProjectData, DataDictionary
 from django.views.generic import DetailView
 from .plotly_dash import dashapp
 from django_plotly_dash import DjangoDash
@@ -20,6 +20,25 @@ def export_csv(request):
 
     excluded_fields = {'longitude', 'latitude', 'final_action_year'}
     field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
+
+    writer = csv.DictWriter(response, fieldnames=field_names)
+    writer.writeheader()
+
+    for obj in data:
+        row = {field: getattr(obj, field) for field in field_names}
+        writer.writerow(row)
+
+    return response
+
+def export_dictionary_csv(request):
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="vasolardatadictionary.csv"'},
+    )
+
+    data = DataDictionary.objects.all()
+
+    field_names = [field.name for field in DataDictionary._meta.fields]
 
     writer = csv.DictWriter(response, fieldnames=field_names)
     writer.writeheader()
@@ -49,7 +68,11 @@ def data(request):
     return render(request, 'database/data.html', context)
 
 def dictionary(request):
-    return render(request, 'database/dictionary.html')
+    
+    datadictionary = DataDictionary.objects.all()
+    context = {'datadictionary': datadictionary}
+
+    return render(request, 'database/dictionary.html',context)
 
 class ProjectView(DetailView):
     model = SolarProjectData

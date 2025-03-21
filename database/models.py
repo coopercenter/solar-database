@@ -80,3 +80,13 @@ class CountyData(models.Model):
         managed = False
         db_table = 'county_fips'
 
+class DataDictionary(models.Model):
+    datapoint_term = models.TextField(db_column='datapoint_term',primary_key=True)
+    csv_term = models.TextField(db_column='csv_term')
+    working_definition = models.TextField(db_column='working_definition')
+    source_of_data = models.TextField(db_column='source_of_data')
+
+    class Meta:
+        managed = False
+        db_table = 'data_dictionary'
+

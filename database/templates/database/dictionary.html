@@ -4,6 +4,43 @@
 
 {% block content %}
 
-
+<br><br>
+    <div class="'container-fluid">
+        <div style="width: 1250px; margin-left: auto; margin-right: auto">
+            <div class="card-body">
+                <h1>Dictionary</h1>
+                <br>
+                <h4>Browse and Download the Solar Data Dictionary</h4>
+                <p><i>Current as of March 11, 2025</i></p>
+                <div>
+                    <div style="line-height: 20%"><br></div>
+                        <a class="btn btn-sm btn--blue-d" href="{% url 'export_dictionary_csv' %}" style="margin-right: 20px">Export Dictionary to CSV</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
+                </div>
+            </div> 
+            </div>
+        </div>
+<br><br>
+<div style="width: 1200px; margin-left: auto; margin-right: auto">
+    <table id="dataDictionary" class="table ">
+        <thead>
+            <tr>
+                <th style="font-weight: 600; width: 200px">Datapoint Term</th>
+                <th style="font-weight: 600">CSV Term</th>
+                <th style="font-weight: 600;">Working Definition</th>
+                <th style="font-weight: 600">Source(s) of Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for datapoint in datadictionary %}
+            <tr>
+                <td style="cursor: pointer;">{{ datapoint.datapoint_term }}</td>
+                <td style="cursor: pointer;">{{ datapoint.csv_term }}</td>
+                <td style="cursor: pointer;">{{ datapoint.working_definition }}</td>
+                <td style="cursor: pointer;">{{ datapoint.source_of_data }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}
