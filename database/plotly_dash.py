@@ -71,6 +71,17 @@ mapDataClean['final_action_year']=mapDataClean.final_action_year.str.replace('PE
 years = mapDataClean['final_action_year'].unique()
 years.sort()
 
+#MW heatmap dataframe
+heatMWYear = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= years[0])].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+heatMWYear['year']=years[0]
+
+for year in years:
+    heatMWYeari = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= year)].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+    heatMWYeari['year']=year
+    heatMWYear = pd.concat([heatMWYear,heatMWYeari])
+
+
+
 mwPieChart = px.pie(pieData[pieData.local_permit_status != 'NA'],
                     values='project_mw', 
                     names='local_permit_status', 
@@ -747,8 +758,7 @@ def update_map(map_type,slide_year):
         return sizeMap
     
     elif map_type=='approvedMWMap':
-        approvedMWFilter = mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
-        approvedMWMap = px.choropleth_map(approvedMWFilter,
+        approvedMWMap = px.choropleth_map(heatMWYear[(heatMWYear['local_permit_status']=='Approved') & (heatMWYear['year']==slide_year)],
                                          geojson=counties, 
                                          locations='fips', 
                                          color='project_mw',
@@ -775,8 +785,7 @@ def update_map(map_type,slide_year):
         return approvedMWMap
     
     elif map_type=='deniedMWMap':
-        deniedMWFilter = mapDataClean[(mapDataClean.local_permit_status=='Denied')&(mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
-        deniedMWMap = px.choropleth_map(deniedMWFilter, 
+        deniedMWMap = px.choropleth_map(heatMWYear[(heatMWYear['local_permit_status']=='Denied') & (heatMWYear['year']==slide_year)], 
                                         geojson=counties, 
                                         locations='fips', 
                                         color='project_mw',

@@ -48,6 +48,9 @@ def data(request):
 
     return render(request, 'database/data.html', context)
 
+def dictionary(request):
+    return render(request, 'database/dictionary.html')
+
 class ProjectView(DetailView):
     model = SolarProjectData
     template_name = 'database/project.html'
