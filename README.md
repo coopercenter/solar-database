@@ -1,5 +1,9 @@
 # Solar Database
 
+MW (with the exception of BARC Community Solar Project in Bath County) that have been advertised for a local public hearing. The database excludes school and government installations and procurement projects (with some exceptions for notable projects such as NASA Wallops, Oceana, and landfill projects such as Campostella). While the information we have compiled is all already publicly available, this is the state's first and only comprehensive source of this data.
+
+__Solar Database__: [https://solardatabase.coopercenter.org/](https://solardatabase.coopercenter.org/)
+
 ## Setting up to run the app for the first time
 
 ### Setting up a virtual environment
