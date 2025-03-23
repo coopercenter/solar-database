@@ -31,6 +31,8 @@ Enter 'python3 manage.py runserver' to run the development server. If it opens i
 2. If changing or adding objects in models.py, confirm objects used in views.py, plotly_dash.py, data.html and project.html call the correct object names from models.py.
 3. Edit column display names in data.html and project.html.
 
+## Debugging Tips
+
 ### Deprecated Packages
 1. Deprecated packages are outdated past their newest version and should be updated as it may pose both a security risk and result in runtime errors. The runtime error displayed will likely point to the packages that are needing to be updated. 
 2. Updating deprecated packages may require changing `import` statements, adding new lines of code in accordance with the documentation of the newest iteration often made in _settings.py_, or changing the version in _requirements.txt_ as indicated after the `==`.
