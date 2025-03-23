@@ -4,7 +4,7 @@ MW (with the exception of BARC Community Solar Project in Bath County) that have
 
 __Solar Database__: [https://solardatabase.coopercenter.org/](https://solardatabase.coopercenter.org/)
 
-## Setting up to run the app for the first time
+## Development
 
 ### Setting up a virtual environment
 
@@ -25,6 +25,15 @@ __Solar Database__: [https://solardatabase.coopercenter.org/](https://solardatab
 ### Start running the development server!
 
 Enter 'python3 manage.py runserver' to run the development server. If it opens in your browser with the url http://127.0.0.1:8000/, you're good to start updating the solar database webpage in your new development environment!
+
+### Testing features for release
+1. When all needed changes have been made and the local server runs successfully, push all your changes to the dev branch. If using Git, in the command line, `run git add file_name` to add the file(s) that have been changed. Next, in the command line, run `git commit 'commit_name'` to name your commit and run `push origin -u dev` to push your changes to the dev branch.
+
+2. The dev branch deploys to a Solar Database web app which includes the preloaded configurations used by SolTax to test your changes on the Azure server. If changes are needed for the preloaded configurations, contact Mary Beth Wetherell at [meh4q@virginia.edu](meh4q@virginia.edu) for access. Changes pushed to the dev branch will automatically be deployed to the developer web app and can be tracked in the Actions tab on Github.
+
+ Solar Database Developer Web App: https://solar-tax-webapp-dev.azurewebsites.net
+
+3. Checking to ensure the developer Azure site is successful and is prepared for release. Otherwise, if the deployment failed or the server failed to load, address the error as needed, push the changes to your branch, and redeploy the code. For additional help, see Debugging Tips.
 
 ### Updating the Data
 1. When adding columns or changing their names, start by updating the database names in models.py.
