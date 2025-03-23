@@ -31,7 +31,7 @@ Enter 'python3 manage.py runserver' to run the development server. If it opens i
 
 2. The dev branch deploys to a Solar Database web app which includes the preloaded configurations used by SolTax to test your changes on the Azure server. If changes are needed for the preloaded configurations, contact Mary Beth Wetherell at [meh4q@virginia.edu](meh4q@virginia.edu) for access. Changes pushed to the dev branch will automatically be deployed to the developer web app and can be tracked in the _Actions_ tab on Github.
 
-  __Solar Database Developer Web App__: [https://va-solar-db-dev.azurewebsites.net](https://va-solar-db-dev.azurewebsites.net/)
+      __Solar Database Developer Web App__: [https://va-solar-db-dev.azurewebsites.net](https://va-solar-db-dev.azurewebsites.net/)
 
 3. Checking to ensure the developer Azure site is successful and is prepared for release. Otherwise, if the deployment failed or the server failed to load, address the error as needed, push the changes to your branch, and redeploy the code. For additional help, see [Debugging Tips](#debugging-tips).
 
