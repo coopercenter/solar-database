@@ -29,7 +29,7 @@ Enter 'python3 manage.py runserver' to run the development server. If it opens i
 ### Testing features for release
 1. When all needed changes have been made and the local server runs successfully, push all your changes to the dev branch. If using Git, in the command line, `run git add file_name` to add the file(s) that have been changed. Next, in the command line, run `git commit 'commit_name'` to name your commit and run `push origin -u dev` to push your changes to the dev branch.
 
-2. The dev branch deploys to a Solar Database web app which includes the preloaded configurations used by SolTax to test your changes on the Azure server. If changes are needed for the preloaded configurations, contact Mary Beth Wetherell at [meh4q@virginia.edu](meh4q@virginia.edu) for access. Changes pushed to the dev branch will automatically be deployed to the developer web app and can be tracked in the _Actions_ tab on Github.
+2. The dev branch deploys to the Solar Database web app which includes the preloaded configurations used by the Solar Database to test your changes on the Azure server. If changes are needed for the preloaded configurations, contact Mary Beth Wetherell at [meh4q@virginia.edu](meh4q@virginia.edu) for access. Changes pushed to the dev branch will automatically be deployed to the developer web app and can be tracked in the _Actions_ tab on Github.
 
       __Solar Database Developer Web App__: [https://va-solar-db-dev.azurewebsites.net](https://va-solar-db-dev.azurewebsites.net/)
 
