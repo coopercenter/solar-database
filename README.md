@@ -8,28 +8,28 @@ __Solar Database__: [https://solardatabase.coopercenter.org/](https://solardatab
 
 ### Setting up a virtual environment
 
-* If you do not already have a virtual environment set up for this project, in the terminal run "python3 -m venv .venv" to create the virtual environment
-* Add .venv/ to .gitignore
-* Run "source .venv/bin/activate" to enter the virtual environment
-* Install the required packages with "python3 -m pip install -r requirements.txt"
+1. If you do not already have a virtual environment set up for this project, in the terminal run "python3 -m venv .venv" to create the virtual environment
+2. Add .venv/ to .gitignore
+3. Run "source .venv/bin/activate" to enter the virtual environment
+4. Install the required packages with "python3 -m pip install -r requirements.txt"
 
 ### Create the hidden variables for connecting to the database
 
-* Create a new folder named hidden, add hidden/ to .gitignore
-* In the new hidden folder, create name.txt, enter the name of the database you're connecting to
-* Next, create user.txt and enter your database username
-* Create password.txt, enter your database password
-* Add host.txt, and the host server name
-* Finally, create port.txt and add the port number. The default port number is 5432
+1. Create a new folder named hidden, add hidden/ to .gitignore
+2. In the new hidden folder, create name.txt, enter the name of the database you're connecting to
+3. Next, create user.txt and enter your database username
+4. Create password.txt, enter your database password
+5. Add host.txt, and the host server name
+6. Finally, create port.txt and add the port number. The default port number is 5432
 
 ### Start running the development server!
 
-* Enter 'python3 manage.py runserver' to run the development server. If it opens in your browser with the url http://127.0.0.1:8000/, you're good to start updating the solar database webpage in your new development environment!
+Enter 'python3 manage.py runserver' to run the development server. If it opens in your browser with the url http://127.0.0.1:8000/, you're good to start updating the solar database webpage in your new development environment!
 
 ### Updating the Data
-* When adding columns or changing their names, start by updating the database names in models.py. 
-* If changing or adding objects in models.py, confirm objects used in views.py, plotly_dash.py, data.html and project.html call the correct object names from models.py.
-* Edit column display names in data.html and project.html.
+1. When adding columns or changing their names, start by updating the database names in models.py.
+2. If changing or adding objects in models.py, confirm objects used in views.py, plotly_dash.py, data.html and project.html call the correct object names from models.py.
+3. Edit column display names in data.html and project.html.
 
 ### Deprecated Packages
 1. Deprecated packages are outdated past their newest version and should be updated as it may pose both a security risk and result in runtime errors. The runtime error displayed will likely point to the packages that are needing to be updated. 
