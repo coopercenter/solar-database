@@ -80,6 +80,30 @@ for year in years:
     heatMWYeari['year']=year
     heatMWYear = pd.concat([heatMWYear,heatMWYeari])
 
+#action rate heatmap dataframe
+actionRate = pd.DataFrame()
+for year in years:
+    all_fips = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
+
+    approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
+
+    denied_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Denied') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
+    
+    approved = pd.merge(all_fips,approved_fips,how='left',on='fips')
+    approved_denied = pd.merge(approved,denied_fips,how='left',on='fips')
+    approved_denied['year']=year
+    actionRate = pd.concat([actionRate,approved_denied])
+
+actionRate['approved_mw'] = actionRate['approved_mw'].replace(np.nan,0)
+actionRate['approved_projects'] = actionRate['approved_projects'].replace(np.nan,0)
+actionRate['approval_rate_mw']=round(actionRate['approved_mw']/actionRate['total_mw'],4)
+actionRate['approval_rate_projects']=round(actionRate['approved_projects']/actionRate['total_projects'],4)
+
+actionRate['denied_mw'] = actionRate['denied_mw'].replace(np.nan,0)
+actionRate['denied_projects'] = actionRate['denied_projects'].replace(np.nan,0)
+actionRate['denial_rate_mw']=round(actionRate['denied_mw']/actionRate['total_mw'],4)
+actionRate['denial_rate_projects']=round(actionRate['denied_projects']/actionRate['total_projects'],4)
+
 
 
 mwPieChart = px.pie(pieData[pieData.local_permit_status != 'NA'],
@@ -808,15 +832,7 @@ def update_map(map_type,slide_year):
         deniedMWMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return deniedMWMap
     elif map_type=='approvedRateMap':
-        rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
-        approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= slide_year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
-        approved_rate = pd.merge(rate_heatmap_workshop,approved_fips,how='left',on='fips')
-        approved_rate['approved_mw'] = approved_rate['approved_mw'].replace(np.nan,0)
-        approved_rate['approved_projects'] = approved_rate['approved_projects'].replace(np.nan,0)
-        approved_rate['approval_rate_mw']=round(approved_rate['approved_mw']/approved_rate['total_mw'],4)
-        approved_rate['approval_rate_projects']=round(approved_rate['approved_projects']/approved_rate['total_projects'],4)
-
-        approvedRateMap = px.choropleth_map(approved_rate, 
+        approvedRateMap = px.choropleth_map(actionRate[actionRate['year']==slide_year], 
                                             geojson=counties, 
                                             locations='fips', 
                                             color='approval_rate_projects',
@@ -845,14 +861,7 @@ def update_map(map_type,slide_year):
         
 
     elif map_type=='deniedRateMap':
-        rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
-        denied_fips = pd.DataFrame(mapDataClean[mapDataClean.local_permit_status=='Denied'].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
-        denied_rate = pd.merge(rate_heatmap_workshop,denied_fips,how='left',on='fips')
-        denied_rate['denied_mw'] = denied_rate['denied_mw'].replace(np.nan,0)
-        denied_rate['denied_projects'] = denied_rate['denied_projects'].replace(np.nan,0)
-        denied_rate['denial_rate_mw']=round(denied_rate['denied_mw']/denied_rate['total_mw'],4)
-        denied_rate['denial_rate_projects']=round(denied_rate['denied_projects']/denied_rate['total_projects'],4)
-        deniedRateMap = px.choropleth_map(denied_rate, 
+        deniedRateMap = px.choropleth_map(actionRate[actionRate['year']==slide_year], 
                                           geojson=counties, 
                                           locations='fips', 
                                           color='denial_rate_projects',
