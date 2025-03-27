@@ -71,6 +71,41 @@ mapDataClean['final_action_year']=mapDataClean.final_action_year.str.replace('PE
 years = mapDataClean['final_action_year'].unique()
 years.sort()
 
+#MW heatmap dataframe
+heatMWYear = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= years[0])].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+heatMWYear['year']=years[0]
+
+for year in years:
+    heatMWYeari = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= year)].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+    heatMWYeari['year']=year
+    heatMWYear = pd.concat([heatMWYear,heatMWYeari])
+
+#action rate heatmap dataframe
+actionRate = pd.DataFrame()
+for year in years:
+    all_fips = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
+
+    approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
+
+    denied_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Denied') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
+    
+    approved = pd.merge(all_fips,approved_fips,how='left',on='fips')
+    approved_denied = pd.merge(approved,denied_fips,how='left',on='fips')
+    approved_denied['year']=year
+    actionRate = pd.concat([actionRate,approved_denied])
+
+actionRate['approved_mw'] = actionRate['approved_mw'].replace(np.nan,0)
+actionRate['approved_projects'] = actionRate['approved_projects'].replace(np.nan,0)
+actionRate['approval_rate_mw']=round(actionRate['approved_mw']/actionRate['total_mw'],4)
+actionRate['approval_rate_projects']=round(actionRate['approved_projects']/actionRate['total_projects'],4)
+
+actionRate['denied_mw'] = actionRate['denied_mw'].replace(np.nan,0)
+actionRate['denied_projects'] = actionRate['denied_projects'].replace(np.nan,0)
+actionRate['denial_rate_mw']=round(actionRate['denied_mw']/actionRate['total_mw'],4)
+actionRate['denial_rate_projects']=round(actionRate['denied_projects']/actionRate['total_projects'],4)
+
+
+
 mwPieChart = px.pie(pieData[pieData.local_permit_status != 'NA'],
                     values='project_mw', 
                     names='local_permit_status', 
@@ -498,7 +533,8 @@ dashapp.layout =  dbc.Container([
             value='statusPermitMap'
         ),style={'margin-left':4,}),
             #switchable maps
-            html.Div(dcc.Graph(id='stateMap'),
+            html.Div(dcc.Graph(id='stateMap',config={'responsive':False,
+                                                     'displayModeBar':False}),
                      style={
                          'margin-left':9,
                          'width':1184,
@@ -548,7 +584,8 @@ dashapp.layout =  dbc.Container([
             value='mwPie'
         ),
             #pie chart block
-            html.Div(dcc.Graph(id='pieChart'))]), 
+            html.Div(dcc.Graph(id='pieChart',config={'responsive':False,
+                                                     'displayModeBar':False}))]), 
             #size category block
             html.Div([
             #size categories universal title
@@ -566,7 +603,8 @@ dashapp.layout =  dbc.Container([
             value='sizeMWBar'
             ),
             #size category bar chart
-            html.Div(dcc.Graph(id='sizeBar'),style={'height':575})])
+            html.Div(dcc.Graph(id='sizeBar',config={'responsive':False,
+                                                    'displayModeBar':False}),style={'height':575})])
                 ]),
         dbc.Row([
             #annual line chart block
@@ -587,15 +625,19 @@ dashapp.layout =  dbc.Container([
             value='rateLine'
             ),
             #annual line chart
-            html.Div(dcc.Graph(id='annualLine'),style={'width':600,})]),
+            html.Div(dcc.Graph(id='annualLine',config={'responsive':False,
+                                                       'displayModeBar':False}),
+                    style={'width':600,})]),
             #regional bar block
             html.Div([
                 #regional title
                 html.H3('Regional Megawatts by Local Permit Status'), 
                 #regional graph
-                dcc.Graph(figure=mwRegionalBar)],style={'width':600,
-                                                        'height':715,
-                                                        'margin-top':35})
+                dcc.Graph(figure=mwRegionalBar,config={'responsive':False,
+                                                       'displayModeBar':False})],
+                style={'width':600,
+                       'height':715,
+                       'margin-top':35})
             ],
             style={'margin-right':0,
                    'margin-left':60,})
@@ -747,8 +789,7 @@ def update_map(map_type,slide_year):
         return sizeMap
     
     elif map_type=='approvedMWMap':
-        approvedMWFilter = mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
-        approvedMWMap = px.choropleth_map(approvedMWFilter,
+        approvedMWMap = px.choropleth_map(heatMWYear[(heatMWYear['local_permit_status']=='Approved') & (heatMWYear['year']==slide_year)],
                                          geojson=counties, 
                                          locations='fips', 
                                          color='project_mw',
@@ -775,8 +816,7 @@ def update_map(map_type,slide_year):
         return approvedMWMap
     
     elif map_type=='deniedMWMap':
-        deniedMWFilter = mapDataClean[(mapDataClean.local_permit_status=='Denied')&(mapDataClean['final_action_year'] <= slide_year)].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
-        deniedMWMap = px.choropleth_map(deniedMWFilter, 
+        deniedMWMap = px.choropleth_map(heatMWYear[(heatMWYear['local_permit_status']=='Denied') & (heatMWYear['year']==slide_year)], 
                                         geojson=counties, 
                                         locations='fips', 
                                         color='project_mw',
@@ -799,15 +839,7 @@ def update_map(map_type,slide_year):
         deniedMWMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
         return deniedMWMap
     elif map_type=='approvedRateMap':
-        rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
-        approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= slide_year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
-        approved_rate = pd.merge(rate_heatmap_workshop,approved_fips,how='left',on='fips')
-        approved_rate['approved_mw'] = approved_rate['approved_mw'].replace(np.nan,0)
-        approved_rate['approved_projects'] = approved_rate['approved_projects'].replace(np.nan,0)
-        approved_rate['approval_rate_mw']=round(approved_rate['approved_mw']/approved_rate['total_mw'],4)
-        approved_rate['approval_rate_projects']=round(approved_rate['approved_projects']/approved_rate['total_projects'],4)
-
-        approvedRateMap = px.choropleth_map(approved_rate, 
+        approvedRateMap = px.choropleth_map(actionRate[actionRate['year']==slide_year], 
                                             geojson=counties, 
                                             locations='fips', 
                                             color='approval_rate_projects',
@@ -836,14 +868,7 @@ def update_map(map_type,slide_year):
         
 
     elif map_type=='deniedRateMap':
-        rate_heatmap_workshop = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= slide_year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
-        denied_fips = pd.DataFrame(mapDataClean[mapDataClean.local_permit_status=='Denied'].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
-        denied_rate = pd.merge(rate_heatmap_workshop,denied_fips,how='left',on='fips')
-        denied_rate['denied_mw'] = denied_rate['denied_mw'].replace(np.nan,0)
-        denied_rate['denied_projects'] = denied_rate['denied_projects'].replace(np.nan,0)
-        denied_rate['denial_rate_mw']=round(denied_rate['denied_mw']/denied_rate['total_mw'],4)
-        denied_rate['denial_rate_projects']=round(denied_rate['denied_projects']/denied_rate['total_projects'],4)
-        deniedRateMap = px.choropleth_map(denied_rate, 
+        deniedRateMap = px.choropleth_map(actionRate[actionRate['year']==slide_year], 
                                           geojson=counties, 
                                           locations='fips', 
                                           color='denial_rate_projects',
