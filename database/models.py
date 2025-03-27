@@ -69,7 +69,7 @@ class SolarProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solar_data_public'
+        db_table = 'dev_solar_data_public'
 
 class CountyData(models.Model):
     locality = models.TextField(db_column='locality',primary_key=True)
@@ -79,4 +79,14 @@ class CountyData(models.Model):
     class Meta:
         managed = False
         db_table = 'county_fips'
+
+class DataDictionary(models.Model):
+    datapoint_term = models.TextField(db_column='datapoint_term',primary_key=True)
+    csv_term = models.TextField(db_column='csv_term')
+    working_definition = models.TextField(db_column='working_definition')
+    source_of_data = models.TextField(db_column='source_of_data')
+
+    class Meta:
+        managed = False
+        db_table = 'data_dictionary'
 
