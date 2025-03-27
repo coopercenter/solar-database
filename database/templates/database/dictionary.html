@@ -31,14 +31,224 @@
             </tr>
         </thead>
         <tbody>
-            {% for datapoint in datadictionary %}
+            <!-- {% for datapoint in datadictionary %}
             <tr>
                 <td style="cursor: pointer;">{{ datapoint.datapoint_term }}</td>
                 <td style="cursor: pointer;">{{ datapoint.csv_term }}</td>
                 <td style="cursor: pointer;">{{ datapoint.working_definition }}</td>
                 <td style="cursor: pointer;">{{ datapoint.source_of_data }}</td>
             </tr>
-            {% endfor %}
+            {% endfor %}-->
+            <tr>
+                <td>Additional Localities</td>
+                <td>additional_localities</td>
+                <td>Name of additional localities if project required land use permitting from multiple localities.</td>
+                <td>Local permit documents, media, other reliable sources</td>
+            </tr>
+            <tr>
+                <td>Alternative Names</td>
+                <td>alt_names</td>
+                <td>Other names the project has/is known by.</td>
+                <td>Local permit documents, EIA, SCC, DEQ, PJM, media, other reliable sources</td>
+            </tr>
+            <tr>
+                <td>Best Available Project Acreage</td>
+                <td>public_project_acres</td>
+                <td>Acreage assigned by UVA based on best available information provided in local permit documents, or other verified sources. Preference is to record "project acreage" as reported by locality. There is no single or universal definiton of "project acreage." If "project acreage" is not reported, "best available acreage" will be determined based on a triage of the following: "in-fence", then"lease", then "parcel", then  "under panel" acreages. In the event acrege is not reported by the locality, the nameplate capacity was multiplied by 9 to estimate the best available project acreage. 9 acres/MW used based on average MW/acres of DEQ solar applications.</td>
+                <td>Weldon Cooper Center at UVA</td>
+            </tr>
+            <tr>
+                <td>Data ID</td>
+                <td>data_id</td>
+                <td>Unique identifier assigned to each project by UVA. Projects that span multiple localities will be assigned a unique Data ID for each locality that reviewed the project.</td>
+                <td>Weldon Cooper Center at UVA</td>
+            </tr>
+            <tr>
+                <td>Data ID for Parent/Child Project</td>
+                <td>parent_or_child_project_id</td>
+                <td>Data ID of projects affiliated with the project. A parent project is a large project that encompasses smaller, independently recorded or permitted projects (child project), such as when a project has several phases.</td>
+                <td>Local permit documents, DEQ, SCC, EIA, UVA</td>
+            </tr>
+            <tr>
+                <td>Data ID for Previous Project</td>
+                <td>prev_project_id</td>
+                <td>Data ID that links a project to a previous iteration of the same project. Projects generally share location, relative size and attributes, but may not share the same project name or developer. Previous projects were typically denied or withdrawn; otherwise it may be considered an amendment to a previously approved project.</td>
+                <td>Weldon Cooper Center at UVA</td>
+            </tr>
+            <tr>
+                <td>Date- Final Action</td>
+                <td>final_action_date</td>
+                <td>This is the final date of action on a project application. It may be the date of planning commission (in the event of 15.2-2232 review only), Board/Council (SUP, CUP, Special Exception, Siting agreement, appeal), or applicant action (withdrawn). This date does not reflect any subsequent amendments to the primary application.</td>
+                <td>Local application documents (meeting minutes)</td>
+            </tr>
+            <tr>
+                <td>Date- Siting Agreement Action</td>
+                <td>siting_agreement_date</td>
+                <td>Date the siting agreement was authorized to be executed by the local authority, date it was denied, or date the locality failed to take action at an advertised siting agreement hearing.</td>
+                <td>Local application documents, Virginia Energy</td>
+            </tr>
+            <tr>
+                <td>Date- Local Permit Amendment</td>
+                <td>local_permit_amend_date</td>
+                <td>Date(s) of amendment(s) to an approved local permit. If an amendment requires an entire new SUP application or the project changed substantially, it would be recorded in this database as a subsequent project to a previous project.</td>
+                <td>Local application documents</td>
+            </tr>
+            <tr>
+                <td>DEQ Permit Number</td>
+                <td>deq_permit_number</td>
+                <td>Permit tracking number assigned by DEQ</td>
+                <td>DEQ Renewable Energy Project Status</td>
+            </tr>
+            <tr>
+                <td>EIA- Operating Status</td>
+                <td>eia_operating_status</td>
+                <td>Current plant operating status according to the EIA. See EIA for their definitions.</td>
+                <td>EIA (EIA updates their data monthly)</td>
+            </tr>
+            <tr>
+                <td>EIA- Plant ID</td>
+                <td>eia_plant_id</td>
+                <td>Project ID assigned by EIA; matched to local project by UVA based on best available information.</td>
+                <td>EIA (EIA updates their data monthly)</td>
+            </tr>
+            <tr>
+                <td>EIA- Project Status</td>
+                <td>eia_project_status</td>
+                <td>Detailed project development status according to the EIA. See EIA for their definitions.</td>
+                <td>EIA (EIA updates their data monthly)</td>
+            </tr>
+            <tr>
+                <td>Energy Storage Capacity (MW)</td>
+                <td>energy_storage_mw</td>
+                <td>If battery proposed onsite, the total capacity in MW of the battery energy storage system.</td>
+                <td>Local permit application, PJM, DEQ, media and other reliable sources</td>
+            </tr>
+            <tr>
+                <td>Energy Storage Onsite?</td>
+                <td>energy_storage_onsite</td>
+                <td>Is the solar facility proposed to be colocated with an on-site battery energy storage facility?</td>
+                <td>PJM, DEQ, local permit application</td>
+            </tr>
+            <tr>
+                <td>Latest Nameplate Capacity per Local Action (MWac)</td>
+                <td>project_mw</td>
+                <td>Latest permitted maximum nameplate electrical generation by megawatts in AC, per local application and/or permit amendment.</td>
+                <td>Local permit documents, media, other reliable sources</td>
+            </tr>
+            <tr>
+                <td>Local Permit Amendment Description</td>
+                <td>local_permit_amend_desc</td>
+                <td>A brief description of the nature of the amendment.</td>
+                <td>Local application documents</td>
+            </tr>
+            <tr>
+                <td>Local Permit Status</td>
+                <td>local_permit_status</td>
+                <td>Description of the status of the local zoning permit application that would enable the project (e.g., Rezoning, 2232 review, Siting Agreement, Conditional or Special Use Permit, or Special Exception). "Approved/Amended" is applied when a project was approved, but was supplanted by a new project application (as opposed to an amendment of the existing permit). "NA" is applied when the project is a child/phase of a parent project  and permitting history is applied to the parent project. "NA" could also be applied to a parent project if the child/phases applied individually for local permitting.</td>
+                <td>Local permit documents, DEQ, media, other reliable sources</td>
+            </tr>
+            <tr>
+                <td>Locality</td>
+                <td>locality</td>
+                <td>Jurisdiction having authority over local land use permitting; in other words, the name of the town, city, county where the project is proposed. Only one locality per project record; if more than one locality is permitting a project, the additional localities will each be given a project record. The additional localities will be listed under "Additional Localities".</td>
+                <td>Local permit documents, DEQ, EIA</td>
+            </tr>
+            <tr>
+                <td>Location Description</td>
+                <td>location_description</td>
+                <td>Exact address if available, or description of the location with respect to towns, roads, and other features.</td>
+                <td>Local application documents (public hearing notice)</td>
+            </tr>
+            <tr>
+                <td>Mined Land</td>
+                <td>mined_land</td>
+                <td>This datapoint reports whether the project is located on Abandoned Mined Land (AML) or a released permitted surface mine site. These locations have been identified as AML sites or permitted by the Virginia Dept. of Energy or predecessor agency.</td>
+                <td>Virginia Department of Energy</td>
+            </tr>
+            <tr>
+                <td>Owner/Developer at Local Action</td>
+                <td>local_action_project_owner</td>
+                <td>Name of the project developer/owner at the time of local action. This is not the property owner unless the developer, applicant, and property owner are the same entity.</td>
+                <td>Local permit documents, media</td>
+            </tr>
+            <tr>
+                <td>Phase Capacity (MWac)</td>
+                <td>phase_mw</td>
+                <td>Megawatts associated with that particular phase of a project, reported in AC</td>
+                <td>Local permit documents, DEQ, SCC, EIA</td>
+            </tr>
+            <tr>
+                <td>PJM Queue Number</td>
+                <td>pjm_queue_number</td>
+                <td>Queue number assigned by PJM; matched to local project by UVA based on best available information.</td>
+                <td>PJM Queue, Serial Service Request</td>
+            </tr>
+            <tr>
+                <td>Pollinator-Smart Certified?</td>
+                <td>dcr_pollinator_certified</td>
+                <td>A yes or no response, based on Va Department of Conservation and Recreation records. "Yes" indicates the project has been certified as Pollinator-Smart by the Pollinator Smart Committee at any point during its lifetime. "No" indicates the project has not been certified as Pollinator-Smart by the Pollinator Smart Committee; "no" does not differentiate between projects that are in review for certification versus projects that are not seeking certification.</td>
+                <td>DCR records provided to UVA. Additional definitions and program information can be found at: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual.</a></td>
+            </tr>
+            <tr>
+                <td>Pollinator-Smart Scorecard (link)</td>
+                <td>dcr_pollinator_scorecard</td>
+                <td>This datapoint provides a link to the Pollinator-Smart Scorecard on file with DCR. For projects that achieved some level of Pollinator-Smart certification, the linked scorecard shows what level of certification was achieved. "Certified" is a project that has earned 80-99 points based on the Pollinator Smart scorecard self-assessment of the site and was reviewed for concurrance from the Pollinator Smart Committee. "Gold" is a project that has earned 100+ points based on the scorecard self-assessment and was reviewed for concurrance from the Pollinator-Smart Committee.</td>
+                <td>DCR Pollinator Smart Scorecard (linked). Additional definitions and program information can be found at: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual.</a></td>
+            </tr>
+            <tr>
+                <td>Pollinator-Smart Scorecard Name</td>
+                <td>dcr_pollinator_scorecard_name</td>
+                <td>This datapoint indicates for projects that achieved some level of Pollinator-Smart certification, what the level of certification is. "Certified" is a project that has earned 80-99 points based on the Pollinator Smart scorecard self-assessment of the site and was reviewed for concurrance from the Pollinator Smart Committee. "Gold" is a project that has earned 100+ points based on the scorecard self-assessment and was reviewed for concurrance from the Pollinator-Smart Committee.</td>
+                <td>DCR records provided to UVA.  Additional definitions and program information can be found at: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual.</a></td>
+            </tr>
+            <tr>
+                <td>Pollinator-Smart Stage of Development</td>
+                <td>dcr_pollinator_status</td>
+                <td>For certified projects, "stage of development" describes the milestone of development certified, based on program defintions and DCR records. Certification for each milestone is a separate and unique achievement. There are six milestone certifications:  <b>"Design"</b>- the project is either pre-construction or less than 2 years old, the Pollinator-Smart Committee has concurred that the design meets the criteria for Pollinator-Smart. The site plan design including the planting plan (vegetation management plan) meets Pollinator Smart Certification per the proposed or retrofit solar sites scorecard version 2.0a (the blue form). <b>"Monitoring Year 2, Monitoring Year 4, Monitoring Year 6, or Monitoring Year 8"</b>- The year indicates how many years since vegetation has been established. The project has been monitored and assessed with the Monitoring Scorecard version 2.0b (the green form). The Pollinator-Smart Committee concurs that the vegetation on the ground meets the requirement for Pollinator Smart based on review of the scorecard and Monitoring Report.  <b>"Lifetime"</b>- The site has been certified at all past milestones and has developed a long term mangement plan. The plan, Year 10 monitoring , and scorecard have been reviewed by the Pollinator Smart committee and they concur with the assessment.</td>
+                <td>DCR: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual</a>; <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-monitoring.pdf">Pollinator-Smart Monitoring Plan</a>;  <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-pollinator-bird-habitat-scorecard-a-new.pdf">Proposed or Retrofit Solar Sites Scorecard (blue)</a>; <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-pollinator-bird-habitat-scorecard-b-established.pdf">Established Site Scorecard (green)</a></td>
+            </tr>
+            <tr>
+                <td>Project Name</td>
+                <td>project_name</td>
+                <td>Project name at the time of local permitting.</td>
+                <td>Local permit documents, EIA, DEQ, SCC</td>
+            </tr>
+            <tr>
+                <td>Project Phases</td>
+                <td>project_phase</td>
+                <td>Project name of phase(s) associated with the (parent) project</td>
+                <td>Local permit documents, DEQ, EIA, SCC</td>
+            </tr>
+            <tr>
+                <td>SCC Certificate Number</td>
+                <td>scc_certificate_number</td>
+                <td>Certificate number assigned by the State Corporation Commission for Certificate of Public Convenience and Necessity (CPCN)</td>
+                <td>SCC</td>
+            </tr>
+            <tr>
+                <td>Shared Solar Program- Enrolled (Dominion)</td>
+                <td>shared_solar_enrolled</td>
+                <td>This datatpoint captures whether the project is officially enrolled in Dominion's shared solar program (MW have been allotted to subscriber organization.)</td>
+                <td>Dominon Shared Solar Program</td>
+            </tr>
+            <tr>
+                <td>Siting Agreement Executed?</td>
+                <td>siting_agreement_exists</td>
+                <td>"Yes" indicates an executed siting agreement has been verified (state code 15.2-2316.7). For siting agreements denied or not approved, the response is "no". Projects before legislation effective date in 2020 were not required to have a siting agreement NOI or negotiations. Negotiated voluntary payment agreements and community benefit agreements are not captured here.</td>
+                <td>Local application documents, Virginia Energy</td>
+            </tr>
+            <tr>
+                <td>Siting Agreement Link</td>
+                <td>siting_agreement_link</td>
+                <td>Link to executed version of siting agreement (if not signed, this is the version approved by the local authority in the public hearing.)</td>
+                <td>Local application documents, Virginia Energy</td>
+            </tr>
+            <tr>
+                <td>Virginia Region</td>
+                <td>region</td>
+                <td>Regions are defined using the <a href="https://www.coopercenter.org/sites/default/files/2025-01/CooperCenter_DemographicRegions_Map_ListCountiesCities.pdf">Weldon Cooper Center Demographics Research Group's eight regions for the Commonwealth of Virginia.</a> These regions have been developed based on communities' shared demographic, social, economic and geographic characteristics. These were the defined regions used to evaluate results of the Virginia Solar Survey.</td>
+                <td>Weldon Cooper Center at UVA</td>
+            </tr>
         </tbody>
     </table>
 </div>
