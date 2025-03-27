@@ -533,7 +533,8 @@ dashapp.layout =  dbc.Container([
             value='statusPermitMap'
         ),style={'margin-left':4,}),
             #switchable maps
-            html.Div(dcc.Graph(id='stateMap'),
+            html.Div(dcc.Graph(id='stateMap',config={'responsive':False,
+                                                     'displayModeBar':False}),
                      style={
                          'margin-left':9,
                          'width':1184,
@@ -583,7 +584,8 @@ dashapp.layout =  dbc.Container([
             value='mwPie'
         ),
             #pie chart block
-            html.Div(dcc.Graph(id='pieChart'))]), 
+            html.Div(dcc.Graph(id='pieChart',config={'responsive':False,
+                                                     'displayModeBar':False}))]), 
             #size category block
             html.Div([
             #size categories universal title
@@ -601,7 +603,8 @@ dashapp.layout =  dbc.Container([
             value='sizeMWBar'
             ),
             #size category bar chart
-            html.Div(dcc.Graph(id='sizeBar'),style={'height':575})])
+            html.Div(dcc.Graph(id='sizeBar',config={'responsive':False,
+                                                    'displayModeBar':False}),style={'height':575})])
                 ]),
         dbc.Row([
             #annual line chart block
@@ -622,15 +625,19 @@ dashapp.layout =  dbc.Container([
             value='rateLine'
             ),
             #annual line chart
-            html.Div(dcc.Graph(id='annualLine'),style={'width':600,})]),
+            html.Div(dcc.Graph(id='annualLine',config={'responsive':False,
+                                                       'displayModeBar':False}),
+                    style={'width':600,})]),
             #regional bar block
             html.Div([
                 #regional title
                 html.H3('Regional Megawatts by Local Permit Status'), 
                 #regional graph
-                dcc.Graph(figure=mwRegionalBar)],style={'width':600,
-                                                        'height':715,
-                                                        'margin-top':35})
+                dcc.Graph(figure=mwRegionalBar,config={'responsive':False,
+                                                       'displayModeBar':False})],
+                style={'width':600,
+                       'height':715,
+                       'margin-top':35})
             ],
             style={'margin-right':0,
                    'margin-left':60,})
