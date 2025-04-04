@@ -5,7 +5,8 @@ from django.urls import path, include
 from .plotly_dash import dashapp
 
 urlpatterns = [
-    path('', views.dash, name='database-home'),
+    path('', views.home, name='database-home'),
+    path('dashboard/', views.dash, name='database-dash'),
     path('about/', views.about, name='database-about'),
     path('data/', views.data, name='database-data'),
     path('dictionary/', views.dictionary, name='database-dictionary'),
