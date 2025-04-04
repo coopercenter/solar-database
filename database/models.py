@@ -34,7 +34,7 @@ class SolarProjectData(models.Model):
     project_name = models.TextField(db_column='project_name', blank=True, null=True)
     project_phase = models.TextField(db_column='project_phase', blank=True, null=True)
     alt_names = models.TextField(db_column='alt_names', blank=True, null=True)
-    parent_or_child_project = models.TextField(db_column='parent_or_child_project', blank=True, null=True)
+    parent_or_child_project_id = models.TextField(db_column='parent_or_child_project_id', blank=True, null=True)
     prev_project_id = models.TextField(db_column='prev_project_id',blank=True,null=True)
     local_action_project_owner = models.TextField(db_column='local_action_project_owner', blank=True, null=True)
     project_mw = models.FloatField(db_column='project_mw', blank=True, null=True)
@@ -46,13 +46,20 @@ class SolarProjectData(models.Model):
     location_description = models.TextField(db_column='location_description', blank=True, null=True)
     final_action_date = models.TextField(db_column='final_action_date', blank=True, null=True)
     final_action_year = models.TextField(db_column='final_action_year', blank=True, null=True)
+    local_permit_amend_date = models.TextField(db_column='local_permit_amend_date',blank=True,null=True)
+    local_permit_amend_desc = models.TextField(db_column='local_permit_amend_desc',blank=True,null=True)
+    #zoning_permit_conditions = models.TextField(db_column='zoning_permit_conditions',blank=True,null=True)
     siting_agreement_exists = models.TextField(db_column='siting_agreement_exists', blank=True, null=True)
     siting_agreement_date = models.TextField(db_column='siting_agreement_date', blank=True, null=True)
     siting_agreement_link = models.TextField(db_column='siting_agreement_link', blank=True, null=True)
     deq_permit_number = models.TextField(db_column='deq_permit_number', blank=True, null=True)
     scc_certificate_number = models.TextField(db_column='scc_certificate_number', blank=True, null=True)
-    shared_solar_enrolled = models.DateTimeField(db_column='shared_solar_enrolled', blank=True, null=True)
-    mined_land = models.TextField(db_column='aml_program_or_funding', blank=True, null=True)
+    shared_solar_enrolled = models.TextField(db_column='shared_solar_enrolled', blank=True, null=True)
+    mined_land = models.TextField(db_column='mined_land', blank=True, null=True)
+    dcr_pollinator_certified = models.TextField(db_column='dcr_pollinator_certified',blank=True,null=True)
+    dcr_pollinator_status = models.TextField(db_column='dcr_pollinator_status',blank=True,null=True)
+    dcr_pollinator_scorecard = models.TextField(db_column='dcr_pollinator_scorecard',blank=True,null=True)
+    dcr_pollinator_scorecard_name = models.TextField(db_column='dcr_pollinator_scorecard_name',blank=True,null=True)
     energy_storage_onsite = models.TextField(db_column='energy_storage_onsite', blank=True, null=True)
     energy_storage_mw = models.TextField(db_column='energy_storage_mw', blank=True, null=True)
     pjm_queue_number = models.TextField(db_column='pjm_queue_number', blank=True, null=True)
@@ -72,4 +79,14 @@ class CountyData(models.Model):
     class Meta:
         managed = False
         db_table = 'county_fips'
+
+class DataDictionary(models.Model):
+    datapoint_term = models.TextField(db_column='datapoint_term',primary_key=True)
+    csv_term = models.TextField(db_column='csv_term')
+    working_definition = models.TextField(db_column='working_definition')
+    source_of_data = models.TextField(db_column='source_of_data')
+
+    class Meta:
+        managed = False
+        db_table = 'data_dictionary'
 

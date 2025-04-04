@@ -2,7 +2,6 @@
 <html>
     <head>
         {% load static %}
-
         <title>Solar Database</title>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         
@@ -32,7 +31,7 @@
           <div class="container-fluid" style="margin-left: 30px">
             
             <a href="https://www.coopercenter.org/">
-              <img src="{% static 'images/uva-cooper-full.png' %}"></img>
+              <img src="{% static 'images/uva-cooper-full-new.png' %}" style="max-width: 425px;"></img>
            </a>
               <!-- <a class="navbar-brand"><h2 class="navbar-text">Virginia Solar Database</h2></a> <!-- navbar-text is rooted in Bootstrap stylesheet and modified in styles.css-->
           
@@ -47,6 +46,8 @@
                 <li class="nav-item px-2">
                   <a class="nav-link btn btn--blue-d" href="/data/">Data</a>  <!-- final button layer from styles.css -->
                 </li>
+                <a class="nav-link btn btn--blue-d" href="/dictionary/">Dictionary</a>  <!-- final button layer from styles.css -->
+              </li>
               </ul>
             </div>
           </div>

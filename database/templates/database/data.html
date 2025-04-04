@@ -4,16 +4,16 @@
 
     <br><br>
     <div class="'container-fluid">
-        <div style="width: 1500px; margin-left: auto; margin-right: auto">
+        <div style="width: 1250px; margin-left: auto; margin-right: auto">
             <div class="card-body">
                 <h1>Data</h1>
                 <br>
-                <h3>NEW! Local Pollinator-Friendly Requirement Data</h3>
-                <a class="btn btn-light btn-med" href="{% static 'VA_Localities_Pollinator_Smart_Req_Dec_2023.xlsx' %}" download>Download Local Pollinator Policy Data</a>
+                 <!-- <h3>NEW! Local Native Vegetation Requirement Data</h3>
+               <a class="btn btn-light btn-med" href="{% static 'VA_Localities_Pollinator_Smart_Req_Dec_2023.xlsx' %}" download>Download Local Pollinator Policy Data</a>
                 <p>Explore this inventory of local ordinances and policies as they relate to native and pollinator-friendly plant species for utility-scale solar energy facilities in Virginia. Data was provided by the Virginia Department of Conservation and Recreation based on their December 2023 report, <a href="https://www.dcr.virginia.gov/natural-heritage/document/va-solarordin-natveg.pdf">Virginia Localities Solar Ordinances and Native Vegetation.</a> Additional Pollinator-Smart information is available on the <a href="https://www.dcr.virginia.gov/natural-heritage/pollinator-smart">DCR website.</a></p>
-                <br>
+                <br> -->
                 <h4>Browse and Download Solar Data</h4>
-                <p><i>Current as of February 24, 2025 (Will be updated quarterly)</i></p>
+                <p><i>Current as of March 31, 2025 (Will be updated quarterly)</i></p>
                 <div>
                     <div style="line-height: 20%"><br></div>
                         <a class="btn btn-sm btn--blue-d" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
@@ -23,7 +23,7 @@
         </div>
 
     {{ map_data|json_script:"data_json" }}
-        <div class="row" style="background-color:#F2F4F8; width: 1455px; margin-left: auto; margin-right: auto">
+        <div class="row" style="background-color:#F2F4F8; width: 1200px; margin-left: auto; margin-right: auto">
           <div class="col">
             <div style="line-height: 135%"><br></div>
             <h5>Explore Solar Projects</h5>in Virginia
@@ -789,28 +789,28 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input size-box" type="checkbox" id="5mw">
                         <label class="form-check-label button-font" for="5mw">
-                            &lt;5 MW
+                            &le;5MW
                         </label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input size-box" type="checkbox" id="5mw20mw">
                         <label class="form-check-label button-font" for="5mw20mw">
-                            5 MW - 20 MW
+                            5MW&lt; - &le;20MW
                         </label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input size-box" type="checkbox" id="21mw150mw">
                         <label class="form-check-label button-font" for="21mw150mw">
-                            21 MW - 150 MW
+                            20MW&lt; - &le;150MW
                         </label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input size-box" type="checkbox" id="150mw">
                         <label class="form-check-label button-font" for="150mw">
-                            &gt;150 MW
+                            150MW&lt;
                         </label>
                     </div>
                 </div>
@@ -824,7 +824,7 @@
 
           </div>
           <div class="col-9">
-            <style> #map { height: 400px; width: 1110px } </style>
+            <style> #map { height: 400px; width: 885px } </style>
             <p class="card-text" id="map"></p>
           </div>
         </div>
@@ -833,7 +833,7 @@
     <br>
     <br>
     <br>
-    <div style="width: 1455px; margin-left: auto; margin-right: auto">
+    <div style="width: 1200px; margin-left: auto; margin-right: auto">
     <table id="projectData" class="table table-hover">
         <thead>
             <tr>
@@ -842,7 +842,7 @@
 
                 <th style="font-weight: 600;">Locality</th>
                 <th style="font-weight: 600">Virginia Region</th>
-                <th style="font-weight: 600">Latest Nameplate Capacity per Local Action (MWac)</th>
+                <th style="font-weight: 600">Nameplate Capacity (MWac)</th>
                 <th style="font-weight: 600">Local Permit Status</th>
                 <th style="font-weight: 600">Best Available Project Acreage</th>
                 <th style="font-weight: 600">Owner/Developer at Local Action</th>
@@ -883,7 +883,7 @@
                 { width: '150px', targets: 1 }, 
                 { width: '150px', targets: 2 }, 
                 { width: '150px', targets: 3 },
-                { width: '350px', targets: 4 },
+                { width: '200px', targets: 4 },
                 { width: '200px', targets: 5, type: 'num' },
                 { width: '250px', targets: 6, type: 'num' },
                 { width: '300px', targets: 7},
