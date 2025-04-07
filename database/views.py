@@ -52,6 +52,9 @@ def export_dictionary_csv(request):
 def dash(request):
     return render(request, 'database/dash.html',)
 
+def home(request):
+    return render(request, 'database/home.html',)
+
 def about(request):
     return render(request, 'database/about.html')
 
