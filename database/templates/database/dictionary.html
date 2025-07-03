@@ -11,7 +11,7 @@
                 <h1>Dictionary</h1>
                 <br>
                 <h4>Browse and Download the Solar Data Dictionary</h4>
-                <p><i>Current as of March 11, 2025</i></p>
+                <p><i>Current as of June 18, 2025</i></p>
                 <div>
                     <div style="line-height: 20%"><br></div>
                         <a class="btn btn-sm btn--blue-d" href="{% url 'export_dictionary_csv' %}" style="margin-right: 20px">Export Dictionary to CSV</a> <!-- btn-light and btn-sm originally from Bootstrap, final layer btn-small modified in styles.css to correct width -->
@@ -186,8 +186,8 @@
             <tr>
                 <td>Pollinator-Smart Certified?</td>
                 <td>dcr_pollinator_certified</td>
-                <td>A yes or no response, based on Va Department of Conservation and Recreation records. "Yes" indicates the project has been certified as Pollinator-Smart by the Pollinator Smart Committee at any point during its lifetime. "No" indicates the project has not been certified as Pollinator-Smart by the Pollinator Smart Committee; "no" does not differentiate between projects that are in review for certification versus projects that are not seeking certification.</td>
-                <td>DCR records provided to UVA. Additional definitions and program information can be found at: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual.</a></td>
+                <td>A yes or no response, based on Va Department of Conservation and Recreation records. "Yes" indicates the project has been certified as Pollinator-Smart by the Pollinator Smart Committee at any point during its lifetime. "No" indicates the project has not been certified as Pollinator-Smart by the Pollinator Smart Committee; "no" does not differentiate between projects that are in review for certification versus projects that are not seeking certification. For more information about native vegetation requirements, see the <a href="https://www.dcr.virginia.gov/natural-heritage/document/va-solarordin-natveg.pdf">Virginia Localities Solar Ordinances and Native Vegetation</a> report from DCR.</td>
+                <td>Pollinator-Smart datapoints added from the <a href="https://www.dcr.virginia.gov/natural-heritage/pollinator-smart"> Virginia Department of Conservation and Recreation. </a>. Additional definitions and program information can be found at: <a href="https://www.dcr.virginia.gov/natural-heritage/document/solar-site-comprehensive-manual.pdf">Pollinator-Smart Comprehensive Manual.</a></td>
             </tr>
             <tr>
                 <td>Pollinator-Smart Scorecard (link)</td>
@@ -223,6 +223,18 @@
                 <td>SCC Certificate Number</td>
                 <td>scc_certificate_number</td>
                 <td>Certificate number assigned by the State Corporation Commission for Certificate of Public Convenience and Necessity (CPCN)</td>
+                <td>SCC</td>
+            </tr>
+            <tr>
+                <td>SCC Docket Number</td>
+                <td>scc_docket_number</td>
+                <td>Docket number to search for the State Corporation Commission case addressing the project.</td>
+                <td>SCC</td>
+            </tr>
+            <tr>
+                <td>SCC Year of Action</td>
+                <td>scc_action_year</td>
+                <td>Year that the certificate number was assigned by the State Corporation Commission.</td>
                 <td>SCC</td>
             </tr>
             <tr>
