@@ -833,7 +833,7 @@
     <br>
     <br>
     <br>
-    <!--
+
     <div style="width: 1200px; margin-left: auto; margin-right: auto">
     <table id="projectData" class="table table-hover">
         <thead>
@@ -876,6 +876,7 @@
           var table = $('#projectData').DataTable({
             searching: true,
             lengthChange: false,
+            sortable: true,
             scrollX: true,
             scrollY: '500px',
             paging: false, 
@@ -884,9 +885,9 @@
                 { width: '150px', targets: 1 }, 
                 { width: '150px', targets: 2 }, 
                 { width: '150px', targets: 3 },
-                { width: '200px', targets: 4 },
+                { width: '200px', type:'num', targets: 4 },
                 { width: '200px', targets: 5 },
-                { width: '250px', targets: 6 },
+                { width: '250px', type: 'num', targets: 6 },
                 { width: '300px', targets: 7 },
             ]
           });
@@ -901,7 +902,6 @@
           
         });
     </script>
-    -->
 
 <script>
     var map = L.map('map').setView([38.2, -79.2569], 7)
