@@ -27,10 +27,10 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 
 DATE_FORMAT = ["m d Y"]
 
-if os.path.exists('hidden'):
-    DEBUG = True
-else:
-    DEBUG = False
+#if os.path.exists('hidden'):
+DEBUG = True
+#else:
+    #DEBUG = False
 
 ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
