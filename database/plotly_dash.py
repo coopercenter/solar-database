@@ -506,31 +506,32 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
 sizeProjectsBar.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar Database</i>',x=0,y=-.07,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 #graphing the percent of projects in each size category by decision category
-sizePercentBar = px.bar(sizeCategoryData[(sizeCategoryData.local_permit_status != 'Pending') & (sizeCategoryData.local_permit_status != 'NA')],
-                        color='mw_size_range',
+sizePercentBar = px.bar(sizeCategoryData[(sizeCategoryData.local_permit_status != "Pending") & (sizeCategoryData.local_permit_status != 'NA')],
+                        color='local_permit_status',
                         custom_data=['project_count'],
                         #text_auto=True,
                         color_discrete_sequence=['rgb(40, 67, 118)', 
-                                      #'rgb(253, 218, 36)', 
-                                      'rgb(229, 114, 0)',
-                                      'rgb(200, 203, 210)',
-                                      'rgb(37, 202, 211)',
-                                      'rgb(98, 187, 70)'],
-             category_orders={"local_permit_status": ["Approved", 
-                                                      "Approved/Amended", 
-                                                      "Denied", 
-                                                      "Withdrawn", 
-                                                      "By-right"]},
+                                                'rgb(253, 218, 36)', 
+                                                'rgb(229, 114, 0)', 
+                                                'rgb(200, 203, 210)',
+                                                'rgb(37, 202, 211)',
+                                                'rgb(98, 187, 70)'],
+                      category_orders={"local_permit_status": ["Approved", 
+                                                               "Approved/Amended", 
+                                                               "Denied", 
+                                                               "Withdrawn", 
+                                                               "By-right", 
+                                                               "Pending"]},
                         labels={'mw_size_range':'Project Size',
                                 'local_permit_status':'Local Permit Status',
-                                'percent_of_size_projects':'Percent of Projects in Size Range',
+                                'percent_of_size_projects':'Percent of Size Range Projects',
                                 'project_count':"Project Count"
                                 },
-                        x='local_permit_status',
+                        x='mw_size_range',
                         y='percent_of_size_projects',
                         height=550,
                         width=480,
-                        barmode='group')
+                        barmode='stack')
 
 sizePercentBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                 paper_bgcolor='#F2F4F8',
@@ -651,7 +652,7 @@ dashapp.layout =  dbc.Container([
                 options=[
                 {"label": "Megawatts", "value": 'sizeMWBar'}, 
                 {"label": "Projects", "value": 'sizeProjectsBar'},
-                {"label": "Percent of Size", "value": 'sizePercentBar'}
+                {"label": "Action Rate", "value": 'sizePercentBar'}
                 
             ],
             value='sizeMWBar'
