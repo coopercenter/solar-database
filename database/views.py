@@ -74,6 +74,10 @@ def dictionary(request):
 
     return render(request, 'database/dictionary.html',context)
 
+def donate(request):
+    return render(request, 'database/donate.html')
+
+
 class ProjectView(DetailView):
     model = SolarProjectData
     template_name = 'database/project.html'

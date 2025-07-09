@@ -29,6 +29,7 @@ class LocalSolarPolicyData(models.Model):
 class SolarProjectData(models.Model):
     data_id = models.BigIntegerField(db_column='data_id', blank=True, null=False, primary_key=True)
     locality = models.TextField(db_column='locality', blank=True, null=True)
+    unit_of_government = models.TextField(db_column='unit_of_government', blank=True, null=True)
     region = models.TextField(db_column='region', blank=True, null=True)
     additional_localities = models.TextField(db_column='additional_localities', blank=True, null=True)
     project_name = models.TextField(db_column='project_name', blank=True, null=True)
@@ -54,6 +55,8 @@ class SolarProjectData(models.Model):
     siting_agreement_link = models.TextField(db_column='siting_agreement_link', blank=True, null=True)
     deq_permit_number = models.TextField(db_column='deq_permit_number', blank=True, null=True)
     scc_certificate_number = models.TextField(db_column='scc_certificate_number', blank=True, null=True)
+    scc_docket_number = models.TextField(db_column='scc_docket_number', blank=True, null=True)
+    scc_action_year = models.TextField(db_column='scc_action_year', blank=True, null=True)
     shared_solar_enrolled = models.TextField(db_column='shared_solar_enrolled', blank=True, null=True)
     mined_land = models.TextField(db_column='mined_land', blank=True, null=True)
     dcr_pollinator_certified = models.TextField(db_column='dcr_pollinator_certified',blank=True,null=True)

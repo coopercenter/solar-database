@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DATE_FORMAT = ["m d Y"]
-
 if os.path.exists('hidden'):
     DEBUG = True
 else:
