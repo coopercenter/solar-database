@@ -1,0 +1,48 @@
+{% extends "database/base.html" %}
+
+{% load static %}
+{% load plotly_dash %}
+
+{% block content %}
+<br><br>
+    <div style="width: 1250px; margin-left: auto; margin-right: auto">
+        <div class="card-body">
+            <h1>Support the Virginia Solar Database</h1>
+            <br>
+            <p class="card-text">
+                <b>To expand this powerful public resource and ensure it keeps pace with the rapidly changing energy landscape — including the integration of battery storage — we’re seeking to raise $300,000 to support the next three years of work:</b>
+                <ul>
+                    <li>Continue to provide this as a free, unbiased, and trusted public resource
+                        <ul>
+                            <li>Quarterly updates of project data</li>
+                            <li>Presentations and quarterly reports</li>
+                        </ul>
+                    </li>
+                    <li>Expand datapoints published</li>
+                    <li>Improve geospatial mapping and compatibility with external sources</li>
+                    <li>Issue monthly webscraping report (for donors)</li>
+                    <li>Expand to include battery storage
+                        <ul>
+                            <li>Convene stakeholder group to define and prioritize storage datapoints</li>
+                        </ul>
+                    </li>
+                </ul>
+                <b>As a thank you for your support, we will offer the following benefits to donors:</b>
+                <ul>
+                    <li>Your company logo will be displayed on this website and subsequent database reports</li>
+                    <li>Advance access to quarterly data updates</li>
+                    <li>Monthly copy of Webscraping Report (summary of solar and/or storage on upcoming public notices and hearing agendas)</li>
+                    <li>Access to additional datapoints (examples could include lat/longs, application dates, planning commission dates and actions, board/council dates and actions, permitted conditions, prior project details, etc.)</li>
+                </ul>
+                ** To provide transparency and retain public trust in this unbiased data source, all donations will be publicly disclosed.
+                <br><br>
+                <b>To make your donation, please visit our <a href = https://www.givecampus.com/campaigns/21340/donations/new>Give Campus</a> page via web link or QR code below and select Designation “Energy Transition Initiative”</b>
+                <br>
+                To discuss donating or for major donations larger than $25,000, please contact Elizabeth Marshall at <a href="mailto:emm2t@virginia.edu">emm2t@virginia.edu</a>.
+                <br>
+                <img src="../../static/images/donate_qr.png" width="420" height="420">
+
+            </p>
+        </div>
+    </div>
+{% endblock content %}

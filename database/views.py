@@ -74,8 +74,8 @@ def dictionary(request):
 
     return render(request, 'database/dictionary.html',context)
 
-def support(request):
-    return render(request, 'database/support.html')
+def donate(request):
+    return render(request, 'database/donate.html')
 
 
 class ProjectView(DetailView):

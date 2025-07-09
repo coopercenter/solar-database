@@ -54,7 +54,7 @@ annualData['annual_rate'] = round(annualData['project_count']/annualData['annual
 regionalData = pd.DataFrame(df.groupby(['region','local_permit_status']).agg({'project_mw':'sum','data_id':'count','public_project_acres':'sum'}).reset_index())
 
 #define the size category data, summarizing by category
-sizeCategoryData = pd.DataFrame(df.groupby(["mw_size_range",'local_permit_status']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'data_id':'project_count'})
+sizeCategoryData = pd.DataFrame(df[df.local_permit_status.isin(["Approved","Approved/Amended","Denied","Withdrawn","By-right"])].groupby(["mw_size_range",'local_permit_status']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'data_id':'project_count'})
 #get the project and megawatt totals by size category
 size_summary = sizeCategoryData.groupby('mw_size_range').agg({'project_mw':'sum','project_count':'sum'}).reset_index().rename(columns={'project_mw':'size_total_mw','project_count':'size_total_projects'})
 sizeCategoryData = pd.merge(sizeCategoryData,size_summary,how='left',on='mw_size_range')
@@ -508,7 +508,7 @@ sizeProjectsBar.add_annotation(text='<i>Source: Weldon Cooper Center Virginia So
 #graphing the percent of projects in each size category by decision category
 sizePercentBar = px.bar(sizeCategoryData[(sizeCategoryData.local_permit_status != "Pending") & (sizeCategoryData.local_permit_status != 'NA')],
                         color='local_permit_status',
-                        custom_data=['project_count'],
+                        custom_data=['project_count','local_permit_status','project_mw'],
                         #text_auto=True,
                         color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -532,7 +532,7 @@ sizePercentBar = px.bar(sizeCategoryData[(sizeCategoryData.local_permit_status !
                         height=550,
                         width=480,
                         barmode='stack')
-
+sizePercentBar.update_traces(hovertemplate="<b>%{x}</b><br>Local Permit Status: %{customdata[1]}<br>Percent of Projects in Size Range: %{y}<br>Projects: %{customdata[0]}<br>Megawatts: %{customdata[2]:,.0f}<br><extra></extra>")
 sizePercentBar.update_layout(margin=dict(l=5, r=5, t=25, b=5),
                                 paper_bgcolor='#F2F4F8',
                                 plot_bgcolor='#F2F4F8',
@@ -809,7 +809,13 @@ def update_map(map_type,slide_year):
             mapDataClean[mapDataClean['final_action_year'] <= slide_year],
             color='mw_size_range',
             custom_data=['project_name','locality','local_permit_status','mw_size_range','final_action_year','project_mw','public_project_acres'],
-            color_discrete_sequence=['rgb(229, 114, 0)','rgb(253, 218, 36)', 'rgb(40, 67, 118)', 'rgb(98, 187, 70)'],
+            #color_discrete_sequence=['rgb(229, 114, 0)','rgb(253, 218, 36)', 'rgb(40, 67, 118)', 'rgb(98, 187, 70)'],
+            color_discrete_sequence=['rgb(40, 67, 118)', 
+                                      #'rgb(253, 218, 36)', 
+                                      'rgb(229, 114, 0)',
+                                      'rgb(200, 203, 210)',
+                                      'rgb(37, 202, 211)',
+                                      'rgb(98, 187, 70)'],
             category_orders={"mw_size_range": ['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<']},
             labels={'locality':'Locality',
                     'local_permit_status':'Local Permit Status',
