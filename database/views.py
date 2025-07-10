@@ -18,7 +18,7 @@ def export_csv(request):
 
     data = SolarProjectData.objects.all()
 
-    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
+    excluded_fields = {'longitude', 'latitude', 'final_action_year','date_earliest_known_hearing'}
     field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
 
     writer = csv.DictWriter(response, fieldnames=field_names)
