@@ -8,10 +8,10 @@ __Solar Database__: [https://solardatabase.coopercenter.org/](https://solardatab
 
 ### Setting up a virtual environment
 
-1. If you do not already have a virtual environment set up for this project, in the terminal run "python3 -m venv .venv" to create the virtual environment
+1. If you do not already have a virtual environment set up for this project, in the terminal run "python -m venv .venv" to create the virtual environment
 2. Add .venv/ to .gitignore
-3. Run "source .venv/bin/activate" to enter the virtual environment
-4. Install the required packages with "python3 -m pip install -r requirements.txt"
+3. Run "source .venv/bin/activate" to enter the virtual environment - Can also run .venv/Scripts/activate
+4. Install the required packages with "python -m pip install -r requirements.txt"
 
 ### Create the hidden variables for connecting to the database
 
