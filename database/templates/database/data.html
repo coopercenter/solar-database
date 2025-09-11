@@ -857,9 +857,9 @@
 
                 <td style="cursor: pointer;">{{ project.locality }}</td>
                 <td style="cursor: pointer;">{{ project.region }}</td>
-                <td style="cursor: pointer;">{{ project.project_mw }}</td>
+                <td style="cursor: pointer;">{{ project.project_mw|floatformat:1 }}</td>
                 <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
-                <td style="cursor: pointer;">{{ project.public_project_acres }}</td>
+                <td style="cursor: pointer;">{{ project.public_project_acres|floatformat:1 }}</td>
                 <td style="cursor: pointer;">{{ project.local_action_project_owner }}</td>
 
                 <td style="cursor: pointer;">{{ project.data_id }}</td>
