@@ -565,7 +565,7 @@ dashapp.layout =  dbc.Container([
                       style={
                           'margin-left': 8,
                       }),
-            html.Div(html.P('Visualizations reflect all projects in the database as of June 18, 2025. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
+            html.Div(html.P('Visualizations reflect all projects in the database as of September 30, 2025. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information.'),
                      style={
                           'margin-left':8,
                           'width':1000
