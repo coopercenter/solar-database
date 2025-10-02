@@ -2,6 +2,7 @@
 {% block content %}
     <br><br>
     <div class="container">
+        <br><br>
     <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     {% if object.project_name.strip %}
@@ -220,9 +221,18 @@
                     </div>
 
                     <div style="height: 12px;"></div>
-                    <div><b>Shared Solar Program - Enrolled (Dominion)</b> <br>
+                    <div><b>Shared Solar Program - Enrolled (Dominion or Appalachian Power)</b> <br>
                         {%if object.shared_solar_enrolled.strip %}
                             {{ object.shared_solar_enrolled }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Shared Solar Program - Enrolled Date</b> <br>
+                        {%if object.shared_solar_enrolled_date.strip %}
+                            {{ object.shared_solar_enrolled_date }}
                         {% else %}
                             &nbsp;
                         {% endif %}
