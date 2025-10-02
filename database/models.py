@@ -58,6 +58,7 @@ class SolarProjectData(models.Model):
     scc_docket_number = models.TextField(db_column='scc_docket_number', blank=True, null=True)
     scc_action_year = models.TextField(db_column='scc_action_year', blank=True, null=True)
     shared_solar_enrolled = models.TextField(db_column='shared_solar_enrolled', blank=True, null=True)
+    shared_solar_enrolled_date = models.TextField(db_column='shared_solar_enrolled_date', blank=True, null=True)
     mined_land = models.TextField(db_column='mined_land', blank=True, null=True)
     dcr_pollinator_certified = models.TextField(db_column='dcr_pollinator_certified',blank=True,null=True)
     dcr_pollinator_status = models.TextField(db_column='dcr_pollinator_status',blank=True,null=True)
@@ -72,7 +73,7 @@ class SolarProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solar_data_public'
+        db_table = 'dev_solar_data_public'
 
 class CountyData(models.Model):
     locality = models.TextField(db_column='locality',primary_key=True)
