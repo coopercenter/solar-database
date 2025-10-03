@@ -73,7 +73,7 @@ class SolarProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'dev_solar_data_public'
+        db_table = 'solar_data_public'
 
 class CountyData(models.Model):
     locality = models.TextField(db_column='locality',primary_key=True)
