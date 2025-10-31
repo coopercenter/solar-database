@@ -13,7 +13,7 @@
     </div>
     {% if object.latitude is not None and object.longitude is not None %}
         <br>
-        <style> #map { height: 350px; } </style>
+        <style> #map { height: 350px; z-index: 0} </style>
         <div class="container" id="map"></div>
 
         {{ object.longitude|json_script:"longitude_json" }}
