@@ -59,10 +59,20 @@ def data(request):
     map_data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
                                                 'locality', 'project_mw', 
                                                 'local_permit_status', 'data_id', 'alt_names'))
+
     data = SolarProjectData.objects.all()
+
+    localities = SolarProjectData.objects.values_list('locality', flat=True).distinct().order_by('locality')
+    localities = [loc for loc in localities if loc]    
+
+    permit_status = SolarProjectData.objects.values_list('local_permit_status', flat=True).distinct().order_by('local_permit_status')
+    permit_status = [status for status in permit_status if status]  # Filter out None/empty
+
     context = {
         'data': data,
         'map_data': map_data,
+        'localities': localities,
+        'permit_status': permit_status
     }
 
     return render(request, 'database/data.html', context)
