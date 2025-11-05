@@ -50,10 +50,15 @@
                 </div>
 
                 <div style="line-height: 65%"><br></div>
+
+                <button class="select-all-btn btn btn-light btn-sm-select">Select All</button>
+
             </div>
         </div>
 
         <div style="line-height: 75%"><br></div>
+
+
 
         <!-- PERMIT STATUS DROPDOWN -->
         <div class="dropdown">
@@ -112,12 +117,16 @@
                 </div>
             </div>
         </div>
+        <button class="clear-all-btn btn btn-light btn-sm-clear">Clear All Filters</button>
 
     </div>
+
+
     <div class="col-9">
         <style> #map { height: 400px; width: 885px; z-index: 1} </style>
         <p class="card-text" id="map"></p>
     </div>
+
 </div>
 
     <br>
@@ -265,6 +274,24 @@
 
     document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(checkbox => {
         checkbox.addEventListener('change', updateMarkers);
+    });
+
+    document.querySelector('.select-all-btn').addEventListener('click', function (event) {
+        event.stopPropagation(); 
+
+        const checkboxes = document.querySelectorAll('.locality-box');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => {
+            cb.checked = !allChecked;
+        });
+    });
+    document.querySelector('.clear-all-btn').addEventListener('click', function () {
+        document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(function (checkbox) {
+            checkbox.checked = false;
+            updateMarkers();
+
+        });
     });
 </script>
       

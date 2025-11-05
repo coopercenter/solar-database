@@ -156,8 +156,28 @@ h4 {
 
   /* originally from Bootstrap CSS, fixing width, applied to download buttons */
 .btn-sm{
-    width: 200px;
-  }
+  width: 200px;
+}
+
+.btn-sm-select{
+  width:200px;
+}
+
+.btn-sm-select:hover{
+  background-color: #141f3d;
+  color: white;
+}
+
+
+.btn-sm-clear{
+  margin-top:20px;
+  margin-left: 15px;
+  width: 200px;
+}
+.btn-sm-clear:hover{
+  background-color: #141f3d;
+  color: white;
+}
 
 .btn-med{
   width: 400px;
