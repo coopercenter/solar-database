@@ -160,23 +160,27 @@ h4 {
 }
 
 .btn-sm-select{
+  background-color: #141f3d;
   width:200px;
+  color: white;
 }
 
 .btn-sm-select:hover{
-  background-color: #141f3d;
-  color: white;
+  background-color: #3cc1cc;
+  color: black;
 }
 
 
 .btn-sm-clear{
+  background-color: #141f3d;
   margin-top:20px;
-  margin-left: 15px;
-  width: 200px;
+  margin-left: 45px;
+  width: 150px;
+  color:white;
 }
 .btn-sm-clear:hover{
-  background-color: #141f3d;
-  color: white;
+  background-color: #3cc1cc;
+  color: black;
 }
 
 .btn-med{
