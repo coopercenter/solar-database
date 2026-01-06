@@ -1,4 +1,6 @@
 
+
+
 /* lowermost style layer for the nav bars from the Bootstrap css, edited to match CooperCenter website*/
 .navbar-dark{
     height: 60px;
@@ -38,7 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 1200px;
-    margin-top: 50px;
+    margin-top: 0px;
     margin-bottom: 50px;
     background-color: #F2F4F8; 
     border: 1px transparent;
@@ -49,6 +51,53 @@
   white-space: normal;
   overflow-wrap: break-word;
   word-wrap: break-word;
+}
+
+.card {
+  @media (min-width: 600px) {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+  }
+
+  &.paragraph--type--call-to-action,
+  &.paragraph--type--attachment,
+  &.node--institute,
+  &.node--institute_subpage,
+  &.node--page,
+  &.node--table {
+    padding: 20px;
+
+    @media (min-width: 600px) {
+      padding: 30px;
+    }
+  }
+
+  &.node--research_summary,
+  &.node--announcement,
+  &.node--external_link {
+    .card__image {
+      margin-bottom: 20px;
+
+      @media (min-width: 600px) {
+        flex: 0 0 250px;
+        margin-bottom: 0;
+        max-width: 250px;
+        order: 1;
+      }
+
+      a {
+        display: block;
+      }
+
+      img {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
 }
 
 html, body{
@@ -153,6 +202,36 @@ h4 {
       }
     }
   }
+
+.btn--dash{
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #141f3d;
+    border-color: #141f3d;
+    color: #ffffff;
+    padding: .375rem .75rem;
+  
+    &:active {
+        background-color: #cccccc;
+        color: #666666;
+      }
+  
+    &:hover {
+      background-color: #3cc1cc;
+      color: #141f3d;
+    }
+  
+    &.btn--outline {
+      background-color: transparent;
+      color: #141f3d;
+    }
+
+}
 
   /* originally from Bootstrap CSS, fixing width, applied to download buttons */
 .btn-sm{
@@ -536,3 +615,43 @@ li {
       border-radius: 3px;
       font-weight: 500;
   }
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #242e4c;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #3cc1cc;
+  color: #141f3d
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #3cc1cc;
+  color: #141f3d;
+}
+
+.tabcontent {
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

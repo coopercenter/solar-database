@@ -1,7 +1,5 @@
 {% extends "database/base.html" %}
-
 {% load static %}
-{% load plotly_dash %}
 
 {% block content %}
     <br><br>
@@ -52,12 +50,20 @@
             contact Elizabeth Marshall, Senior Program Manager, Weldon Cooper Center at UVA,
             <a href="mailto:emm2t@virginia.edu">emm2t@virginia.edu</a>.
             </p>
+            <div>
+            <article class = "node node--page node--teaser card">
+              <div class="card__image"> <img src="{% static 'images/solar_dashboard_screenshot.png' %}" style="max-width: 425px;"></img></div>
+              <div class="card__title"><a href="/solar/">Solar Database and Dashboard</a></div>
+            </article>
+            <article class = "node node--page node--teaser card">
+              <div class="card__image"> <img src="{% static 'images/solar_dashboard_screenshot.png' %}" style="max-width: 425px;"></img></div>
+              <div class="card__title"><a href="/battery_storage/">Battery Energy Storage Database and Dashboard</a></div>
+            </article>
+            </div>
         </div>
     </div>
 
-    {% plotly_header %}
-        {%plotly_direct name='SolarDash'%}
-    {% plotly_footer %}
+    
 
                     
    <!-- <div class="card">

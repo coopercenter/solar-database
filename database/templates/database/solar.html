@@ -1,9 +1,26 @@
 {% extends "database/base.html" %}
+{% load plotly_dash %}
 {% block content %}
-{% load static %} 
+    
+{% load static %}
+<br>
+<br>
+<br>
+<div class="tab" style="width: 1250px; margin-left: auto; margin-right: auto">
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Dashboard')" id = defaultOpen>Dashboard</button>
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Data')">Data</button>
+</div>
 
-<br><br>
-<div class="'container-fluid">
+
+
+<!-- Tab content -->
+<div id="Dashboard" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+    {% plotly_app_bootstrap name='SolarDash' aspect='1by1' %}
+
+</div>
+
+<div id="Data" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+  <div class="'container-fluid">
     <div style="width: 1250px; margin-left: auto; margin-right: auto">
         <div class="card-body">
             <h1>Data</h1>
@@ -294,5 +311,36 @@
         });
     });
 </script>
-      
+</div>
+
+
+<script>
+function showContent(evt, contentType) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(contentType).style.display = "block";
+  evt.currentTarget.className += " active";
+} 
+
+</script>
+
+<script>
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
 {% endblock content %}

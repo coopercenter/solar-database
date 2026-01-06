@@ -113,7 +113,7 @@ actionRate['denial_rate_projects']=round(actionRate['denied_projects']/actionRat
 
 
 mwPieChart = px.pie(pieData[pieData.local_permit_status != 'NA'],
-                    title="<b>Solar Megawatts by Local Permit Status</b>",
+                    title="<b>Battery Storage Megawatts by Local Permit Status</b>",
                     values='project_mw', 
                     names='local_permit_status', 
                     color_discrete_sequence=['rgb(40, 67, 118)', 
@@ -153,12 +153,11 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
      
 #mwPieChart.update_traces(texttemplate="%{value:,.0f} MW (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Nameplate Megawatt Capacity: %{value:,.0f} MW')
 mwPieChart.update_traces(texttemplate="%{value:,.0f} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Nameplate Megawatt Capacity: %{value:,.0f} MW<br>Percent of Total Megawatts: %{percent:.1%}')
-
      
 projectsPieChart= px.pie(pieData[pieData.local_permit_status != 'NA'], 
                          values='data_id', 
                          names='local_permit_status', 
-                         title="<b>Solar Projects by Local Permit Status</b>",
+                         title="<b>Battery Storage Projects by Local Permit Status</b>",
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(253, 218, 36)', 
                                                   'rgb(229, 114, 0)', 
@@ -199,7 +198,7 @@ projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hoverte
 acrePieChart = px.pie(pieData[pieData.local_permit_status != 'NA'], 
                       values='public_project_acres', 
                       names='local_permit_status', 
-                      title="<b>Solar Acres by Local Permit Status</b>",
+                      title="<b>Battery Storage Acres by Local Permit Status</b>",
                       color_discrete_sequence=['rgb(40, 67, 118)', 
                                                'rgb(253, 218, 36)', 
                                                'rgb(229, 114, 0)', 
@@ -240,7 +239,7 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                          x="final_action_year", 
                          y='annual_rate',
                          color='local_permit_status',
-                         title="<b>Annual Solar Action Rate by Local Permit Status</b>",
+                         title="<b>Annual Battery Storage Action Rate by Local Permit Status</b>",
                          custom_data = ['local_permit_status','project_count','annual_total'],
                          height=660,
                          width=600,
@@ -294,7 +293,7 @@ mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING')
                        x="final_action_year", 
                        y="project_mw",
                        color='local_permit_status',
-                       title="<b>Annual Solar Megawatts by Local Permit Status</b>",
+                       title="<b>Annual Battery Storage Megawatts by Local Permit Status</b>",
                        custom_data=['local_permit_status','project_count'],
                        height=660,
                        width=600,
@@ -346,7 +345,7 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                              x="final_action_year", 
                              y="project_count",
                              color='local_permit_status',
-                             title="<b>Annual Solar Projects by Local Permit Status</b>",
+                             title="<b>Annual Battery Storage Projects by Local Permit Status</b>",
                              custom_data=['local_permit_status','project_mw'],
                              height=660,
                              width=600,
@@ -444,9 +443,8 @@ mwRegionalBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                        title="Megawatts"))
      
 
-
 sizeMWBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'].isin(["Approved","Denied",'Withdrawn'])], 
-                   title="<b>Solar Megawatts by Project Size</b>",
+                   title="<b>Battery Storage Megawatts by Project Size</b>",
                    x="mw_size_range", 
                    y="project_mw",
                    color='local_permit_status',
@@ -477,7 +475,7 @@ sizeMWBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                   color='#242e4c'),
                         font_family='franklin-gothic-urw-cond, sans-serif',
                         title=dict(font=dict(size=22), automargin=False, yref='paper'),
-                        title_subtitle=dict(text='<i>Source: Weldon Cooper Center Virginia Solar and Storage Database</i>', font=dict(size=10)),
+                        title_subtitle=dict(text='<i>Source: Weldon Cooper Center Virginia Solar and Battery Database</i>', font=dict(size=10)),
                         xaxis=dict(tickmode='array',
                                    tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                    title=''),
@@ -490,7 +488,7 @@ sizeProjectsBar = px.bar(sizeCategoryData[sizeCategoryData['local_permit_status'
                          x="mw_size_range", 
                          y='project_count',
                          color='local_permit_status',
-                         title="<b>Solar Projects by Project Size</b>",
+                         title="<b>Battery Storage Projects by Project Size</b>",
                          custom_data=['local_permit_status','project_mw'],
                          height=585,
                          width=480,
@@ -525,7 +523,6 @@ sizeProjectsBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                               xaxis=dict(tickmode='array',
                                          tickvals=['≤5MW','5MW< - ≤20MW','20MW< - ≤150MW','150MW<'],
                                          title=''))
-
 
 
 #graphing the percent of projects in each size category by decision category
@@ -575,19 +572,19 @@ sizePercentBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                     x=0,
                                     title=''))
 
-dashapp = DjangoDash(name='SolarDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.BOOTSTRAP,dbc.themes.FLATLY,'/static/css/styles.css'])
+dashappbat = DjangoDash(name='BatteryDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.BOOTSTRAP,dbc.themes.FLATLY,'/static/css/styles.css'])
 
-dashapp.layout =  dbc.Container([
+dashappbat.layout =  dbc.Container([
     #buid the state overview page
     html.Div([
         html.Br(),
         html.Br(),
-        html.H1("Virginia Solar Dashboard"),
+        html.H1("Virginia Battery Storage Dashboard"),
         html.P("Visualizations reflect all projects in the database as of September 30, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Div(
             #dashboard
             [
-            #developing reactive graph display based on Solar or Storage view selection     
+            #developing reactive graph display based on Solar or Battery view selection     
            # html.H2("Select a Project Type to Graph",style={"margin-left":8}),  
             #html.Div(dbc.RadioItems(
             #    id='sourceButtons',
@@ -846,7 +843,7 @@ dashapp.layout =  dbc.Container([
 #        value='mwRegionalBar'
 #        return options,value
 
-@dashapp.callback(
+@dashappbat.callback(
         Output("stateMap", "figure"),
         Input("mapButtons","value"),
         Input("years", "value"))
@@ -897,7 +894,7 @@ def update_map(map_type,slide_year):
                             visible=False),
                     yaxis=dict(showgrid=False,
                              zeroline=False,
-                            visible=False),
+                            visible=False)
                 )
         statusMap.update_traces(marker=dict(size=10),
                                     hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Megawatts: %{customdata[5]:,.0f}<br>Year: %{customdata[4]}<br>Best Available Project Acreage: %{customdata[6]:,.0f}<br><extra></extra>")
@@ -1058,7 +1055,7 @@ def update_map(map_type,slide_year):
         return deniedRateMap
 
 # Define a callback to update the pie graph
-@dashapp.callback(
+@dashappbat.callback(
     Output('graphOne', 'figure'),
     [Input(component_id='graphOneButtons', component_property='value')]
 )
@@ -1071,7 +1068,7 @@ def update_pie_chart(value):
         return acrePieChart
     
 # Define a callback to update the annual bar graph
-@dashapp.callback(
+@dashappbat.callback(
     Output('graphTwo', 'figure'),
     [Input(component_id='graphTwoButtons', component_property='value')]
 )
@@ -1084,7 +1081,7 @@ def update_annual_chart(value):
         return projectsAnnualLine
     
 # Define a callback to update the size bar graph
-@dashapp.callback(
+@dashappbat.callback(
     Output('graphThree', 'figure'),
     [Input(component_id='graphThreeButtons', component_property='value')]
 )
@@ -1096,7 +1093,7 @@ def update_size_chart(value):
     elif value=='sizePercentBar':
         return sizePercentBar
     
-@dashapp.callback(
+@dashappbat.callback(
     Output('graphFour', 'figure'),
     [Input(component_id='graphFourButtons', component_property='value')]
 )
@@ -1105,4 +1102,4 @@ def update_size_chart(value):
         return mwRegionalBar
     
 if __name__ == '__main__':
-    dashapp.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
+    dashappbat.run_server(host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))

@@ -1,0 +1,346 @@
+{% extends "database/base.html" %}
+{% load plotly_dash %}
+{% block content %}
+    
+{% load static %}
+<br>
+<br>
+<br>
+<div class="tab" style="width: 1250px; margin-left: auto; margin-right: auto">
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Dashboard')" id = defaultOpen>Dashboard</button>
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Data')">Data</button>
+</div>
+
+
+
+<!-- Tab content -->
+<div id="Dashboard" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+    {% plotly_app_bootstrap name='SolarDash' aspect='1by1' %}
+
+</div>
+
+<div id="Data" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+  <div class="'container-fluid">
+    <div style="width: 1250px; margin-left: auto; margin-right: auto">
+        <div class="card-body">
+            <h1>Data</h1>
+            <h2>Browse and Download Battery Storage Data</h2>
+            <p><i>Current as of September 30, 2025 (Will be updated quarterly)</i></p>
+            <div>
+                <div style="line-height: 20%"><br></div>
+                <a class="btn btn-sm btn--blue-d" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a>
+            </div>
+        </div> 
+    </div>
+</div>
+
+{{ map_data|json_script:"data_json" }}
+<div class="row" style="background-color:#F2F4F8; width: 1200px; margin-left: auto; margin-right: auto">
+    <div class="col">
+        <div style="line-height: 135%"><br></div>
+        <h3><b>Explore Battery Storage Projects</b></h3>in Virginia
+
+        <div style="line-height: 185%"><br></div>
+        
+        <div class="search-box">
+            <input type="text" class="form-control" style="font-size: 13px; width: 240px; height: 30px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" placeholder="Search by Project Name">
+        </div>
+
+        <div style="line-height: 75%"><br></div>
+        
+        <!-- LOCALITY DROPDOWN -->
+        <div class="dropdown">
+            <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
+                &#160; Locality
+            </button>
+            <div class="dropdown-menu p-2" style="width: 240px;">
+                <div style="width: 215px; height: 200px; overflow-y: scroll;">
+                    {% for locality in localities %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input locality-box" type="checkbox" id="{{ locality|lower|slugify }}">
+                            <label class="form-check-label button-font" for="{{ locality|lower|slugify }}">
+                                {{ locality }}
+                            </label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+
+                <div style="line-height: 65%"><br></div>
+
+                <button class="select-all-btn btn btn-light btn-sm-select">Select All</button>
+
+            </div>
+        </div>
+
+        <div style="line-height: 75%"><br></div>
+
+
+
+        <!-- PERMIT STATUS DROPDOWN -->
+        <div class="dropdown">
+            <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
+                &#160; Permit Status
+            </button>
+            <div class="dropdown-menu p-2" style="width: 240px;">
+                <div style="width: 215px; height: 200px; overflow-y: scroll;">
+                    {% for status in permit_status %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input status-box" type="checkbox" id="{{ status|lower|slugify }}">
+                            <label class="form-check-label button-font" for="{{ status|lower|slugify }}">
+                                {{ status }}
+                            </label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div style="line-height: 75%"><br></div>
+
+        <!-- PROJECT SIZE DROPDOWN -->
+        <div class="dropdown">
+            <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
+                &#160; Project Size
+            </button>
+            <div class="dropdown-menu p-2" style="width: 240px;">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input size-box" type="checkbox" id="5mw">
+                    <label class="form-check-label button-font" for="5mw">
+                        &le;5MW
+                    </label>
+                </div>
+                <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input size-box" type="checkbox" id="5mw20mw">
+                    <label class="form-check-label button-font" for="5mw20mw">
+                        5MW&lt; - &le;20MW
+                    </label>
+                </div>
+                <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input size-box" type="checkbox" id="21mw150mw">
+                    <label class="form-check-label button-font" for="21mw150mw">
+                        20MW&lt; - &le;150MW
+                    </label>
+                </div>
+                <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input size-box" type="checkbox" id="150mw">
+                    <label class="form-check-label button-font" for="150mw">
+                        &gt;150MW
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button class="clear-all-btn btn btn-light btn-sm-clear">Clear All Filters</button>
+
+    </div>
+
+
+    <div class="col-9">
+        <style> #map { height: 400px; width: 885px; z-index: 1} </style>
+        <p class="card-text" id="map"></p>
+    </div>
+
+</div>
+
+    <br>
+    <br>
+    <br>
+
+    <div style="width: 1200px; margin-left: auto; margin-right: auto">
+    <table id="projectData" class="table table-hover">
+        <thead>
+            <tr>
+                <th style="font-weight: 600">Project Name</th>
+                <th style="font-weight: 600">Project Phases</th>
+
+                <th style="font-weight: 600;">Locality</th>
+                <th style="font-weight: 600">Virginia Region</th>
+                <th style="font-weight: 600">Nameplate Capacity (MWac)</th>
+                <th style="font-weight: 600">Local Permit Status</th>
+                <th style="font-weight: 600">Best Available Project Acreage</th>
+                <th style="font-weight: 600">Owner/Developer at Local Action</th>
+                <th>data_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in data %}
+            <tr>
+                <td style="cursor: pointer;">{{ project.project_name }}</td>
+                <td style="cursor: pointer;">{{ project.project_phase }}</td>
+
+                <td style="cursor: pointer;">{{ project.locality }}</td>
+                <td style="cursor: pointer;">{{ project.region }}</td>
+                <td style="cursor: pointer;">{{ project.project_mw|floatformat:1 }}</td>
+                <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
+                <td style="cursor: pointer;">{{ project.public_project_acres|floatformat:1 }}</td>
+                <td style="cursor: pointer;">{{ project.local_action_project_owner }}</td>
+
+                <td style="cursor: pointer;">{{ project.data_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <div style="line-height: 200%"><br></div>
+
+    <script>
+        $(document).ready(function () {
+          var table = $('#projectData').DataTable({
+            searching: true,
+            lengthChange: false,
+            sortable: true,
+            scrollX: true,
+            scrollY: '500px',
+            paging: false, 
+            columnDefs: [
+                { width: '300px', targets: 0 },
+                { width: '150px', targets: 1 }, 
+                { width: '150px', targets: 2 }, 
+                { width: '150px', targets: 3 },
+                { width: '200px', type:'num', targets: 4 },
+                { width: '200px', targets: 5 },
+                { width: '250px', type: 'num', targets: 6 },
+                { width: '300px', targets: 7 },
+            ]
+          });
+
+          table.column(8).visible(false)
+          
+          $('#projectData tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            var data_id = data[8]
+            window.location.href = '/project/' + parseInt(data_id) + '/';
+          });
+          
+        });
+    </script>
+
+<script>
+    var map = L.map('map').setView([38.2, -79.2569], 7)
+
+    let JSONData = JSON.parse(document.getElementById('data_json').textContent)
+
+    let data = JSONData.map(item => {
+        const capacity = parseFloat(item.project_mw); 
+
+        if (capacity < 5) {
+            item.size = "5mw";
+        } else if (capacity >= 5 && capacity < 20) {
+            item.size = "5mw20mw";
+        } else if (capacity >= 21 && capacity < 150) {
+            item.size = "21mw150mw";
+        } else if (capacity >= 150) {
+            item.size = "150mw";
+        }
+        return item;
+    });
+
+    var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    })
+
+    var projectMarkers = L.layerGroup();
+    mapBase.addTo(map);
+    projectMarkers.addTo(map);
+
+    function updateMarkers() {
+        let search = document.querySelector('.search-box input').value.toLowerCase();
+        let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+        let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
+        let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
+
+        let filteredData = data.filter(item => 
+            (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alt_names && item.alt_names.toLowerCase().includes(search)) ) &&
+            (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
+            (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
+            (sizeList.length == 0 || (item.project_mw && sizeList.includes(item.size)))
+        );
+
+        projectMarkers.clearLayers();
+
+        filteredData.forEach(data => {
+            if (data.longitude !== null && data.latitude !== null) {
+                var projectMarker = L.marker([data.latitude, data.longitude])
+                    .on('click', function() {
+                        window.location.href = "/project/" + data.data_id;
+                    })
+                    .on('mouseover', function() {
+                        projectMarker.bindPopup(data.project_name).openPopup();
+                    })
+                    .on('mouseout', function() {
+                        projectMarker.closePopup();
+                    });
+                
+                projectMarkers.addLayer(projectMarker);
+            }
+        });
+    }
+
+    updateMarkers();
+
+    let searchTimeout;
+    document.querySelector('.search-box input').addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(updateMarkers, 300); // Update after 300ms of no typing
+    });
+
+    document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(checkbox => {
+        checkbox.addEventListener('change', updateMarkers);
+    });
+
+    document.querySelector('.select-all-btn').addEventListener('click', function (event) {
+        event.stopPropagation(); 
+
+        const checkboxes = document.querySelectorAll('.locality-box');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => {
+            cb.checked = !allChecked;
+        });
+    });
+    document.querySelector('.clear-all-btn').addEventListener('click', function () {
+        document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(function (checkbox) {
+            checkbox.checked = false;
+            updateMarkers();
+
+        });
+    });
+</script>
+</div>
+
+
+<script>
+function showContent(evt, contentType) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(contentType).style.display = "block";
+  evt.currentTarget.className += " active";
+} 
+
+</script>
+
+<script>
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+{% endblock content %}
