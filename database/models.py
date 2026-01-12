@@ -92,6 +92,7 @@ class StorageProjectData(models.Model):
     location_description = models.TextField(db_column='location_description', blank=True, null=True)
     latitude = models.FloatField(db_column='latitude', blank=True, null=True)
     longitude = models.FloatField(db_column='longitude', blank=True, null=True)
+    solar_storage = models.TextField(db_column='solar_storage', blank=True, null=True)
     colocation_info = models.TextField(db_column='colocation_info', blank=True, null=True)
     storage_tech = models.TextField(db_column='storage_tech', blank=True, null=True)
     storage_chemistry = models.TextField(db_column='storage_chemistry', blank=True, null=True)
