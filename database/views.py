@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import csv
-from .models import SolarProjectData, DataDictionary
+from .models import SolarProjectData, DataDictionary, StorageProjectData
 from django.views.generic import DetailView
 from .plotly_dash import dashapp
 from django_plotly_dash import DjangoDash
@@ -77,16 +77,16 @@ def about(request):
     return render(request, 'database/about.html')
 
 def battery_storage(request):
-    map_data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
+    map_data = list(StorageProjectData.objects.values('latitude', 'longitude', 'project_name', 
                                                 'locality', 'project_mw', 
                                                 'local_permit_status', 'data_id', 'alt_names'))
 
-    data = SolarProjectData.objects.all()
+    data = StorageProjectData.objects.all()
 
-    localities = SolarProjectData.objects.values_list('locality', flat=True).distinct().order_by('locality')
+    localities = StorageProjectData.objects.values_list('locality', flat=True).distinct().order_by('locality')
     localities = [loc for loc in localities if loc]    
 
-    permit_status = SolarProjectData.objects.values_list('local_permit_status', flat=True).distinct().order_by('local_permit_status')
+    permit_status = StorageProjectData.objects.values_list('local_permit_status', flat=True).distinct().order_by('local_permit_status')
     permit_status = [status for status in permit_status if status]  # Filter out None/empty
 
     context = {

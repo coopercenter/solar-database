@@ -27,7 +27,7 @@ class LocalSolarPolicyData(models.Model):
 """
 
 class SolarProjectData(models.Model):
-    data_id = models.BigIntegerField(db_column='data_id', blank=True, null=False, primary_key=True)
+    data_id = models.TextField(db_column='data_id', blank=True, null=False, primary_key=True)
     locality = models.TextField(db_column='locality', blank=True, null=True)
     unit_of_government = models.TextField(db_column='unit_of_government', blank=True, null=True)
     region = models.TextField(db_column='region', blank=True, null=True)
@@ -74,6 +74,43 @@ class SolarProjectData(models.Model):
     class Meta:
         managed = False
         db_table = 'solar_data_public'
+
+class StorageProjectData(models.Model):
+    data_id = models.TextField(db_column='data_id', blank=True, null=False, primary_key=True)
+    locality = models.TextField(db_column='locality', blank=True, null=True)
+    unit_of_government = models.TextField(db_column='unit_of_government', blank=True, null=True)
+    region = models.TextField(db_column='region', blank=True, null=True)
+    additional_localities = models.TextField(db_column='additional_localities', blank=True, null=True)
+    project_name = models.TextField(db_column='project_name', blank=True, null=True)
+    alt_names = models.TextField(db_column='alt_names', blank=True, null=True)
+    local_action_project_owner = models.TextField(db_column='local_action_project_owner', blank=True, null=True)
+    project_bess_mw = models.FloatField(db_column='project_bess_mw', blank=True, null=True)
+    project_bess_capacity = models.FloatField(db_column='project_bess_capacity', blank=True, null=True)
+    duration_hours = models.FloatField(db_column='duration_hours', blank=True, null=True)
+    duration_short_long = models.TextField(db_column='duration_short_long', blank=True, null=True)
+    local_permit_status = models.TextField(db_column='local_permit_status', blank=True, null=True)
+    location_description = models.TextField(db_column='location_description', blank=True, null=True)
+    latitude = models.FloatField(db_column='latitude', blank=True, null=True)
+    longitude = models.FloatField(db_column='longitude', blank=True, null=True)
+    colocation_info = models.TextField(db_column='colocation_info', blank=True, null=True)
+    storage_tech = models.TextField(db_column='storage_tech', blank=True, null=True)
+    storage_chemistry = models.TextField(db_column='storage_chemistry', blank=True, null=True)
+    public_bess_project_acres = models.FloatField(db_column='public_bess_project_acres', blank=True, null=True)
+    board_council_action_date = models.TextField(db_column='board_council_action_date',blank=True,null=True)
+    final_action_year = models.TextField(db_column='final_action_year',blank=True,null=True)
+    siting_agreement_exists = models.TextField(db_column='siting_agreement_exists',blank=True,null=True)
+    siting_agreement_date = models.TextField(db_column='siting_agreement_date', blank=True, null=True)
+    siting_agreement_link = models.TextField(db_column='siting_agreement_link', blank=True, null=True)
+    pjm_queue_number = models.TextField(db_column='pjm_queue_number', blank=True, null=True)
+    scc_certificate_number = models.TextField(db_column='scc_certificate_number', blank=True, null=True)
+    scc_docket_number = models.TextField(db_column='scc_docket_number', blank=True, null=True)
+    scc_action_year = models.TextField(db_column='scc_action_year', blank=True, null=True)
+    scc_application_date = models.TextField(db_column='scc_application_date', blank=True, null=True)
+    scc_action_year = models.TextField(db_column='scc_action_date', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = "dev_storage_data_public"
 
 class CountyData(models.Model):
     locality = models.TextField(db_column='locality',primary_key=True)
