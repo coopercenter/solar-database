@@ -13,24 +13,47 @@ from io import BytesIO
 from openpyxl import Workbook
 
 
-def export_csv(request):
-    response = HttpResponse(
-        content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="solarprojects.csv"'},
+def write_sheet(write_sheet, queryset, model):
+
+    field_names = [
+        f.name for f in model._meta.fields
+    ]
+
+    write_sheet.append(field_names)
+
+    for obj in queryset.iterator():
+        write_sheet.append([getattr(obj, field) for field in field_names])
+
+    write_sheet.freeze_panes = "A2"
+
+def export_xlsx(request):
+    workbook = Workbook()
+
+    write_sheet_solar = workbook.active
+    write_sheet_solar.title = "Solar"
+
+    write_sheet(
+        write_sheet_solar,
+        SolarProjectData.objects.all(),
+        SolarProjectData
     )
 
-    data = SolarProjectData.objects.all()
+    write_sheet_storage = workbook.create_sheet(title="Storage")
+    write_sheet(
+        write_sheet_storage,
+        StorageProjectData.objects.all(),
+        StorageProjectData
+    )
 
-    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
-    field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
+    output = BytesIO()
+    workbook.save(output)
+    output.seek(0)
 
-    writer = csv.DictWriter(response, fieldnames=field_names)
-    writer.writeheader()
-
-    for obj in data:
-        row = {field: getattr(obj, field) for field in field_names}
-        writer.writerow(row)
-
+    response = HttpResponse(
+        output.getvalue(),
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
+    response["Content-Disposition"] = 'attachment; filename="projects.xlsx"'
     return response
 
 def export_dictionary_csv(request):
