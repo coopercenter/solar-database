@@ -78,7 +78,7 @@ def about(request):
 
 def battery_storage(request):
     map_data = list(StorageProjectData.objects.values('latitude', 'longitude', 'project_name', 
-                                                'locality', 'project_mw', 
+                                                'locality', 'project_bess_mw', 
                                                 'local_permit_status', 'data_id', 'alt_names'))
 
     data = StorageProjectData.objects.all()

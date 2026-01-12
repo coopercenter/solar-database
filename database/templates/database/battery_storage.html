@@ -99,41 +99,6 @@
 
         <div style="line-height: 75%"><br></div>
 
-        <!-- PROJECT SIZE DROPDOWN -->
-        <div class="dropdown">
-            <button class="btn btn-sm dropdown-toggle" style="width: 240px; text-align: left; border: 0.8px solid #000000; background-color: #ffffff;" data-toggle="dropdown">
-                &#160; Project Size
-            </button>
-            <div class="dropdown-menu p-2" style="width: 240px;">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input size-box" type="checkbox" id="5mw">
-                    <label class="form-check-label button-font" for="5mw">
-                        &le;5MW
-                    </label>
-                </div>
-                <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input size-box" type="checkbox" id="5mw20mw">
-                    <label class="form-check-label button-font" for="5mw20mw">
-                        5MW&lt; - &le;20MW
-                    </label>
-                </div>
-                <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input size-box" type="checkbox" id="21mw150mw">
-                    <label class="form-check-label button-font" for="21mw150mw">
-                        20MW&lt; - &le;150MW
-                    </label>
-                </div>
-                <br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input size-box" type="checkbox" id="150mw">
-                    <label class="form-check-label button-font" for="150mw">
-                        &gt;150MW
-                    </label>
-                </div>
-            </div>
-        </div>
         <button class="clear-all-btn btn btn-light btn-sm-clear">Clear All Filters</button>
 
     </div>
@@ -155,14 +120,14 @@
         <thead>
             <tr>
                 <th style="font-weight: 600">Project Name</th>
-                <th style="font-weight: 600">Project Phases</th>
+                <th style="font-weight: 600">Locality</th>
 
-                <th style="font-weight: 600;">Locality</th>
-                <th style="font-weight: 600">Virginia Region</th>
-                <th style="font-weight: 600">Nameplate Capacity (MWac)</th>
+                <th style="font-weight: 600;">Unit of Government</th>
+                <th style="font-weight: 600">BESS Project MW</th>
+                <th style="font-weight: 600">Energy Capacity (MWh)</th>
                 <th style="font-weight: 600">Local Permit Status</th>
-                <th style="font-weight: 600">Best Available Project Acreage</th>
-                <th style="font-weight: 600">Owner/Developer at Local Action</th>
+                <!-- <th style="font-weight: 600">EIA - Operational Status Acreage</th> -->
+                <th style="font-weight: 600">Colocated with Solar</th>
                 <th>data_id</th>
             </tr>
         </thead>
@@ -170,15 +135,13 @@
             {% for project in data %}
             <tr>
                 <td style="cursor: pointer;">{{ project.project_name }}</td>
-                <td style="cursor: pointer;">{{ project.project_phase }}</td>
-
                 <td style="cursor: pointer;">{{ project.locality }}</td>
-                <td style="cursor: pointer;">{{ project.region }}</td>
-                <td style="cursor: pointer;">{{ project.project_mw|floatformat:1 }}</td>
+                <td style="cursor: pointer;">{{ project.unit_of_government }}</td>
+                <td style="cursor: pointer;">{{ project.project_bess_mw|floatformat:1 }}</td>
+                <td style="cursor: pointer;">{{ project.project_bess_capacity|floatformat:1 }}</td>
                 <td style="cursor: pointer;">{{ project.local_permit_status }}</td>
-                <td style="cursor: pointer;">{{ project.public_project_acres|floatformat:1 }}</td>
-                <td style="cursor: pointer;">{{ project.local_action_project_owner }}</td>
-
+                <!---  <td style="cursor: pointer;">{{ project.eia_operational }}</td> -->
+                <td style="cursor: pointer;">{{ project.solar_storage }}</td>
                 <td style="cursor: pointer;">{{ project.data_id }}</td>
             </tr>
             {% endfor %}
@@ -212,7 +175,7 @@
           
           $('#projectData tbody').on('click', 'tr', function () {
             var data = table.row(this).data();
-            var data_id = data[8]
+            var data_id = data[7]
             window.location.href = '/project/' + parseInt(data_id) + '/';
           });
           
@@ -223,21 +186,6 @@
     var map = L.map('map').setView([38.2, -79.2569], 7)
 
     let JSONData = JSON.parse(document.getElementById('data_json').textContent)
-
-    let data = JSONData.map(item => {
-        const capacity = parseFloat(item.project_mw); 
-
-        if (capacity < 5) {
-            item.size = "5mw";
-        } else if (capacity >= 5 && capacity < 20) {
-            item.size = "5mw20mw";
-        } else if (capacity >= 21 && capacity < 150) {
-            item.size = "21mw150mw";
-        } else if (capacity >= 150) {
-            item.size = "150mw";
-        }
-        return item;
-    });
 
     var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 20,
@@ -252,13 +200,11 @@
         let search = document.querySelector('.search-box input').value.toLowerCase();
         let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
         let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
-        let sizeList = Array.from(document.querySelectorAll('.size-box:checked')).map(checkbox => checkbox.id.toLowerCase());
 
         let filteredData = data.filter(item => 
             (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alt_names && item.alt_names.toLowerCase().includes(search)) ) &&
             (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
-            (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase()))) &&     
-            (sizeList.length == 0 || (item.project_mw && sizeList.includes(item.size)))
+            (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase())))
         );
 
         projectMarkers.clearLayers();
@@ -289,7 +235,7 @@
         searchTimeout = setTimeout(updateMarkers, 300); // Update after 300ms of no typing
     });
 
-    document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(checkbox => {
+    document.querySelectorAll('.locality-box, .status-box').forEach(checkbox => {
         checkbox.addEventListener('change', updateMarkers);
     });
 
@@ -304,7 +250,7 @@
         });
     });
     document.querySelector('.clear-all-btn').addEventListener('click', function () {
-        document.querySelectorAll('.locality-box, .status-box, .size-box').forEach(function (checkbox) {
+        document.querySelectorAll('.locality-box, .status-box').forEach(function (checkbox) {
             checkbox.checked = false;
             updateMarkers();
 
