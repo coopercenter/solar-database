@@ -177,8 +177,8 @@
             console.log("ROW CLICKED");
             var data = table.row(this).data();
             var data_id = data[7]
-            window.location.href = '/storage-project/' + parseInt(data_id) + '/';
-            console.log("Row data:", row);
+            window.location.href = "/storage-project/" + data_id + "/";
+            // console.log("Row data:", row);
         });
           
         });
@@ -189,6 +189,7 @@
 
     let JSONData = JSON.parse(document.getElementById('data_json').textContent)
     let data = JSONData;
+
 
     var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 20,
@@ -215,14 +216,14 @@
 
         projectMarkers.clearLayers();
 
-        filteredData.forEach(data => {
-            if (data.longitude !== null && data.latitude !== null) {
-                var projectMarker = L.marker([data.latitude, data.longitude])
+        filteredData.forEach(project => { 
+            if (project.longitude !== null && project.latitude !== null) {
+                var projectMarker = L.marker([project.latitude, project.longitude])
                     .on('click', function() {
-                        window.location.href = "/storage-project/" + data.data_id;
+                        window.location.href = "/storage-project/" + project.data_id + "/";
                     })
                     .on('mouseover', function() {
-                        projectMarker.bindPopup(data.project_name).openPopup();
+                        projectMarker.bindPopup(project.project_name).openPopup();
                     })
                     .on('mouseout', function() {
                         projectMarker.closePopup();
