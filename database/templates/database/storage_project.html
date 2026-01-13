@@ -6,9 +6,9 @@
     <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     {% if object.project_name.strip %}
-        <h4>{{ object.project_name }}</h4>
+        <h1>{{ object.project_name }}</h1>
     {% else %}
-        <h4>{{ object.project_phases }}</h4>
+        <h1>{{ object.project_phases }}</h1>
     {% endif %}
     </div>
     {% if object.latitude is not None and object.longitude is not None %}
@@ -38,77 +38,98 @@
     <br>
 
     <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
-        <div>
-            <div class="card">
-                <h6 class="card-header">
-                    Project Overview
-                </h6>
-                <div class="card-body">
-                    <div><b>Locality</b> <br> {{ object.locality }} {{object.unit_of_government}}</div>
+        <div class="card">
+            <h6 class="card-header">
+                Project Overview
+            </h6>
+            
+            <div class = "card-body">
+                <div><b>Locality</b> <br> {{ object.locality }} {{object.unit_of_government}}</div>
 
-                    <div style="height: 12px;"></div>
-                    <div><b>Additional Localities</b> <br> 
-                        {% if object.additional_localities.strip %}
-                            {{ object.additional_localities }} 
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                    </div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Virginia Region</b> <br> {{ object.region}}</div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Date of Final Action</b> <br> {{ object.final_action_date }}</div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Latest Nameplate Capacity per Local Action (MWac)</b> <br> {{ object.project_mw  }}</div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Project Phases</b> <br> 
-                        {% if object.project_phase.strip %}
-                            {{ object.project_phase  }}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                    </div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Phase Capacity (MWac)</b> <br> 
-                        {% if object.phase_mw.strip %}
-                            {{ object.phase_mw }}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                    </div>
-
-                    <div style="height: 12px;"></div>
-                    <div><b>Best Available Project Acreage</b> <br> {{ object.public_project_acres }}</div>
+                <div style="height: 12px;"></div>
+                <div><b>Additional Localities</b> <br> 
+                    {% if object.additional_localities.strip %}
+                        {{ object.additional_localities }} 
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
                 </div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>BESS Project MW</b> <br> {{ object.project_bess_mw }}</div>
+
+                <div style="height: 12px;"></div>
+                <div><b>BESS Project Energy Capacity (MWh)</b> <br> {{ object.project_bess_capacity }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Acres - BESS Project (Best Available)</b> <br> {{ object.public_bess_project_acres }}</div>
             </div>
+        </div>
 
-            <br>
-
-            <div class="card">
-                <h6 class="card-header">
-                    Additional Permitting Details
-                </h6>
-                <div class="card-body">
-                    <div><b>DEQ Permit Number</b> <br> 
-                        {%if object.deq_permit_number.strip %}
-                            {{  object.deq_permit_number  }}
-                        {%else%}
-                            &nbsp;
-                        {% endif %}
-                    </div>
+        <div class="card">
+            <h6 class="card-header">
+                Additional Project Details 
+            </h6>
+            
+            <div class = "card-body">
+                <div style="height: 12px;"></div>
+                <div><b>Alternate Names</b> <br> 
+                    {% if object.alt_names.strip %}
+                        {{ object.alt_names }} 
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
                 </div>
+
+                <div style="height: 12px;"></div>
+                <div><b>Developer/Owner at Action</b> <br> {{ object.local_action_project_owner }}</div>
+            
+                <div style="height: 12px;"></div>
+                <div><b>Duration- Short (<10 MWh) or Long (>10 MWh)</b> <br> {{ object.bess_duration_short_long }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Location Description</b> <br> {{ object.location_description }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Notes on Co-location/Use</b> <br> {{ object.colocation_info }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Colocated with Solar</b> <br> {{ object.solar_storage }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>BESS Technology Type</b> <br> {{ object.storage_tech }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>BESS Technology Chemistry</b> <br> {{ object.storage_chemistry }}</div>
+            
+            </div>
+        </div>
+
+        <div class="card">
+            <h6 class="card-header">
+                Additional Permitting Details
+            </h6>
+            
+            <div class = "card-body">
+                <div style="height: 12px;"></div>
+                <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Date- Final Action</b> <br> {{ object.final_action_date }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Siting Agreement Executed?</b> <br> {{ object.siting_agreement_exists }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Date - Siting Agreement  Action</b> <br> {{ object.siting_agreement_date }}</div>
+                
+                <div style="height: 12px;"></div>
+                <div><b>Link - Siting Agreement</b> <br> {{ object.siting_agreement_link }}</div>
             </div>
         </div>
     </div>
 
-    <br>
+
+
 
 {% endblock content %}
