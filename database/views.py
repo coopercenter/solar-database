@@ -138,3 +138,7 @@ def donate(request):
 class ProjectView(DetailView):
     model = SolarProjectData
     template_name = 'database/project.html'
+
+class StorageProjectView(DetailView):
+    model = StorageProjectData
+    template_name = 'database/storage_project.html'

@@ -28,7 +28,7 @@
             <p><i>Current as of December 31, 2025 (Will be updated quarterly)</i></p>
             <div>
                 <div style="line-height: 20%"><br></div>
-                <a class="btn btn-sm btn--blue-d" href="{% url 'export_csv' %}" style="margin-right: 20px">Export All to CSV</a>
+                <a class="btn btn-sm btn--blue-d" href="{% url 'export_xlsx' %}" style="margin-right: 20px">Export All to Excel</a>
             </div>
         </div> 
     </div>
@@ -171,13 +171,15 @@
             ]
           });
 
-          table.column(8).visible(false)
+          table.column(7).visible(false)
           
           $('#projectData tbody').on('click', 'tr', function () {
+            console.log("ROW CLICKED");
             var data = table.row(this).data();
             var data_id = data[7]
-            window.location.href = '/project/' + parseInt(data_id) + '/';
-          });
+            window.location.href = '/storage-project/' + parseInt(data_id) + '/';
+            console.log("Row data:", row);
+        });
           
         });
     </script>
@@ -186,6 +188,7 @@
     var map = L.map('map').setView([38.2, -79.2569], 7)
 
     let JSONData = JSON.parse(document.getElementById('data_json').textContent)
+    let data = JSONData;
 
     var mapBase = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 20,
@@ -196,16 +199,19 @@
     mapBase.addTo(map);
     projectMarkers.addTo(map);
 
+
+
     function updateMarkers() {
         let search = document.querySelector('.search-box input').value.toLowerCase();
         let statusList = Array.from(document.querySelectorAll('.status-box:checked')).map(checkbox => checkbox.id.toLowerCase());
         let localityList = Array.from(document.querySelectorAll('.locality-box:checked')).map(checkbox => checkbox.id.replace(/_/g, ' ').toLowerCase());
-
+ 
         let filteredData = data.filter(item => 
             (!search || (item.project_name && item.project_name.toLowerCase().includes(search)) || (item.alt_names && item.alt_names.toLowerCase().includes(search)) ) &&
             (statusList.length == 0 || (item.local_permit_status && statusList.includes(item.local_permit_status.toLowerCase()))) &&
             (localityList.length == 0 || (item.locality && localityList.includes(item.locality.toLowerCase())))
         );
+
 
         projectMarkers.clearLayers();
 
@@ -213,7 +219,7 @@
             if (data.longitude !== null && data.latitude !== null) {
                 var projectMarker = L.marker([data.latitude, data.longitude])
                     .on('click', function() {
-                        window.location.href = "/project/" + data.data_id;
+                        window.location.href = "/storage-project/" + data.data_id;
                     })
                     .on('mouseover', function() {
                         projectMarker.bindPopup(data.project_name).openPopup();

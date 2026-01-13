@@ -1,0 +1,114 @@
+{% extends "database/base.html" %}
+{% block content %}
+    <br><br>
+    <div class="container">
+        <br><br>
+    <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
+    <br><br>
+    {% if object.project_name.strip %}
+        <h4>{{ object.project_name }}</h4>
+    {% else %}
+        <h4>{{ object.project_phases }}</h4>
+    {% endif %}
+    </div>
+    {% if object.latitude is not None and object.longitude is not None %}
+        <br>
+        <style> #map { height: 350px; z-index: 0} </style>
+        <div class="container" id="map"></div>
+
+        {{ object.longitude|json_script:"longitude_json" }}
+        {{ object.latitude|json_script:"latitude_json" }}
+
+        <script>
+            let longitude = Number(JSON.parse(document.getElementById('longitude_json').textContent))
+            let latitude = Number(JSON.parse(document.getElementById('latitude_json').textContent))
+            
+            var map = L.map('map').setView([37.6, -78.6569], 7)
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map)
+
+            L.marker([latitude, longitude]).addTo(map)
+
+        </script>
+    {% endif %}
+
+    <br>
+
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%;">
+        <div>
+            <div class="card">
+                <h6 class="card-header">
+                    Project Overview
+                </h6>
+                <div class="card-body">
+                    <div><b>Locality</b> <br> {{ object.locality }} {{object.unit_of_government}}</div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Additional Localities</b> <br> 
+                        {% if object.additional_localities.strip %}
+                            {{ object.additional_localities }} 
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Virginia Region</b> <br> {{ object.region}}</div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Local Permit Status</b> <br> {{ object.local_permit_status }}</div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Date of Final Action</b> <br> {{ object.final_action_date }}</div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Latest Nameplate Capacity per Local Action (MWac)</b> <br> {{ object.project_mw  }}</div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Project Phases</b> <br> 
+                        {% if object.project_phase.strip %}
+                            {{ object.project_phase  }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Phase Capacity (MWac)</b> <br> 
+                        {% if object.phase_mw.strip %}
+                            {{ object.phase_mw }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+
+                    <div style="height: 12px;"></div>
+                    <div><b>Best Available Project Acreage</b> <br> {{ object.public_project_acres }}</div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="card">
+                <h6 class="card-header">
+                    Additional Permitting Details
+                </h6>
+                <div class="card-body">
+                    <div><b>DEQ Permit Number</b> <br> 
+                        {%if object.deq_permit_number.strip %}
+                            {{  object.deq_permit_number  }}
+                        {%else%}
+                            &nbsp;
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+{% endblock content %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('export_xlsx/', views.export_xlsx, name='export_xlsx'),
     path('export-dictionary-csv/', views.export_dictionary_csv, name='export_dictionary_csv'),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    path('storage-project/<pk>/', views.StorageProjectView.as_view(), name='database-storage-project'),
 ]
