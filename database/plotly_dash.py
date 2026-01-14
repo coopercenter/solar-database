@@ -326,7 +326,7 @@ actionAnnualLine = px.line(actionRateAnnual,
 
 actionAnnualLine.update_traces(line=dict(width=2),
                              marker=dict(size=10),
-                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
+                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects Acted On: %{customdata[2]}<br><extra></extra>')
 
 actionAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                              font_family='franklin-gothic-urw-cond, sans-serif',
