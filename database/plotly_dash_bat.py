@@ -46,7 +46,7 @@ annualData = pd.merge(annualData,annualProjectTotal,on='final_action_year')
 annualData['annual_rate'] = round(annualData['project_count']/annualData['annual_total'],2)
 
 #annual action rate data for approved/denied projects
-actionRateData = df[df.local_permit_status.isin(["Approved","Denied"])].groupby(["final_action_year","local_permit_status"]).agg({"data_id":"count"}).reset_index().rename(columns={"data_id":"project_count"})
+actionRateData = df[df.local_permit_status.isin(["Approved","Denied"])&(df["project_type"]!="Solar + Storage")].groupby(["final_action_year","local_permit_status"]).agg({"data_id":"count"}).reset_index().rename(columns={"data_id":"project_count"})
 annualActionTotal = actionRateData.groupby("final_action_year").agg({"project_count":"sum"}).reset_index().rename(columns={"project_count":"annual_total"})
 actionRateData=pd.merge(actionRateData,annualActionTotal,how="left",on="final_action_year")
 actionRateData["action_rate"] = round(actionRateData['project_count']/actionRateData['annual_total'],2)
@@ -134,13 +134,13 @@ statusRate['denial_rate_projects']=round(statusRate['denied_projects']/statusRat
 
 
 mwPieChart = px.pie(pieData,
-                    title="<b>Approved Battery Storage Megawatts</b>",
+                    title="<b>Approved BESS Megawatts</b>",
                     values='project_bess_mw', 
                     names='project_type', 
                     color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
-                    category_orders={"local_permit_status": ["Non-Solar BESS", 
+                    category_orders={"project_type": ["Non-Solar BESS", 
                                                              "Colocated with Solar", 
                                                              "Solar + Storage"]},
                     labels={'project_type':'Project Type',
@@ -157,12 +157,12 @@ mwPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                          font_color='#242e4c',
                          autosize=False,
                          width=450,
-                         height=660,
+                         height=640,
                          legend=dict(font=dict(size=10,
                                                color='#242e4c'),
                                       orientation='h',
                                       yanchor="bottom",
-                                      y=.95,
+                                      y=1.2,
                                       x=0,
                                       title=''))
      
@@ -172,11 +172,11 @@ mwPieChart.update_traces(texttemplate="%{value:,.0f} (%{percent:.1%}) ",hovertem
 projectsPieChart= px.pie(pieData, 
                          values='data_id', 
                          names='project_type', 
-                         title="<b>Approved Battery Storage Projects</b>",
+                         title="<b>Approved BESS Projects</b>",
                     color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
-                    category_orders={"local_permit_status": ["Non-Solar BESS", 
+                    category_orders={"project_type": ["Non-Solar BESS", 
                                                              "Colocated with Solar", 
                                                              "Solar + Storage"]},
                          labels={'project_type':'Project Type',
@@ -192,7 +192,7 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                font_color='#242e4c',
                                autosize=False,
                                width=450,
-                               height=660,
+                               height=640,
                                legend=dict(font=dict(size=10,
                                                      color='#242e4c'),
                                            orientation='h',
@@ -207,11 +207,11 @@ projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hoverte
 mwhPieChart = px.pie(pieData, 
                       values='project_bess_capacity', 
                       names='project_type', 
-                      title="<b>Approved Known Battery Storage MWh</b>",
+                      title="<b>Approved Known BESS MWh</b>",
                     color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
-                    category_orders={"local_permit_status": ["Non-Solar BESS", 
+                    category_orders={"project_type": ["Non-Solar BESS", 
                                                              "Colocated with Solar", 
                                                              "Solar + Storage"]},
                       labels={'project_type':'Project Type',
@@ -227,7 +227,7 @@ mwhPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                            font_color='#242e4c',
                            autosize=False,
                            width=450,
-                           height=660,
+                           height=640,
                            legend=dict(font=dict(size=10,
                                                  color='#242e4c'),
                                        orientation='h',
@@ -242,10 +242,10 @@ actionAnnualLine = px.line(actionRateData,
                          x="final_action_year", 
                          y='action_rate',
                          color='local_permit_status',
-                         title="<b>Annual Battery Storage Action Rate</b>",
+                         title="<b>Annual Non-Solar BESS Action Rate</b>",
                          custom_data = ['local_permit_status','project_count','annual_total'],
-                         height=660,
-                         width=600,
+                         height=600,
+                         width=550,
                          markers=True,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(253, 218, 36)', 
@@ -267,7 +267,7 @@ actionAnnualLine = px.line(actionRateData,
 
 actionAnnualLine.update_traces(line=dict(width=2),
                              marker=dict(size=10),
-                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
+                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects Acted On: %{customdata[2]}<br><extra></extra>')
 
 actionAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                              font_family='franklin-gothic-urw-cond, sans-serif',
@@ -295,10 +295,10 @@ rateAnnualLine = px.line(annualData,
                          x="final_action_year", 
                          y='annual_rate',
                          color='local_permit_status',
-                         title="<b>Annual Battery Storage Local Status Rate</b>",
+                         title="<b>Annual Non-Solar BESS Local Status Rate</b>",
                          custom_data = ['local_permit_status','project_count','annual_total'],
-                         height=660,
-                         width=600,
+                         height=600,
+                         width=550,
                          markers=True,
                          color_discrete_sequence=['rgb(40, 67, 118)', 
                                                   'rgb(253, 218, 36)', 
@@ -349,10 +349,10 @@ mwAnnualLine = px.line(annualData,
                        x="final_action_year", 
                        y="project_bess_mw",
                        color='local_permit_status',
-                       title="<b>Annual Battery Storage Megawatts by Local Permit Status</b>",
+                       title="<b>Annual Non-Solar BESS MW</b>",
                        custom_data=['local_permit_status','project_count'],
-                       height=660,
-                       width=600,
+                       height=600,
+                       width=550,
                        markers=True,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -400,10 +400,10 @@ mwhAnnualLine = px.line(annualData,
                        x="final_action_year", 
                        y="project_bess_capacity",
                        color='local_permit_status',
-                       title="<b>Annual Known Battery Storage MWh by Local Permit Status</b>",
+                       title="<b>Annual Known Non-Solar BESS MWh</b>",
                        custom_data=['local_permit_status','project_count'],
-                       height=660,
-                       width=600,
+                       height=600,
+                       width=550,
                        markers=True,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
@@ -452,10 +452,10 @@ projectsAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PEN
                              x="final_action_year", 
                              y="project_count",
                              color='local_permit_status',
-                             title="<b>Annual Battery Storage Projects by Local Permit Status</b>",
+                             title="<b>Annual Non-Solar BESS Projects</b>",
                              custom_data=['local_permit_status','project_bess_mw'],
-                             height=660,
-                             width=600,
+                             height=600,
+                             width=550,
                              markers=True,
                              color_discrete_sequence=['rgb(40, 67, 118)', 
                                                       'rgb(253, 218, 36)', 
@@ -504,10 +504,10 @@ mwRegionalBar = px.bar(regionalData,
                        x="region", 
                        y='project_bess_mw', 
                        color='local_permit_status',
-                       title="<b>Regional Megawatts by Local Permit Status</br>",
+                       title="<b>Regional BESS Megawatts, All Projects</br>",
                        custom_data=['local_permit_status','project_bess_capacity','data_id'],
                        height=640,
-                       width=600,
+                       width=580,
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                                 'rgb(253, 218, 36)', 
                                                 'rgb(229, 114, 0)', 
@@ -554,23 +554,24 @@ mwStatusBar = px.bar(statusBar,
                        x="project_bess_mw", 
                        y='local_permit_status', 
                        color='project_type',
-                       title="<b>Megawatts, All Projects</br>",
+                       title="<b>BESS Megawatts, All Projects</br>",
                        custom_data=['local_permit_status','project_bess_capacity','data_id'],
-                       height=640,
-                       width=600,
-                        color_discrete_sequence=['rgb(40, 67, 118)', 
+                       color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
-                        category_orders={"local_permit_status": ["Non-Solar BESS", 
+                    category_orders={"project_type": ["Non-Solar BESS", 
                                                              "Colocated with Solar", 
-                                                             "Solar + Storage"]},
+                                                             "Solar + Storage"],
+                                    'local_permit_status':['Approved','Approved/Amended','By-right','Denied','Withdrawn','Pending']},
+                       height=640,
+                       width=600,
                       labels={"project_type":'Project Type',
                               'project_bess_mw':'Megawatts',
                               'project_bess_capacity':'Known Megawatt Hours',
                               'data_id':'Project Count',
                               'local_permit_status':'Local Permit Status'},
                       barmode='stack')
-mwStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
+mwStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b>%{customdata[0]} Megawatts: %{x}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
 
 mwStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                             paper_bgcolor='#F2F4F8',
@@ -579,8 +580,8 @@ mwStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                                   color='#242e4c'),
                                          orientation='h',
                                          yanchor="bottom",
-                                         y=.95,
-                                         x=0,
+                                         y=1,
+                                         x=-.2,
                                          title=''),
                             font=dict(size=10,color='#242e4c'),
                             font_family='franklin-gothic-urw-cond, sans-serif',
@@ -590,31 +591,30 @@ mwStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                        tickformat=",.0f",
                                        title='Megawatts'),
                             yaxis=dict(
-                                       
-                                       tickvals=['Approved','Approved/Amended','By-right','Denied','Withdrawn','Pending'],
                                        title="Local Permit Status"))
 
 mwhStatusBar = px.bar(statusBar, 
                        x="project_bess_capacity", 
                        y='local_permit_status', 
                        color='project_type',
-                       title="<b>Known Megawatt Hours, All Projects</br>",
+                       title="<b>Known BESS MWh, All Projects</br>",
                        custom_data=['local_permit_status','project_bess_mw','data_id'],
                        height=640,
                        width=600,
                     color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
-                    category_orders={"local_permit_status": ["Non-Solar BESS", 
+                    category_orders={"project_type": ["Non-Solar BESS", 
                                                              "Colocated with Solar", 
-                                                             "Solar + Storage"]},
+                                                             "Solar + Storage"],
+                                    'local_permit_status':['Approved','Approved/Amended','By-right','Denied','Withdrawn','Pending']},
                       labels={"project_type":'Project Type',
                               'project_bess_mw':'Megawatt Hours',
                               'project_bess_capacity':'Known Megawatt Hours',
                               'data_id':'Project Count',
                               'local_permit_status':'Local Permit Status'},
                       barmode='stack')
-mwhStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b><br>Region: %{x}<br>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
+mwhStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
 
 mwhStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                             paper_bgcolor='#F2F4F8',
@@ -634,7 +634,6 @@ mwhStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                        title='Megawatt Hours'),
                             yaxis=dict(
                                        
-                                       tickvals=['Approved','Approved/Amended','By-right','Denied','Withdrawn','Pending'],
                                        title="Local Permit Status"))     
 
 dashappbat = DjangoDash(name='BatteryDash',add_bootstrap_links=True, external_stylesheets=[dbc.themes.BOOTSTRAP,dbc.themes.FLATLY,'/static/css/styles.css'])
@@ -697,26 +696,6 @@ dashappbat.layout =  dbc.Container([
         #summary graphs
         html.Div(
         [dbc.Row([
-            #pie chart block
-            html.Div([
-            #pie chart universal title
-            #html.H3('Local Permit Status Summaries'),
-            #pie chart buttons
-            dbc.RadioItems(
-                id='graphOneButtons',
-            className='btn-group',
-            inputClassName='btn-check',
-            labelClassName="btn--dash",
-            options=[
-                {"label": "Projects", "value": 'projectsPie'},
-                {"label": "Megawatts", "value": 'mwPie'},
-                {"label": "Known Megawatt Hours", "value": 'mwhPie'}
-            ],
-        value='projectsPie'
-        ),
-            #pie chart block
-            html.Div(dcc.Graph(id='graphOne',config={'responsive':False,
-                                                     'displayModeBar':True}))]), 
             #size category block
             html.Div([
             #size categories universal title
@@ -736,9 +715,7 @@ dashappbat.layout =  dbc.Container([
             ),
             #size category bar chart
             html.Div(dcc.Graph(id='graphThree',config={'responsive':False,
-                                                    'displayModeBar':True}),style={'height':640})])
-                ]),
-        dbc.Row([
+                                                    'displayModeBar':True}),style={'height':640})]),
             #annual line chart block
             html.Div([
             #annual chart universal title
@@ -760,7 +737,33 @@ dashappbat.layout =  dbc.Container([
             #annual line chart
             html.Div(dcc.Graph(id='graphTwo',config={'responsive':False,
                                                        'displayModeBar':True}),
-                    style={'width':600,})]),
+                    style={'width':550,})]),
+
+
+                ]),
+        dbc.Row([
+            #pie chart block
+            html.Div([
+            #pie chart universal title
+            #html.H3('Local Permit Status Summaries'),
+            #pie chart buttons
+            dbc.RadioItems(
+                id='graphOneButtons',
+            className='btn-group',
+            inputClassName='btn-check',
+            labelClassName="btn--dash",
+            options=[
+                {"label": "Projects", "value": 'projectsPie'},
+                {"label": "Megawatts", "value": 'mwPie'},
+                {"label": "Known Megawatt Hours", "value": 'mwhPie'}
+            ],
+        value='projectsPie'
+        ),
+            #pie chart block
+            html.Div(dcc.Graph(id='graphOne',config={'responsive':False,
+                                                     'displayModeBar':True},))],style={'margin-left':50}),
+
+
             #regional bar block
             html.Div([
                 dbc.RadioItems(
@@ -778,12 +781,14 @@ dashappbat.layout =  dbc.Container([
                 #regional graph
                 dcc.Graph(id='graphFour',config={'responsive':False,
                                                        'displayModeBar':True})],
-                style={'width':600,
+                style={'width':560,
                        'height':715,
-                       'margin-top':35})
+                       'margin-top':70,
+                       'margin-left':0})
             ],
             style={'margin-right':0,
-                   'margin-left':60,})
+                   'margin-left':0,
+                   'margin-top':5})
             ],
         style={
             #style the container that holds the graphs
@@ -794,7 +799,8 @@ dashappbat.layout =  dbc.Container([
             'display': 'flex'
         })])],
                             fluid=True,
-                            style={'display': 'flex'},
+                            style={'display': 'flex',
+                                   'background-color':'#F2F4F8'},
                             className='dashboard-container')
 
 #Define a callback to plot the map with a time slider

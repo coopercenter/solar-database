@@ -795,7 +795,8 @@ dashapp.layout =  dbc.Container([
             'background-color':'#F2F4F8'
         })])],
                             fluid=True,
-                            style={'display': 'flex'},
+                            style={'display': 'flex',
+                                   'background-color':'#F2F4F8'},
                             className='dashboard-container')
 
 #Define a callback to plot the map with a time slider

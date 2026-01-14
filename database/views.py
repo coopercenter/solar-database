@@ -33,6 +33,8 @@ def export_xlsx(request):
     write_sheet_solar = workbook.active
     write_sheet_solar.title = "Solar"
 
+    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
+
     write_sheet(
         write_sheet_solar,
         SolarProjectData.objects.all(),
@@ -60,7 +62,7 @@ def export_xlsx(request):
 def export_dictionary_csv(request):
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="vasolardatadictionary.csv"'},
+        headers={"Content-Disposition": 'attachment; filename="va_solar_and_storage_data_dictionary.csv"'},
     )
 
     data = DataDictionary.objects.all()

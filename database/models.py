@@ -136,5 +136,5 @@ class DataDictionary(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'data_dictionary'
+        db_table = 'data_dictionary_new'
 
