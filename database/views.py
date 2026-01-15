@@ -27,7 +27,7 @@ def write_sheet(write_sheet, queryset, model):
 
     write_sheet.freeze_panes = "A2"
 
-def export_xlsx(request):
+def _xlsx(request):
     workbook = Workbook()
 
     write_sheet_solar = workbook.active
@@ -45,7 +45,8 @@ def export_xlsx(request):
     write_sheet(
         write_sheet_storage,
         StorageProjectData.objects.all(),
-        StorageProjectData
+        StorageProjectData,
+        excluded_fields = excluded_fields
     )
 
     output = BytesIO()
