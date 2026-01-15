@@ -43,12 +43,19 @@ df['mw_size_range_int'] = pd.cut(df.project_mw,bins=[0,5,20,150,9999],labels=['1
 #define the dataset for the pie charts
 pieData = df.groupby('local_permit_status').agg({'project_mw':'sum','phase_mw':'sum','data_id':'count','public_project_acres':'sum'}).reset_index()
 #define the data used in the annual line charts, summing the relevant values by year and by status then calculating an annual rate of status action
-annualData = pd.DataFrame(df.groupby(['final_action_year','local_permit_status']).agg({'data_id':'count','project_mw':'sum'}).reset_index())
+annualData = pd.DataFrame(df[df["local_permit_status"]!= 'Pending'].groupby(['final_action_year','local_permit_status']).agg({'data_id':'count','project_mw':'sum'}).reset_index())
 annualData = annualData.rename(columns={'data_id':'project_count'})
-annualTotal = df.groupby('final_action_year').agg({'data_id':'count'}).reset_index()
+annualTotal = df[df["local_permit_status"]!= 'Pending'].groupby('final_action_year').agg({'data_id':'count'}).reset_index()
 annualTotal = annualTotal.rename(columns={'data_id':'annual_total'})
 annualData = pd.merge(annualData,annualTotal,on='final_action_year')
 annualData['annual_rate'] = round(annualData['project_count']/annualData['annual_total'],2)
+
+#annual action rate data for approved/denied projects
+actionRateAnnual = df[df.local_permit_status.isin(["Approved","Denied"])].groupby(["final_action_year","local_permit_status"]).agg({"data_id":"count"}).reset_index().rename(columns={"data_id":"project_count"})
+annualActionTotal = actionRateAnnual.groupby("final_action_year").agg({"project_count":"sum"}).reset_index().rename(columns={"project_count":"annual_total"})
+actionRateAnnual=pd.merge(actionRateAnnual,annualActionTotal,how="left",on="final_action_year")
+actionRateAnnual["action_rate"] = round(actionRateAnnual['project_count']/actionRateAnnual['annual_total'],2)
+
 #define the regional data, straightforward summary of relevant datapoints by region. More could be added
 regionalData = pd.DataFrame(df.groupby(['region','local_permit_status']).agg({'project_mw':'sum','data_id':'count','public_project_acres':'sum'}).reset_index())
 
@@ -73,16 +80,17 @@ counties = requests.get('https://raw.githubusercontent.com/plotly/datasets/maste
 mapData = pd.merge(df,countyDf,how='left',on='locality')
 #set up the data for the permit status map with the time slider
 mapDataClean = mapData[(mapData.local_permit_status != 'NA') & (mapData.final_action_year.isna()==False)]
-mapDataClean['final_action_year']=mapDataClean.final_action_year.str.replace('PENDING','2025').astype('int')
+mapDataClean['final_action_year']=mapDataClean.final_action_year.replace('PENDING',2026)
+mapDataClean['final_action_year']=mapDataClean.final_action_year.replace('PENDING  ',2026).astype("int")
 years = mapDataClean['final_action_year'].unique()
 years.sort()
 
 #MW heatmap dataframe
-heatMWYear = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= years[0])].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+heatMWYear = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'].astype("int") <= years[0])].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
 heatMWYear['year']=years[0]
 
 for year in years:
-    heatMWYeari = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'] <= year)].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
+    heatMWYeari = mapDataClean[(mapDataClean.local_permit_status.isin(['Approved','Denied'])) & (mapDataClean['final_action_year'].astype("int") <= year)].groupby(['local_permit_status','fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()
     heatMWYeari['year']=year
     heatMWYear = pd.concat([heatMWYear,heatMWYeari])
 
@@ -91,9 +99,9 @@ actionRate = pd.DataFrame()
 for year in years:
     all_fips = pd.DataFrame(mapDataClean[(mapDataClean['final_action_year'] <= year) &(mapDataClean['local_permit_status'] !='PENDING')].groupby(['fips','locality_mapping']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'total_mw','data_id':'total_projects'})
 
-    approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
+    approved_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Approved') & (mapDataClean['final_action_year'].astype("int")<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'approved_mw','data_id':'approved_projects'})
 
-    denied_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Denied') & (mapDataClean['final_action_year']<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
+    denied_fips = pd.DataFrame(mapDataClean[(mapDataClean.local_permit_status == 'Denied') & (mapDataClean['final_action_year'].astype("int")<= year)].groupby(['fips']).agg({'project_mw':'sum','data_id':'count'}).reset_index()).rename(columns={'project_mw':'denied_mw','data_id':'denied_projects'})
     
     approved = pd.merge(all_fips,approved_fips,how='left',on='fips')
     approved_denied = pd.merge(approved,denied_fips,how='left',on='fips')
@@ -240,7 +248,7 @@ rateAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING
                          x="final_action_year", 
                          y='annual_rate',
                          color='local_permit_status',
-                         title="<b>Annual Solar Action Rate by Local Permit Status</b>",
+                         title="<b>Annual Solar Local Status Rate</b>",
                          custom_data = ['local_permit_status','project_count','annual_total'],
                          height=660,
                          width=600,
@@ -289,6 +297,58 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                         categoryorder='category ascending',
                                         title=''))
 
+actionAnnualLine = px.line(actionRateAnnual,  
+                         x="final_action_year", 
+                         y='action_rate',
+                         color='local_permit_status',
+                         title="<b>Annual Solar Action Rate</b>",
+                         custom_data = ['local_permit_status','project_count','annual_total'],
+                         height=660,
+                         width=600,
+                         markers=True,
+                         color_discrete_sequence=['rgb(40, 67, 118)', 
+                                                  'rgb(253, 218, 36)', 
+                                                  'rgb(229, 114, 0)',
+                                                  'rgb(200, 203, 210)',
+                                                  'rgb(37, 202, 211)',
+                                                  'rgb(98, 187, 70)'],
+                         category_orders={"local_permit_status": ["Approved", 
+                                                                  "Approved/Amended", 
+                                                                  "Denied", 
+                                                                  "Withdrawn", 
+                                                                  "By-right", 
+                                                                  "Pending"]},
+                         labels={"final_action_year":'Year',
+                                 'local_permit_status':'Action Taken',
+                                 'annual_rate':'Action Rate',
+                                 'annual_total':'Total Projects for Year',
+                                 'project_count':'Action Projects'})
+
+actionAnnualLine.update_traces(line=dict(width=2),
+                             marker=dict(size=10),
+                             hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects Acted On: %{customdata[2]}<br><extra></extra>')
+
+actionAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
+                             font_family='franklin-gothic-urw-cond, sans-serif',
+                             title=dict(font=dict(size=22), automargin=False, yref='paper'),
+                             paper_bgcolor='#F2F4F8',
+                             plot_bgcolor='#F2F4F8',
+                             legend=dict(font=dict(size=10,
+                                                   color='#242e4c'),
+                                         orientation='h',
+                                         yanchor="bottom",
+                                         y=1,
+                                         x=0,
+                                         title=''),
+                             font=dict(size=10,
+                                       color='#242e4c'),
+                             title_subtitle=dict(text='<i>Source: Weldon Cooper Center Virginia Solar and Storage Database</i>', font=dict(size=10)),
+                             yaxis=dict(title="Percent of Projects",tickformat='.0%'),
+                             xaxis=dict(type='category',
+                                        tickmode='array',
+                                        tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
+                                        categoryorder='category ascending',
+                                        title=''))
 
 mwAnnualLine = px.line(annualData[(annualData['final_action_year'] != 'PENDING') & (annualData['local_permit_status'] != 'NA')],
                        x="final_action_year", 
@@ -583,7 +643,7 @@ dashapp.layout =  dbc.Container([
         html.Br(),
         html.Br(),
         html.H1("Virginia Solar Dashboard"),
-        html.P("Visualizations reflect all projects in the database as of September 30, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
+        html.P("Visualizations reflect all projects in the database as of December 31, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Div(
             #dashboard
             [
@@ -690,7 +750,8 @@ dashapp.layout =  dbc.Container([
                 inputClassName='btn-check',
                 labelClassName="btn--dash",
                         options=[
-                {"label": "Action Rate", "value": 'rateLine'},
+                {"label": "Local Status Rate", "value": 'rateLine'},
+                {"label": "Action Rate", "value": 'actionLine'},
                 {"label": "Megawatts", "value": 'mwLine'}, 
                 {"label": "Projects", "value": 'projectsLine'}
             ],
@@ -730,10 +791,12 @@ dashapp.layout =  dbc.Container([
             'margin-right': 0,
             'margin-left':10,
             'margin-bottom': 35,
-            'display': 'flex'
+            'display': 'flex',
+            'background-color':'#F2F4F8'
         })])],
                             fluid=True,
-                            style={'display': 'flex'},
+                            style={'display': 'flex',
+                                   'background-color':'#F2F4F8'},
                             className='dashboard-container')
 
 #Define a callback to plot the map with a time slider
@@ -891,7 +954,7 @@ def update_map(map_type,slide_year):
                     width=1155,
                     height=600,
                     map_style='carto-positron-nolabels',
-                    paper_bgcolor='rgba(0,0,0,0)',
+                    paper_bgcolor='#F2F4F8',
                     xaxis=dict(showgrid=False,
                             zeroline=False,
                             visible=False),
@@ -943,7 +1006,7 @@ def update_map(map_type,slide_year):
                     width=1155,
                     height=600,
                     map_style='carto-positron-nolabels',
-                    paper_bgcolor='rgba(0,0,0,0)')
+                    paper_bgcolor='#F2F4F8')
         
         sizeMap.update_traces(marker=dict(sizeref=.04),
                               hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Size Category: %{customdata[3]}<br>Project Megawatts: %{customdata[5]:,.0f}<br>Year: %{customdata[4]}<br>Best Available Project Acreage: %{customdata[6]:,.0f}<br><extra></extra>")
@@ -968,7 +1031,7 @@ def update_map(map_type,slide_year):
                         width=1155,
                         height=600,
                         map_style='carto-positron-nolabels',
-                        paper_bgcolor='rgba(0,0,0,0)',
+                        paper_bgcolor='#F2F4F8',
                         coloraxis_colorbar=dict(tickfont=dict(size=10,color='#242e4c'),orientation='h')
                   )
         approvedMWMap.update_coloraxes(colorbar_labelalias={500:'500 and above'})
@@ -995,7 +1058,7 @@ def update_map(map_type,slide_year):
                                   width=1155,
                                   height=600,
                                   map_style='carto-positron-nolabels',
-                                  paper_bgcolor='rgba(0,0,0,0)',
+                                  paper_bgcolor='#F2F4F8',
                                   coloraxis_colorbar=dict(tickfont=dict(size=10,color='#242e4c'),orientation='h'))
         deniedMWMap.update_coloraxes(colorbar_labelalias={500:'500 and above'})
         deniedMWMap.update_geos(fitbounds='locations')
@@ -1020,7 +1083,7 @@ def update_map(map_type,slide_year):
                                       width=1155,
                                       height=600,
                                       map_style='carto-positron-nolabels',
-                                      paper_bgcolor='rgba(0,0,0,0)',
+                                      paper_bgcolor='#F2F4F8',
                                       coloraxis_colorbar=dict(tickfont=dict(size=10,
                                                                             color='#242e4c'),
                                                                             orientation="h",
@@ -1048,7 +1111,7 @@ def update_map(map_type,slide_year):
                                     width=1155,
                                     height=600,
                                     map_style='carto-positron-nolabels',
-                                    paper_bgcolor='rgba(0,0,0,0)',
+                                    paper_bgcolor='#F2F4F8',
                                     coloraxis_colorbar=dict(tickfont=dict(size=10,
                                                                           color='#242e4c'),
                                                                           orientation="h",
@@ -1078,6 +1141,8 @@ def update_pie_chart(value):
 def update_annual_chart(value):
     if value=='rateLine':
         return rateAnnualLine
+    elif value=='actionLine':
+        return actionAnnualLine
     elif value=='mwLine':
         return mwAnnualLine
     elif value=='projectsLine':

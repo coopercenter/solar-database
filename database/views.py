@@ -4,6 +4,7 @@ import csv
 from .models import SolarProjectData, DataDictionary, StorageProjectData
 from django.views.generic import DetailView
 from .plotly_dash import dashapp
+from .plotly_dash_bat import dashappbat
 from django_plotly_dash import DjangoDash
 import dash_bootstrap_components as dbc
 from dash import dcc
@@ -32,6 +33,8 @@ def export_xlsx(request):
     write_sheet_solar = workbook.active
     write_sheet_solar.title = "Solar"
 
+    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
+
     write_sheet(
         write_sheet_solar,
         SolarProjectData.objects.all(),
@@ -59,7 +62,7 @@ def export_xlsx(request):
 def export_dictionary_csv(request):
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="vasolardatadictionary.csv"'},
+        headers={"Content-Disposition": 'attachment; filename="va_solar_and_storage_data_dictionary.csv"'},
     )
 
     data = DataDictionary.objects.all()
