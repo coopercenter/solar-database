@@ -28,11 +28,8 @@ def write_sheet(sheet, queryset, model, excluded_fields=None):
         row = [getattr(obj, f) for f in fields]
         sheet.append(row)
 
-<<<<<<< HEAD
-=======
     write_sheet.freeze_panes = "A2"
 
->>>>>>> fbe6b3f2433c7a93a9071662ddcb25b9548edd02
 def export_xlsx(request):
     workbook = Workbook()
 
@@ -52,12 +49,8 @@ def export_xlsx(request):
     write_sheet(
         write_sheet_storage,
         StorageProjectData.objects.all(),
-<<<<<<< HEAD
         StorageProjectData,
         excluded_fields=excluded_fields
-=======
-        StorageProjectData
->>>>>>> fbe6b3f2433c7a93a9071662ddcb25b9548edd02
     )
 
     output = BytesIO()
