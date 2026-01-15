@@ -1,0 +1,720 @@
+
+
+
+/* lowermost style layer for the nav bars from the Bootstrap css, edited to match CooperCenter website*/
+.navbar-dark{
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+}
+
+/* Adjust the background color to match the CooperCenter website from the Bootstrap default*/
+.navbar-background {
+    background-color: #141f3d;
+}
+
+/* This edits the navbar-text class from the Bootstrap stylesheet */
+.navbar-text {
+    color: white;
+    text-decoration: none;
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+}
+
+/* This edits the navbar-text:hover class from the Bootstrap stylesheet */
+.navbar-text:hover {
+    color: #DADADA;
+    text-decoration: none;
+}
+
+
+
+.form-select-format {
+    width: 240px; 
+    height: 28px;
+    font-size: 14px;
+}
+
+/* modifies the original style from dash_bootstrap_components Flatly css, applied to dashboard */
+.dashboard-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    background-color: #F2F4F8; 
+    border: 1px transparent;
+}
+
+.card-body{
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.card {
+  @media (min-width: 600px) {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+  }
+
+  &.paragraph--type--call-to-action,
+  &.paragraph--type--attachment,
+  &.node--institute,
+  &.node--institute_subpage,
+  &.node--page,
+  &.node--table {
+    padding: 20px;
+
+    @media (min-width: 600px) {
+      padding: 30px;
+    }
+  }
+
+  &.node--research_summary,
+  &.node--announcement,
+  &.node--external_link {
+    .card__image {
+      margin-bottom: 20px;
+
+      @media (min-width: 600px) {
+        flex: 0 0 250px;
+        margin-bottom: 0;
+        max-width: 250px;
+        order: 1;
+      }
+
+      a {
+        display: block;
+      }
+
+      img {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+html, body{
+  max-width: 100%;
+  /* overflow-x: hidden; */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+p {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    font-display: none;
+}
+
+h1 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 35px;
+    letter-spacing: 0em;
+}
+
+h2 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    margin-top: 30px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+h4 {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #242e4c;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/*from Bootstrap CSS, applied to navigation buttons */
+.button-spacing {
+    line-height: 70%;
+}
+/* from Bootstrap CSS, applied to navigation buttons */
+.button-font {
+    font: 'franklin-gothic-urw-cond',sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* At the highest level, likely pulling from Bootstrap CSS but specified modifications come from CooperCenter website. Applied to navigation buttons, dashboard buttons, and download buttons */
+.btn {
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #cccccc;
+      border-color: #cccccc;
+      color: #666666;
+  
+      &:hover,
+      &:focus {
+        background-color: #cccccc;
+        color: #666666;
+      }
+    }
+  }
+/* original to this stylesheet, pulled from CooperCenter styles, applied to dashboard */
+.btn--blue-d {
+    background-color: #141f3d;
+    border-color: #141f3d;
+    color: #ffffff;
+  
+    &:hover {
+      background-color: #3cc1cc;
+      color: #141f3d;
+    }
+  
+    &.btn--outline {
+      background-color: transparent;
+      color: #141f3d;
+  
+      &:hover {
+        background-color: #141f3d;
+        color: #ffffff;
+      }
+    }
+  }
+
+.btn--dash{
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #141f3d;
+    border-color: #141f3d;
+    color: #ffffff;
+    padding: .375rem .75rem;
+  
+    &:active {
+        background-color: #cccccc;
+        color: #666666;
+      }
+  
+    &:hover {
+      background-color: #3cc1cc;
+      color: #141f3d;
+    }
+  
+    &.btn--outline {
+      background-color: transparent;
+      color: #141f3d;
+    }
+
+}
+
+  /* originally from Bootstrap CSS, fixing width, applied to download buttons */
+.btn-sm{
+  width: 200px;
+}
+
+.btn-sm-select{
+  background-color: #141f3d;
+  width:200px;
+  color: white;
+}
+
+.btn-sm-select:hover{
+  background-color: #3cc1cc;
+  color: black;
+}
+
+
+.btn-sm-clear{
+  background-color: #141f3d;
+  margin-top:20px;
+  margin-left: 45px;
+  width: 150px;
+  color:white;
+}
+.btn-sm-clear:hover{
+  background-color: #3cc1cc;
+  color: black;
+}
+
+.btn-med{
+  width: 400px;
+}
+
+hr {
+    border: 0;
+    border-right: 1px solid #fff;
+    height: 30px;
+    margin: 0 7px;
+    width: 0;
+}
+
+.table {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+li {
+    font-family: 'franklin-gothic-urw-cond',sans-serif;
+    color: #666666;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+
+
+
+.hamburger-menu{
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  /* margin: 10px 0 0 10px; */
+  z-index: 1003;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.hamburger-menu:hover{
+  background-color: #3cc1cc;
+}
+
+.hamburger-menu span:hover{
+  background: white;
+}
+
+.hamburger-menu span{
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.items{
+  display: none;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(6px) translateX(6px) translateZ(3px);
+}
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-6px) translateX(5px) translateZ(2px);
+}
+
+@media (max-width: 993px){
+  .nav-item{
+    display: none;
+  }
+
+  .container-fluid{
+    margin: 0;
+
+  }
+  
+  .cooper_center_logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .cooper_center_logo img{
+    max-width: 100%;
+    height: auto;
+  }
+
+  .hamburger-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 5px;
+  }
+
+  .items {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: relative;
+    width: 15vw;
+    background: #242e4c;
+    list-style: none;
+    padding: 20px 20px;
+    margin: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .items.active{
+    transform: translateX(0);
+  }
+
+  .items a{
+    font-family: 'franklin-gothic-urw-cond',sans-serif;  
+    color: white;
+    font-weight: bold;
+  }
+
+  .items a:hover{
+    color: white;
+    text-decoration-color: #3cc1cc;
+    text-decoration-thickness: 3px;
+  }
+  
+
+}
+@media (max-width: 800px){
+  .hamburger-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 5px;
+  }
+
+  .items {
+    width: 22vw;
+  }
+  
+}
+
+
+
+
+/* dictionary CSS */
+  .controls {
+      padding: 24px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+  }
+  
+  .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+  }
+  
+  .search-box input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      background: white;
+  }
+  
+  .search-box input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      pointer-events: none;
+  }
+  
+  .filter-select {
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      background: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+  }
+  
+  .filter-select:focus {
+      outline: none;
+      border-color: #3b82f6;
+  }
+  
+  .stats {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-size: 14px;
+      color: #64748b;
+  }
+  
+  .stats span {
+      background: #e2e8f0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+  }
+  
+  .clear-filters {
+      padding: 8px 16px;
+      background: #141f3d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+  }
+  
+  .clear-filters:hover {
+      background: #3cc1cc;
+      color: black;
+  }
+  
+  .table-container {
+      overflow-x: auto;
+      max-height: 70vh;
+      overflow-y: auto;
+  }
+  
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+  }
+  
+  thead {
+      background: #141f3d;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+  }
+  
+  th {
+      padding: 16px;
+      text-align: left;
+      font-weight: normal;
+      white-space: nowrap;
+      border-right: 1px solid #334155;
+  }
+  
+  tbody tr {
+      border-bottom: 1px solid #e2e8f0;
+      transition: background-color 0.2s ease;
+  }
+  
+  tbody tr:hover {
+      background-color: #f1f5f9;
+  }
+  
+  tbody tr:nth-child(even) {
+      background-color: #fafafa;
+  }
+  
+  tbody tr:nth-child(even):hover {
+      background-color: #f1f5f9;
+  }
+  
+  td {
+      padding: 16px;
+      vertical-align: top;
+      border-right: 1px solid #f1f5f9;
+  }
+  
+  td:last-child {
+      border-right: none;
+  }
+  
+  .datapoint-term {
+      font-weight: 600;
+      min-width: 200px;
+  }
+  
+  .csv-term {
+      border-radius: 4px;
+      font-size: 13px;
+      min-width: 180px;
+      vertical-align: top;
+      padding: 16px;
+  }
+  
+  .definition {
+      max-width: 400px;
+      line-height: 1.5;
+  }
+  
+  .source {
+      max-width: 300px;
+      font-size: 13px;
+  }
+  
+  .source a {
+      color: #3b82f6;
+      text-decoration: none;
+  }
+  
+  .source a:hover {
+      text-decoration: underline;
+  }
+  
+  .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+  }
+  
+  .no-results svg {
+      margin-bottom: 16px;
+      opacity: 0.5;
+  }
+  
+  .highlight {
+      background-color: #fef3c7;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: 500;
+  }
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background-color: #242e4c;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #3cc1cc;
+  color: #141f3d
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #3cc1cc;
+  color: #141f3d;
+}
+
+.tabcontent {
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+
+
+/* Home Dashboard Link Styling */
+
+.dashboard-container {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    background: none;
+}
+
+.dashboard-block {
+    flex: 1;
+    background: #f6f8fb;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.image-holder{
+  width: 100%;
+}
+
+.centered-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  height: auto;
+}
+
+.text_holder {
+  display: flex;
+  align-items: center;    
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  gap: 8px;             
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f2a44;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 3px;
+}
+
+.card-desc {
+  margin: 0;              
+  font-size: 18px;
+  line-height: 1.5;
+  color: #3b4a67;         
+  max-width: 520px;  
+}
