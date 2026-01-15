@@ -72,6 +72,7 @@ class SolarProjectData(models.Model):
     eia_operating_status = models.TextField(db_column='eia_operating_status', blank=True, null=True)
     eia_project_status = models.TextField(db_column='eia_project_status', blank=True, null=True)
     eia_operating_year = models.TextField(db_column='eia_operating_year', blank=True, null=True)
+    #add congressional datapoints
 
     class Meta:
         managed = False
@@ -104,7 +105,7 @@ class StorageProjectData(models.Model):
     siting_agreement_exists = models.TextField(db_column='siting_agreement_exists',blank=True,null=True)
     siting_agreement_date = models.TextField(db_column='siting_agreement_date', blank=True, null=True)
     siting_agreement_link = models.TextField(db_column='siting_agreement_link', blank=True, null=True)
-    #pjm_queue_number = models.TextField(db_column='pjm_queue_number', blank=True, null=True)
+    pjm_queue_number = models.TextField(db_column='pjm_queue_number', blank=True, null=True)
     #scc_certificate_number = models.TextField(db_column='scc_certificate_number', blank=True, null=True)
     #scc_docket_number = models.TextField(db_column='scc_docket_number', blank=True, null=True)
     #scc_action_year = models.TextField(db_column='scc_action_year', blank=True, null=True)
@@ -114,6 +115,7 @@ class StorageProjectData(models.Model):
     eia_operating_status = models.TextField(db_column='eia_operating_status', blank=True, null=True)
     eia_project_status = models.TextField(db_column='eia_project_status', blank=True, null=True)
     eia_operating_year = models.TextField(db_column='eia_operating_year', blank=True, null=True)
+    #add congressioinal datapoints
 
     class Meta:
         managed = False
