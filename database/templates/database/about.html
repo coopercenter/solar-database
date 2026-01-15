@@ -6,46 +6,41 @@
 <div class="container-fluid">
     <div style="width: 1200px; margin-left: auto; margin-right: auto">
         <div class="card-body">
-            <h1>About the Virginia Solar Database</h1>
+            <h1>About the Virginia Solar and Storage Database</h1>
     
             <br>
 
-            <a href="{% static 'About_DB_2025.pdf' %}" class="btn btn-sm btn--blue-d" download>More About VSD</a>
+            <a href="{% static 'About_DB_Jan_2026.pdf' %}" class="btn btn-sm btn--blue-d" download>More About VSSD</a>
 
             <br>
             <br>
-            <p><b>Virginia Solar Database</b> was created and is maintained by the Weldon Cooper Center for Public Service at UVA. It includes the Virginia Solar Dashboard, a permit map with links to individual project information sheets, a sortable data table, a downloadable dataset (csv), and data dictionary. 
+            <p>The <b>Virginia Solar and Storage Database</b> was created and is maintained by the Weldon Cooper Center for Public Service at UVA. It includes an overall solar and storage permit map, the Virginia Solar Database and Dashboard, the Virginia BESS Database and Dashboard, related individual project summary sheets, sortable data tables, a downloadable dataset with tabbed solar and storage data (xls), and a data dictionary. 
 
             <br>
 
             <h3>Background</h3>
 
-            <p>The <a href="https://www.coopercenter.org/virginia-solar-survey">2022 Virginia Solar Survey</a> confirmed the need for ongoing efforts to track and monitor local solar permitting across the state. In 2023, UVA solicited stakeholder input to inform the design of 
-            a new statewide solar database. Stakeholder input determined which datapoints were prioritized and collected, data definitions, data sources, and what database features and tools should be provided. The Virginia Solar Database was 
-            publicly launched in November 2024; data is updated quarterly, and a changelog is provided for intermittent updates.</p>
+            <p>The <a href="https://www.coopercenter.org/virginia-solar-survey">2022 Virginia Solar Survey</a> confirmed the need for ongoing efforts to track and monitor local solar permitting across the state. In 2023, UVA solicited stakeholder input to inform the design of a new statewide solar database. Stakeholder input informed which datapoints were prioritized and collected, data definitions, data sources, and what database features and tools should be provided. The Virginia Solar Database was publicly launched in November 2024; data is updated quarterly, and a changelog is provided for intermittent updates.  </p>
 
+            <p>In 2025, UVA initiated expanding the database to include BESS. Stakeholder input was collected and used to prioritize which datapoints were collected, ensure accuracy of definitions, and inform how the databases and dashboards should be designed. The Virginia Solar and Storage Database was launched in January 2026. </p>
 
             <h3>Purpose</h3>
 
             <p>The purpose of the Virginia Solar Database is to:
             <ul>
                 <li>Facilitate tracking projects across local, state, and interconnection permitting;</li>
-                <li>Provide transparent and trusted solar siting information from across the state;</li>
+                <li>Provide transparent and reliable siting and permitting information from across the state; </li>
                 <li>Support informed, data-driven policymaking to further Virginia's adopted goals and policies;</li>
                 <li>Enable monitoring of, implementation of, and progress towards Virginia's adopted goals and policies;</li>
                 <li>Provide foundational data to support complex analysis, research, and related land use, energy, and economic development planning.</li>
             </ul></p>
 
             <h3>Data</h3>
-            <p>Based on stakeholder input, 38 unique datapoints are collected for each solar project.  Data is collected and validated by hand, with the 
-            assistance of automated alerts and webscraping tools. Not all data is available for every project. To learn more about data collection methodology, 
-            see “More About VSD” from this page. </p>
+            <p>Based on stakeholder input, up to 48 unique datapoints are collected for each solar project or BESS. Data is collected and validated by hand, with assistance from automated alerts and webscraping tools. Not all datapoints apply to both solar and BESS, and not all data is available for every project.  To learn more about data collection methodology, see “More About VSD” from this page.   </p>
 
-            <p>Data is sourced from primary sources such as local government archives (meeting minutes, video recordings, resolutions, land use applications, staff reports, conditions, etc.), 
-            Virginia Department of Environmental Quality (DEQ) permit records, Virginia Department of Conservation and Recreation (DCR) Pollinator Smart Certification 
-            records, Virginia Department of Energy records, Virginia State Corporation Commission (SCC) dockets and final orders, Energy Information Administration (EIA) 
-            data, PJM Interconnection Request data, and various press, utility, industry/developer, and stakeholder media. </p>
+            <p>Data is sourced from primary sources such as local government archives (meeting minutes, agendas, video recordings, resolutions, land use applications, staff reports, conditions, etc.), Virginia Department of Environmental Quality (DEQ) permit records, Virginia Department of Conservation and Recreation (DCR) Pollinator Smart Certification records, Virginia Department of Energy records, Virginia State Corporation Commission (SCC) dockets and final orders, Energy Information Administration (EIA) data, PJM Interconnection Request data, and various press, utility, industry/developer, and stakeholder media.  </p>
 
+            <p>NOTE: Solar and BESS data can be dowloaded together in a tabbed Excel file from either the Solar or the BESS data pages. When projects were permitted as solar+storage projects, the project’s main permitting data lives in the solar database while storage-specific datapoints such as MWh and battery technology details are provided in the storage database. The project’s Data ID can be used to link the projects.  </p>
             <p>See the <a href="/dictionary">Data Dictionary</a> for a complete list of datapoints, their associated definitions, and sources for the data. </p>
 
             <h3>Acknowledgements</h3>
@@ -60,7 +55,10 @@
             <b>Changelog</b>
             </p>
             <div class="card-body" style="height: 90px; overflow-y: auto;">
-                <p><b>November 5, 2025 <span class="badge badge-pill badge-success">New</span></b>
+                <span class="badge badge-pill badge-success">New</span>
+                <p><b>January 14, 2026</b>
+                <br>Added BESS Data and updated usability across site</p>
+                <p><b>November 5, 2025</b>
                 <br>Updated data locality dropdown</p>
                 <div style="line-height: 40%"><br></div>
                 <p><b>October 2, 2025</b>

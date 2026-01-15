@@ -1,0 +1,139 @@
+{% extends "database/base.html" %}
+{% load static %}
+
+{% block content %}
+    <br><br>
+    <div style="width: 1250px; margin-left: auto; margin-right: auto">
+        <div class="card-body">
+            <h1>Virginia Solar and Storage Database</h1>
+
+            <p>
+                The Virginia Solar and Storage Database (VSSD) provides an inventory of large-scale solar projects and battery energy storage systems (BESS) proposed for siting approval at the local level in Virginia. Its purpose is to provide information on the status of local permitting, details about project characteristics and attributes, and to provide a mechanism to link projects and track development trends across local, state, and interconnection permitting.      
+            </p>
+
+            <p>
+                For solar, the database includes projects over 1 MW (with the exception of BARC Community Solar Project) that have been advertised for a local public hearing or are being developed by-right.  For BESS, it includes projects over 1 MW that have applied for any enabling local action (such as a special use permit or lease of public property) or are being developed by-right as a primary or accessory use. The database excludes school and government installations, with some exceptions for notable projects such as NASA Wallops, Oceana, and brownfield/landfill projects such as Campostella. 
+            </p>
+
+            <p>
+                Visit our <a href="{% url 'database-about' %}">About</a>
+                page to learn more about the database's history, data collection methodology, and how stakeholder input informs the project.
+            </p>
+           
+            <p>
+                Visit our <a href="{% url 'database-dictionary' %}">Dictionary</a> to learn more about the datapoints that are collected and their definitions. 
+            </p>
+
+            <p>
+                Data is current through <strong>December 31, 2025</strong>
+            </p>
+
+            <p>
+            <strong>To cite our data:</strong>
+            <em>Weldon Cooper Center for Public Service at the University of Virginia. December 31, 2025.
+            “Virginia Solar Database.” <a href="https://solardatabase.coopercenter.org/">
+            https://solardatabase.coopercenter.org/</a>.</em>
+            </p>
+
+            <p>
+            This database is a living document and will be updated regularly. The data has been collected and
+            vetted to the best of our ability; however, we recognize there may be errors. If you find issues,
+            omissions, have any questions, or would like to sponsor this project to ensure its ongoing success,
+            contact Elizabeth Marshall, Senior Program Manager, Weldon Cooper Center at UVA,
+            <a href="mailto:emm2t@virginia.edu">emm2t@virginia.edu</a>.
+            </p>
+
+            <!-- Blocks for Solar and Storage Dashboard Links -->
+            <div class = 'dashboard-container'>
+                <div class = "dashboard-block">
+                    <div class="text_holder">
+                        <div class="card-text">
+                            <a href="/solar/" class="card-title">
+                                Solar Database and Dashboard
+                            </a>
+                            <p class="card-desc">
+                                <img src="{% static 'images/solar_dashboard_screenshot.png' %}" width="100%" height="300"> 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "dashboard-block">
+                    <div class="text_holder">
+                        <div class="card-text">
+                            <a href="/battery_storage/" class="card-title">
+                                BESS Database and Dashboard
+                            </a>
+                            <p class="card-desc">
+                                <img src="{% static 'images/bess_page_screenshot.png' %}" width='100%' height="300">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-holder">
+                <img src="{% static 'images/map-placeholder.png' %}" class="centered-img" alt="Solar screenshot">
+            </div>
+
+
+<!--                 
+            <article class = "node node--page node--teaser card">
+              <div class="card__image"> <img src="{% static 'images/solar_dashboard_screenshot.png' %}" style="max-width: 425px;"></img></div>
+              <div class="card__title"><a href="/solar/">Solar Database and Dashboard</a></div>
+            </article>
+            <article class = "node node--page node--teaser card">
+              <div class="card__image"> <img src="{% static 'images/solar_dashboard_screenshot.png' %}" style="max-width: 425px;"></img></div>
+              <div class="card__title"><a href="/battery_storage/">Battery Energy Storage Database and Dashboard</a></div>
+            </article>
+            </div> -->
+        </div>
+    </div>
+
+    
+
+                    
+   <!-- <div class="card">
+        <div class="card-body" style="background-color:#F2F4F8">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0px; width: 100%;">
+                <div>
+                     {% autoescape off %}
+                        {{ mwPieChart_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ projectsAnnualLine_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ mwAnnualLine_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ sizeMWBar_div }}
+                    {% endautoescape %}
+                </div>
+                <div>
+                    {% autoescape off %}
+                        {{ acrePieChart_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ rateAnnualLine_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ mwRegionalBar_div }}
+                    {% endautoescape %}
+                    <br>
+                    {% autoescape off %}
+                        {{ sizeProjectsBar_div }}
+                    {% endautoescape %}
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+
+    <br>
+
+{% endblock content %}

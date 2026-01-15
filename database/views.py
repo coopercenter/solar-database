@@ -1,39 +1,73 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import csv
-from .models import SolarProjectData, DataDictionary
+from .models import SolarProjectData, DataDictionary, StorageProjectData
 from django.views.generic import DetailView
 from .plotly_dash import dashapp
+from .plotly_dash_bat import dashappbat
 from django_plotly_dash import DjangoDash
 import dash_bootstrap_components as dbc
 from dash import dcc
 from dash import html
 from django.urls import path, include
+from io import BytesIO
+from openpyxl import Workbook
 
-def export_csv(request):
-    response = HttpResponse(
-        content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="solarprojects.csv"'},
+
+def write_sheet(sheet, queryset, model, excluded_fields=None):
+    if excluded_fields is None:
+        excluded_fields = set()
+    else:
+        excluded_fields = set(excluded_fields)
+
+    fields = [f.name for f in model._meta.fields if f.name not in excluded_fields]
+
+    sheet.append(fields)
+
+    for obj in queryset:
+        row = [getattr(obj, f) for f in fields]
+        sheet.append(row)
+
+    write_sheet.freeze_panes = "A2"
+
+def export_xlsx(request):
+    workbook = Workbook()
+
+    write_sheet_solar = workbook.active
+    write_sheet_solar.title = "Solar"
+
+    excluded_fields = ['longitude', 'latitude', 'final_action_year']
+
+    write_sheet(
+        write_sheet_solar,
+        SolarProjectData.objects.all(),
+        SolarProjectData,
+        excluded_fields=excluded_fields
     )
 
-    data = SolarProjectData.objects.all()
+    write_sheet_storage = workbook.create_sheet(title="Storage")
+    write_sheet(
+        write_sheet_storage,
+        StorageProjectData.objects.all(),
+        StorageProjectData,
+        excluded_fields=excluded_fields
+    )
 
-    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
-    field_names = [field.name for field in SolarProjectData._meta.fields if field.name not in excluded_fields]
+    output = BytesIO()
+    workbook.save(output)
+    output.seek(0)
 
-    writer = csv.DictWriter(response, fieldnames=field_names)
-    writer.writeheader()
-
-    for obj in data:
-        row = {field: getattr(obj, field) for field in field_names}
-        writer.writerow(row)
-
+    response = HttpResponse(
+        output.getvalue(),
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
+    response["Content-Disposition"] = 'attachment; filename="projects.xlsx"'
     return response
 
 def export_dictionary_csv(request):
     response = HttpResponse(
         content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="vasolardatadictionary.csv"'},
+        headers={"Content-Disposition": 'attachment; filename="va_solar_and_storage_data_dictionary.csv"'},
     )
 
     data = DataDictionary.objects.all()
@@ -49,13 +83,10 @@ def export_dictionary_csv(request):
 
     return response
 
-def dash(request):
-    return render(request, 'database/dash.html',)
+def home(request):
+    return render(request, 'database/home.html',)
 
-def about(request):
-    return render(request, 'database/about.html')
-
-def data(request):
+def solar(request):
     map_data = list(SolarProjectData.objects.values('latitude', 'longitude', 'project_name', 
                                                 'locality', 'project_mw', 
                                                 'local_permit_status', 'data_id', 'alt_names'))
@@ -74,8 +105,32 @@ def data(request):
         'localities': localities,
         'permit_status': permit_status
     }
+    return render(request, 'database/solar.html',context)
 
-    return render(request, 'database/data.html', context)
+def about(request):
+    return render(request, 'database/about.html')
+
+def battery_storage(request):
+    map_data = list(StorageProjectData.objects.values('latitude', 'longitude', 'project_name', 
+                                                'locality', 'project_bess_mw', 
+                                                'local_permit_status', 'data_id', 'alt_names'))
+
+    data = StorageProjectData.objects.all()
+
+    localities = StorageProjectData.objects.values_list('locality', flat=True).distinct().order_by('locality')
+    localities = [loc for loc in localities if loc]    
+
+    permit_status = StorageProjectData.objects.values_list('local_permit_status', flat=True).distinct().order_by('local_permit_status')
+    permit_status = [status for status in permit_status if status]  # Filter out None/empty
+
+    context = {
+        'data': data,
+        'map_data': map_data,
+        'localities': localities,
+        'permit_status': permit_status
+    }
+
+    return render(request, 'database/battery_storage.html', context)
 
 def dictionary(request):
     
@@ -91,3 +146,7 @@ def donate(request):
 class ProjectView(DetailView):
     model = SolarProjectData
     template_name = 'database/project.html'
+
+class StorageProjectView(DetailView):
+    model = StorageProjectData
+    template_name = 'database/storage_project.html'

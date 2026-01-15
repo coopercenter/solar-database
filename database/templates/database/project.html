@@ -6,9 +6,9 @@
     <button onclick="javascript:history.go(-1);" class="btn btn-light btn-sm">Back</button>
     <br><br>
     {% if object.project_name.strip %}
-        <h4>{{ object.project_name }}</h4>
+        <h1>{{ object.project_name }}</h1>
     {% else %}
-        <h4>{{ object.project_phases }}</h4>
+        <h1>{{ object.project_phases }}</h1>
     {% endif %}
     </div>
     {% if object.latitude is not None and object.longitude is not None %}

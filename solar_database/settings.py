@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 if os.path.exists('hidden'):
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
@@ -58,16 +58,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django_plotly_dash.middleware.BaseMiddleware',
     'django_plotly_dash.middleware.ExternalRedirectionMiddleware',
 ]
@@ -189,6 +186,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'database', 'static'),
