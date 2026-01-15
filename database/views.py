@@ -14,7 +14,7 @@ from io import BytesIO
 from openpyxl import Workbook
 
 
-def write_sheet(write_sheet, queryset, model):
+def write_sheet(write_sheet, queryset, model, excluded_fields):
 
     field_names = [
         f.name for f in model._meta.fields
@@ -27,19 +27,13 @@ def write_sheet(write_sheet, queryset, model):
 
     write_sheet.freeze_panes = "A2"
 
-def _xlsx(request):
+def export_xlsx(request):
     workbook = Workbook()
 
     write_sheet_solar = workbook.active
     write_sheet_solar.title = "Solar"
 
     excluded_fields = {'longitude', 'latitude', 'final_action_year'}
-
-    write_sheet(
-        write_sheet_solar,
-        SolarProjectData.objects.all(),
-        SolarProjectData
-    )
 
     write_sheet_storage = workbook.create_sheet(title="Storage")
     write_sheet(
