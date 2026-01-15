@@ -207,7 +207,7 @@ projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hoverte
 mwhPieChart = px.pie(pieData, 
                       values='project_bess_capacity', 
                       names='project_type', 
-                      title="<b>Approved Known BESS MWh (26 of 77 projects)</b>",
+                      title="<b>Approved Known BESS MWh <br>(26 of 77 projects)</b>",
                     color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
@@ -232,7 +232,7 @@ mwhPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                                  color='#242e4c'),
                                        orientation='h',
                                        yanchor="bottom",
-                                       y=1,
+                                       y=.93,
                                        x=0,
                                        title=''))
      
