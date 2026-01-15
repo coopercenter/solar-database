@@ -934,8 +934,6 @@ def update_map(map_type,slide_year):
                     'local_permit_status':'Local Permit Status',
                     'project_bess_mw':'Project Megawatts',
                     'project_name':'Project Name',
-                    'project_phase':'Phase Name',
-                    'phase_mw':'Phase Megawatts',
                     'final_action_year':'Year',
                     'locality': 'Locality'},
                     hover_name='project_name',
@@ -971,7 +969,7 @@ def update_map(map_type,slide_year):
                             visible=False)
                 )
         statusMap.update_traces(marker=dict(size=10),
-                                    hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Megawatts: %{customdata[5]:,.0f}<br>Year: %{customdata[4]}<br>Best Available Project Acreage: %{customdata[6]:,.0f}<br><extra></extra>")
+                                    hovertemplate="<b>%{customdata[0]}</b><br>Locality: %{customdata[1]}<br>Local Permit Status: %{customdata[2]}<br>Project Megawatts: %{customdata[4]:,.0f}<br>Year: %{customdata[3]}<extra></extra>")
         statusMap.add_annotation(text='<i>Source: Weldon Cooper Center Virginia Solar and Storage Database</i>',x=0,y=0,xref="paper", yref="paper",font=dict(size=8),showarrow=False)
 
 
