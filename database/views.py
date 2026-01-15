@@ -14,18 +14,19 @@ from io import BytesIO
 from openpyxl import Workbook
 
 
-def write_sheet(write_sheet, queryset, model, excluded_fields):
+def write_sheet(sheet, queryset, model, excluded_fields=None):
+    if excluded_fields is None:
+        excluded_fields = set()
+    else:
+        excluded_fields = set(excluded_fields)
 
-    field_names = [
-        f.name for f in model._meta.fields
-    ]
+    fields = [f.name for f in model._meta.fields if f.name not in excluded_fields]
 
-    write_sheet.append(field_names)
+    sheet.append(fields)
 
-    for obj in queryset.iterator():
-        write_sheet.append([getattr(obj, field) for field in field_names])
-
-    write_sheet.freeze_panes = "A2"
+    for obj in queryset:
+        row = [getattr(obj, f) for f in fields]
+        sheet.append(row)
 
 def export_xlsx(request):
     workbook = Workbook()
@@ -35,12 +36,19 @@ def export_xlsx(request):
 
     excluded_fields = {'longitude', 'latitude', 'final_action_year'}
 
+    write_sheet(
+        write_sheet_solar,
+        SolarProjectData.objects.all(),
+        SolarProjectData,
+        excluded_fields=excluded_fields
+    )
+
     write_sheet_storage = workbook.create_sheet(title="Storage")
     write_sheet(
         write_sheet_storage,
         StorageProjectData.objects.all(),
         StorageProjectData,
-        excluded_fields = excluded_fields
+        excluded_fields=excluded_fields
     )
 
     output = BytesIO()
