@@ -36,6 +36,7 @@ df.project_bess_capacity.replace(np.nan,0,inplace=True)
 df.project_bess_capacity=df.project_bess_capacity.astype("float64")
 #define the dataset for the pie charts
 pieData = df[df["local_permit_status"]=="Approved"].groupby('project_type').agg({'project_bess_mw':'sum','project_bess_capacity':'sum','data_id':'count',}).reset_index()
+pieMWhData = df[(df["local_permit_status"]=="Approved")&(df.project_bess_capacity >0)].groupby('project_type').agg({'project_bess_mw':'sum','project_bess_capacity':'sum','data_id':'count',}).reset_index()
 #define the data used in the annual line charts, summing the relevant values by year and by status then calculating an annual rate of status action
 annualData = pd.DataFrame(df[(df["local_permit_status"]!="Pending")&(df["project_type"]!="Solar + Storage")].groupby(['final_action_year','local_permit_status']).agg({'data_id':'count','project_bess_mw':'sum','project_bess_capacity':'sum'}).reset_index())
 annualData = annualData.rename(columns={'data_id':'project_count'})
@@ -52,6 +53,7 @@ actionRateData=pd.merge(actionRateData,annualActionTotal,how="left",on="final_ac
 actionRateData["action_rate"] = round(actionRateData['project_count']/actionRateData['annual_total'],2)
 
 statusBar = df.groupby(["local_permit_status","project_type"]).agg({"data_id":"count","project_bess_mw":"sum","project_bess_capacity":"sum"}).reset_index()
+statusMWhBar = df[df.project_bess_capacity >0].groupby(["local_permit_status","project_type"]).agg({"data_id":"count","project_bess_capacity":"sum","project_bess_mw":"sum"}).reset_index()
 #annual count for solar+storage projects
 #annualSSTotal = annualData[annualData["project_type"]=="Solar + Storage"].groupby(['final_action_year']).agg({"data_id":"sum"}).reset_index()
 #annualSSTotal.rename(columns={"data_id":"annual_solar_plus_storage"},inplace=True)
@@ -204,7 +206,7 @@ projectsPieChart.update_layout(margin=dict(l=5, r=5, t=100, b=0),
 projectsPieChart.update_traces(texttemplate="%{value} (%{percent:.1%}) ",hovertemplate='<b>%{label}</b><br>Projects: %{value:,.0f}<br> Percent of Total Projects: %{percent:.1%}')
 
     
-mwhPieChart = px.pie(pieData, 
+mwhPieChart = px.pie(pieMWhData, 
                       values='project_bess_capacity', 
                       names='project_type', 
                       title="<b>Approved Known BESS MWh <br>(26 of 77 projects)</b>",
@@ -295,7 +297,7 @@ rateAnnualLine = px.line(annualData,
                          x="final_action_year", 
                          y='annual_rate',
                          color='local_permit_status',
-                         title="<b>Annual BESS Local Status Rate (no Solar+Storage)</b>",
+                         title="<b>Annual BESS Local Status Rate <br>(no Solar+Storage)</b>",
                          custom_data = ['local_permit_status','project_count','annual_total'],
                          height=600,
                          width=550,
@@ -322,7 +324,7 @@ rateAnnualLine.update_traces(line=dict(width=2),
                              marker=dict(size=10),
                              hovertemplate='<b>%{customdata[0]}</b><br>Year: %{x}<br>Percent %{customdata[0]}: %{y}<br>%{customdata[0]} Projects: %{customdata[1]}<br>Total Projects: %{customdata[2]}<br><extra></extra>')
 
-rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
+rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=140, b=0),
                              font_family='franklin-gothic-urw-cond, sans-serif',
                              title=dict(font=dict(size=22), automargin=False, yref='paper'),
                              paper_bgcolor='#F2F4F8',
@@ -331,7 +333,7 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                                    color='#242e4c'),
                                          orientation='h',
                                          yanchor="bottom",
-                                         y=1,
+                                         y=.96,
                                          x=0,
                                          title=''),
                              font=dict(size=10,
@@ -555,7 +557,7 @@ mwStatusBar = px.bar(statusBar,
                        y='local_permit_status', 
                        color='project_type',
                        title="<b>BESS Megawatts, All Projects</br>",
-                       custom_data=['local_permit_status','project_bess_capacity','data_id'],
+                       custom_data=['local_permit_status','project_bess_capacity','data_id','project_type'],
                        color_discrete_sequence=['rgb(40, 67, 118)', 
                                              'rgb(253, 218, 36)', 
                                              'rgb(98, 187, 70)'],
@@ -571,7 +573,7 @@ mwStatusBar = px.bar(statusBar,
                               'data_id':'Project Count',
                               'local_permit_status':'Local Permit Status'},
                       barmode='stack')
-mwStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b>%{customdata[0]} Megawatts: %{x}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
+mwStatusBar.update_traces(hovertemplate="<b>%{customdata[3]}</b><br>%{customdata[3]} Megawatts: %{x}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
 
 mwStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                             paper_bgcolor='#F2F4F8',
@@ -593,12 +595,12 @@ mwStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                             yaxis=dict(
                                        title="Local Permit Status"))
 
-mwhStatusBar = px.bar(statusBar, 
+mwhStatusBar = px.bar(statusMWhBar, 
                        x="project_bess_capacity", 
                        y='local_permit_status', 
                        color='project_type',
                        title="<b>Known BESS MWh (51 of 77 projects)</br>",
-                       custom_data=['local_permit_status','project_bess_mw','data_id'],
+                       custom_data=['local_permit_status','project_bess_mw','data_id','project_type'],
                        height=640,
                        width=600,
                     color_discrete_sequence=['rgb(40, 67, 118)', 
@@ -614,7 +616,7 @@ mwhStatusBar = px.bar(statusBar,
                               'data_id':'Project Count',
                               'local_permit_status':'Local Permit Status'},
                       barmode='stack')
-mwhStatusBar.update_traces(hovertemplate="<b>%{customdata[0]}</b>%{customdata[0]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
+mwhStatusBar.update_traces(hovertemplate="<b>%{customdata[3]}</b><br>%{customdata[3]} Megawatts: %{y}<br>%{customdata[0]} Projects: %{customdata[2]}<br>%{customdata[0]} Known Megawatt Hours: %{customdata[1]:,.0f}<br><extra></extra>")
 
 mwhStatusBar.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                             paper_bgcolor='#F2F4F8',
@@ -643,7 +645,7 @@ dashappbat.layout =  dbc.Container([
     html.Div([
         html.Br(),
         html.Br(),
-        html.H1("Virginia Battery Storage Dashboard"),
+        html.H1("Virginia BESS Dashboard"),
         html.P("Visualizations reflect all projects in the database as of December 31, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Br(),
         html.P("For the purposes of this dashboard, Known Megawatt Hours (MWh) is limited to the projects where the megawatt hour value can be confirmed. The number of projects that apply to this measure of MWh has been specified in the graph titles. This number will be updated as new projects are added and missing MWh values are able to be confirmed. Megawatt values are available for all projects."),
