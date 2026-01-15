@@ -792,7 +792,7 @@ dashappbat.layout =  dbc.Container([
             ],
         style={
             #style the container that holds the graphs
-            'margin-top': 35,
+            'margin-top': 50,
             'margin-right': 0,
             'margin-left':10,
             'margin-bottom': 35,
