@@ -729,7 +729,7 @@ dashapp.layout =  dbc.Container([
                 options=[
                 {"label": "Megawatts", "value": 'sizeMWBar'}, 
                 {"label": "Projects", "value": 'sizeProjectsBar'},
-                {"label": "Action Rate", "value": 'sizePercentBar'}
+                {"label": "Local Status Rate", "value": 'sizePercentBar'}
                 
             ],
         value='sizeMWBar'
@@ -787,7 +787,7 @@ dashapp.layout =  dbc.Container([
             ],
         style={
             #style the container that holds the graphs
-            'margin-top': 35,
+            'margin-top': 50,
             'margin-right': 0,
             'margin-left':10,
             'margin-bottom': 35,

@@ -33,7 +33,7 @@ def _xlsx(request):
     write_sheet_solar = workbook.active
     write_sheet_solar.title = "Solar"
 
-    excluded_fields = {'longitude', 'latitude', 'final_action_year'}
+    excluded_fields = ['longitude', 'latitude', 'final_action_year']
 
     write_sheet(
         write_sheet_solar,

@@ -73,6 +73,9 @@ class SolarProjectData(models.Model):
     eia_project_status = models.TextField(db_column='eia_project_status', blank=True, null=True)
     eia_operating_year = models.TextField(db_column='eia_operating_year', blank=True, null=True)
     #add congressional datapoints
+    va_state_senate_district = models.TextField(db_column='va_state_senate_district', blank=True, null=True)
+    va_house_of_delegates = models.TextField(db_column='va_house_of_delegates', blank=True, null=True)
+    va_federal_congressional_district = models.TextField(db_column='va_federal_congressional_district', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -116,6 +119,9 @@ class StorageProjectData(models.Model):
     eia_project_status = models.TextField(db_column='eia_project_status', blank=True, null=True)
     eia_operating_year = models.TextField(db_column='eia_operating_year', blank=True, null=True)
     #add congressioinal datapoints
+    va_state_senate_district = models.TextField(db_column='va_state_senate_district', blank=True, null=True)
+    va_house_of_delegates = models.TextField(db_column='va_house_of_delegates', blank=True, null=True)
+    va_federal_congressional_district = models.TextField(db_column='va_federal_congressional_district', blank=True, null=True)
 
     class Meta:
         managed = False
