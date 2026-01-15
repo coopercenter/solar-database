@@ -7,23 +7,23 @@
 <br>
 <br>
 <div class="tab" style="width: 1250px; margin-left: auto; margin-right: auto">
-  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Dashboard')" id = defaultOpen>Dashboard</button>
-  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'Data')">Data</button>
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'BESS Dashboard')" id = defaultOpen>BESS Dashboard</button>
+  <button class="tablinks btn btn--blue-d" onclick="showContent(event, 'BESS Data')">BESS Data</button>
 </div>
 
 
 
 <!-- Tab content -->
-<div id="Dashboard" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+<div id="BESS Dashboard" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
     {% plotly_app_bootstrap name='BatteryDash' aspect='1by1' %}
 
 </div>
 
-<div id="Data" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
+<div id="BESS Data" class="tabcontent" style="width: 1250px; margin-left: auto; margin-right: auto">
   <div class="'container-fluid">
     <div style="width: 1250px; margin-left: auto; margin-right: auto">
         <div class="card-body">
-            <h1>Data</h1>
+            <h1>BESS Data</h1>
             <h2>Browse and Download Battery Storage Data</h2>
             <p><i>Current as of December 31, 2025 (Will be updated quarterly)</i></p>
             <div>
