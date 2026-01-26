@@ -4,6 +4,7 @@ from .views import ProjectView
 from django.urls import path, include
 from .plotly_dash import dashapp
 from .plotly_dash_bat import dashappbat
+from .joint_map import jointapp
 
 urlpatterns = [
     path('', views.home, name='database-home'),
