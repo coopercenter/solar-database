@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#kru)))h+3s2lr4h)p_sbj!#v+o$d0v)vycw#@3#&%7dj^(1@&
 if os.path.exists('hidden'):
     DEBUG = True
 else:
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
@@ -74,7 +74,7 @@ MIDDLEWARE = [
 CHANNEL_LAYERS = {
    'default': { 'BACKEND': 'channels_redis.core.RedisChannelLayer',
                 'CONFIG': {
-                           'hosts': [('va-solar-db.azurewebsites.net','va-solar-db-dev.azurewebsites.net','127.0.0.1', 6379, 'solardatabase.coopercenter.org'),],
+                            'hosts': [('127.0.0.1', 6379)]
                           }
               }
 }
