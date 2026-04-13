@@ -646,7 +646,7 @@ dashappbat.layout =  dbc.Container([
         html.Br(),
         html.Br(),
         html.H1("Virginia BESS Dashboard"),
-        html.P("Visualizations reflect all projects in the database as of December 31, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Hovertext labels on all maps and graphs provide supplemental information."),
+        html.P("Visualizations reflect all projects in the database as of March 31, 2026. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Br(),
         html.P("For the purposes of this dashboard, Known Megawatt Hours (MWh) is limited to the projects where the megawatt hour value can be confirmed. The number of projects that apply to this measure of MWh has been specified in the graph titles. This number will be updated as new projects are added and missing MWh values are able to be confirmed. Megawatt values are available for all projects."),
         html.Div(

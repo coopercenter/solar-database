@@ -643,7 +643,7 @@ dashapp.layout =  dbc.Container([
         html.Br(),
         html.Br(),
         html.H1("Virginia Solar Dashboard"),
-        html.P("Visualizations reflect all projects in the database as of December 31, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
+        html.P("Visualizations reflect all projects in the database as of March 31, 2026. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Div(
             #dashboard
             [
