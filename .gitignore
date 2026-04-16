@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+solar_database/__pycache__/settings.cpython-312.pyc

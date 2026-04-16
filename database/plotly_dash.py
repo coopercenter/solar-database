@@ -81,7 +81,7 @@ mapData = pd.merge(df,countyDf,how='left',on='locality')
 #set up the data for the permit status map with the time slider
 mapDataClean = mapData[(mapData.local_permit_status != 'NA') & (mapData.final_action_year.isna()==False)]
 mapDataClean['final_action_year']=mapDataClean.final_action_year.replace('PENDING',2026)
-mapDataClean['final_action_year']=mapDataClean.final_action_year.replace('PENDING  ',2026).astype("int")
+mapDataClean['final_action_year']=mapDataClean.final_action_year.replace('PENDING  ',2026).astype("int64")
 years = mapDataClean['final_action_year'].unique()
 years.sort()
 
@@ -293,7 +293,7 @@ rateAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                              yaxis=dict(title="Percent of Projects",tickformat='.0%'),
                              xaxis=dict(type='category',
                                         tickmode='array',
-                                        tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
+                                        tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025, 2026],
                                         categoryorder='category ascending',
                                         title=''))
 
@@ -346,7 +346,7 @@ actionAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                              yaxis=dict(title="Percent of Projects",tickformat='.0%'),
                              xaxis=dict(type='category',
                                         tickmode='array',
-                                        tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025],
+                                        tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024,2025, 2026],
                                         categoryorder='category ascending',
                                         title=''))
 
@@ -398,7 +398,7 @@ mwAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                       type='category',
                                       categoryorder='category ascending',
                                       tickmode='array',
-                                      tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]),
+                                      tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]),
                            yaxis=dict(tickformat=",.0f",
                                       title="Megawatts"))
 
@@ -447,7 +447,7 @@ projectsAnnualLine.update_layout(margin=dict(l=5, r=5, t=100, b=0),
                                              title=''),
                                  xaxis=dict(title='',
                                             tickmode='array',
-                                            tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+                                            tickvals=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
                                             type='category',
                                             categoryorder='category ascending'),
                                  yaxis=dict(tickformat=",.0f",
@@ -643,7 +643,7 @@ dashapp.layout =  dbc.Container([
         html.Br(),
         html.Br(),
         html.H1("Virginia Solar Dashboard"),
-        html.P("Visualizations reflect all projects in the database as of December 31, 2025. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
+        html.P("Visualizations reflect all projects in the database as of March 31, 2026. Explore different data highlights with the buttons, and download a graph with the camera icon in the upper right corner of each graph. Project Size map includes all projects regardless of local permit status. Hovertext labels on all maps and graphs provide supplemental information."),
         html.Div(
             #dashboard
             [
