@@ -29,7 +29,7 @@ if os.path.exists('hidden'):
     DEBUG = True
     # ALLOWED_HOSTS = ['127.0.0.1']
 else:
-    DEBUG = True
+    DEBUG = False
 
 ALLOWED_HOSTS = ['va-solar-db.azureawebsites.net','va-solar-db-dev.azurewebsites.net', '127.0.0.1', 'solardatabase.coopercenter.org']
 
