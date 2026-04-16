@@ -79,7 +79,7 @@ class SolarProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'solar_data_public'
+        db_table = 'dev_solar_data_public'
 
 class StorageProjectData(models.Model):
     data_id = models.TextField(db_column='data_id', blank=True, null=False, primary_key=True)
@@ -125,7 +125,7 @@ class StorageProjectData(models.Model):
 
     class Meta:
         managed = False
-        db_table = "storage_data_public"
+        db_table = "dev_storage_data_public"
 
 class CountyData(models.Model):
     locality = models.TextField(db_column='locality',primary_key=True)
